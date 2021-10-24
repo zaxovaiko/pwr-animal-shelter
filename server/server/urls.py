@@ -15,8 +15,8 @@ Including another URLconf
 """
 from django.urls import include, path
 from rest_framework import routers
-from shelter.views import RegisterView
-from shelter import views
+from users.views import RegisterView
+from users import views
 from rest_framework_simplejwt.views import ( TokenObtainPairView, TokenRefreshView )
 
 router = routers.DefaultRouter()

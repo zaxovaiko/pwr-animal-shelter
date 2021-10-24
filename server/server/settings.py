@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework_simplejwt',
-    'shelter'
+    'users'
 ]
 
 MIDDLEWARE = [
@@ -139,4 +139,4 @@ SIMPLE_JWT = {
     'ROTATE_REFRESH_TOKENS': True,
 }
 
-AUTH_USER_MODEL = 'shelter.User'
+AUTH_USER_MODEL = 'users.User'

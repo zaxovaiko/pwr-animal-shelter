@@ -1,6 +1,6 @@
 from .models import User
 from rest_framework import viewsets, generics, permissions
-from shelter.serializers import UserSerializer
+from .serializers import UserSerializer
 from .serializers import RegisterSerializer
 
 
