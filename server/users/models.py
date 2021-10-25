@@ -6,16 +6,15 @@ from django.utils.translation import ugettext_lazy as _
 
 # Create your models here.
 class User(AbstractUser):
-    username = None
-    email = models.EmailField(unique=True)
-    is_staff = models.BooleanField(default=False)
+    username = models.EmailField(unique=True)
     date_joined = models.DateTimeField(default=timezone.now)
 
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = []
+
 
     def __str__(self):
         return self.email
+
+
 
 
 class Person(models.Model):
@@ -25,5 +24,5 @@ class Person(models.Model):
     pesel = models.CharField("PESEL", max_length=11, unique=True, help_text="")
     email = models.EmailField(unique=True)
     phone = models.CharField("Tel.", max_length=20, help_text="")
-    person = models.OneToOneField(User, null=False, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, null=False, on_delete=models.CASCADE)
 
