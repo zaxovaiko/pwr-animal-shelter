@@ -19,9 +19,11 @@ class User(AbstractUser):
 
 
 class Person(models.Model):
-    name = models.CharField("Imię", max_length=100, help_text="")
+    first_name = models.CharField("Imię", max_length=100, help_text="")
     last_name = models.CharField("Nazwisko", max_length=100, help_text="")
     address = models.CharField("Adres", max_length=200, help_text="")
     pesel = models.CharField("PESEL", max_length=11, unique=True, help_text="")
     email = models.EmailField(unique=True)
     phone = models.CharField("Tel.", max_length=20, help_text="")
+    person = models.OneToOneField(User, null=False, on_delete=models.CASCADE)
+
