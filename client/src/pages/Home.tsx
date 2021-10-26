@@ -30,7 +30,7 @@ export default function Home() {
             </Card>
           </Col>
         </Row>
-        <Row className={styles["c-navbar__c-animals-slider"]}>
+        <Row className={styles["c-navbar__c-animals-slider"] + ' mb-5'}>
           <Col className="px-5">
             <p className={styles["c-navbar__c-animals-slider__title"]}>
               Nowi w schronisku

@@ -1,0 +1,15 @@
+<svg
+  width="170"
+  height="245"
+  viewBox="0 0 170 245"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <g opacity="0.95">
+    <circle cx="116" cy="106" r="106" fill="#0E576F" />
+    <circle cx="116" cy="106" r="106" fill="#A2E3E9" />
+    <circle cx="116" cy="106" r="106" fill="#85AF5B" />
+    <circle cx="116" cy="106" r="106" fill="#FCEF78" />
+  </g>
+  <circle opacity="0.7" cx="44.5" cy="200.5" r="44.5" fill="#A2E3E9" />
+</svg>
