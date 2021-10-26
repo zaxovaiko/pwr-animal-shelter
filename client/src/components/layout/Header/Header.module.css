@@ -1,5 +1,5 @@
 .c-header {
-  background-color: #ADCF62;
+  background-color: #adcf62;
 }
 
 .c-header__icon-links {
@@ -23,3 +23,4 @@ a {
   display: flex !important;
   align-items: center !important;
 }
+

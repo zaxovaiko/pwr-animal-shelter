@@ -1,6 +1,6 @@
 import styles from "./Footer.module.css";
-import { ReactComponent as BubbleLeft } from "../../assets/footer/svg/bubble-left.svg";
-import { ReactComponent as BubbleRight } from "../../assets/footer/svg/bubble-right.svg";
+import { ReactComponent as BubbleLeft } from "../../../assets/footer/svg/bubble-left.svg";
+import { ReactComponent as BubbleRight } from "../../../assets/footer/svg/bubble-right.svg";
 
 export default function Footer() {
   return (
