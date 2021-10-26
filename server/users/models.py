@@ -9,12 +9,8 @@ class User(AbstractUser):
     username = models.EmailField(unique=True)
     date_joined = models.DateTimeField(default=timezone.now)
 
-
-
     def __str__(self):
         return self.email
-
-
 
 
 class Person(models.Model):
@@ -26,3 +22,5 @@ class Person(models.Model):
     phone = models.CharField("Tel.", max_length=20, help_text="")
     user = models.OneToOneField(User, null=False, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.email
