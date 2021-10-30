@@ -1,16 +1,22 @@
+from rest_framework import viewsets, permissions
+from rest_framework_simplejwt.views import TokenObtainPairView
+from .serializers import JWTTokenObtainPairSerializer, UserSerializer
 from .models import User
-from rest_framework import viewsets, generics, permissions
-from .serializers import UserSerializer
-from .serializers import RegisterSerializer
 
 
 class UserViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all().order_by('-date_joined')
-    serializer_class = UserSerializer
-    permission_classes = [permissions.IsAuthenticated]
-
-
-class RegisterView(generics.CreateAPIView):
     queryset = User.objects.all()
-    permission_classes = ()
-    serializer_class = RegisterSerializer
+    serializer_class = UserSerializer
+    action_permissions = {
+        'delete': [permissions.IsAuthenticated],
+        'update': [permissions.IsAuthenticated],
+        'partial_update': [permissions.IsAuthenticated],
+    }
+
+
+    def get_permissions(self): 
+        return self.action_permissions.get(self.action, [])
+
+
+class JWTTokenRefreshView(TokenObtainPairView):
+    serializer_class = JWTTokenObtainPairSerializer

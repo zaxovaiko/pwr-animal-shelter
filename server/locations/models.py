@@ -1,22 +1,19 @@
 from django.db import models
 from django.utils import timezone
-
-
-# Create your models here.
 from animals.models import Animal
 
 
 class Building(models.Model):
     street = models.CharField("Ulica", max_length=100, help_text="")
-    number = models.IntegerField("Numer budynku")
+    number = models.PositiveIntegerField("Numer budynku")
 
     def __str__(self):
         return str(self.street) + " " + str(self.number)
 
 
 class Room(models.Model):
-    number = models.IntegerField("Numer pokoju")
-    capacity = models.IntegerField("Ilość miejsc")
+    number = models.PositiveIntegerField("Numer pokoju")
+    capacity = models.PositiveIntegerField("Ilość miejsc")
     building = models.ForeignKey(Building, on_delete=models.CASCADE)
 
     def __str__(self):
