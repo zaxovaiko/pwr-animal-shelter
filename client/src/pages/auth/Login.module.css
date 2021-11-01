@@ -1,0 +1,102 @@
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;600;700&display=swap");
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.login {
+  background-image: url("../../assets/auth/Sign_in_back-bicubic.png");
+  height: 98vh;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  font-family: "Quicksand", sans-serif;
+}
+
+.login__label-h1 {
+  color: #686464;
+  width: 100vh;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+.login__container {
+  padding-top: 22vh;
+  padding-left: 15vh;
+  display: flex;
+  flex-wrap: wrap;
+  width: 50%;
+  justify-content: center;
+}
+
+.login__form {
+  width: 55vh;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.login__form-input-email,
+.login__form-input-password {
+  border-width: 0px 0px 2px;
+  border-color: #dadada;
+  margin-top: 8vh;
+  width: 80%;
+  height: 20%;
+}
+
+.login__text-pass {
+  width: 80%;
+  padding-top: 1%;
+  display: flex;
+}
+
+.login__a-text-pass:hover,
+.login__a-text-reg:hover {
+  color: #a2e3e9;
+}
+
+.login__a-text-pass {
+  margin-left: auto;
+  color: #0e576f;
+  font-size: 2.2vh;
+}
+
+.login__form-input-email:focus,
+.login__form-input-password:focus {
+  outline-width: 0;
+  border-width: 0px 0px 2px;
+  border-color: #adcf62;
+}
+
+.login__form-submit-button {
+  background-color: #adcf62;
+  border: none;
+  color: white;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  font-size: 20px;
+  border-radius: 25px;
+  text-decoration: none;
+  width: 80%;
+  height: 8vh;
+  font-weight: bold;
+}
+
+.login__form-submit-button:hover {
+  background-color: #d2d980;
+}
+
+.login__text-reg {
+  width: 55vh;
+  text-align: center;
+  font-size: 2.2vh;
+}
+
+.login__a-text-reg {
+  color: #0e576f;
+  margin-right: auto;
+  font-weight: bolder;
+}

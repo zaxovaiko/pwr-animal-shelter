@@ -7,6 +7,8 @@ import Home from "./pages/Home";
 import Contact from "./pages/contact/Contact";
 import Profile from "./pages/profile/Profile";
 import Charity from "./pages/charity/Charity";
+import Login from "./pages/auth/Login";
+import Registration from "./pages/auth/Registration";
 
 function App() {
   const { auth, setAuth } = useContext(AuthContext);
@@ -16,6 +18,8 @@ function App() {
       <Header />
       <Switch>
         <Route exact path="/" component={Home} />
+        <Route exact path="/login" component={Login} />
+        <Route exact path="/registration" component={Registration} />
         <Route exact path="/contact" component={Contact} />
         <Route exact path="/profile/:id" component={Profile} />
         <Route exact path="/charity" component={Charity} />
