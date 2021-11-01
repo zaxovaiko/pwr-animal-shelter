@@ -1,5 +1,6 @@
-import { Card, Col, Container, Image, Row } from "react-bootstrap";
+import { Col, Container, Image, Row } from "react-bootstrap";
 import Slider from "react-slick";
+import HeaderTitle from "../components/HeaderTitle/HeaderTitle";
 import styles from "./Home.module.css";
 
 export default function Home() {
@@ -18,15 +19,11 @@ export default function Home() {
 
   return (
     <>
-      <Container fluid className={styles["p-home__top-img"]} />
+      <HeaderTitle
+        text="Witamy!"
+        image="https://cdn.mos.cms.futurecdn.net/VSy6kJDNq2pSXsCzb6cvYF-1200-80.jpg"
+      />
       <Container fluid>
-        <Row>
-          <Col xs={{ offset: 1, span: 10 }}>
-            <Card className="h-title" body>
-              Witamy!
-            </Card>
-          </Col>
-        </Row>
         <Row className={styles["c-navbar__c-animals-slider"] + " mb-5"}>
           <Col className="px-5">
             <p className={styles["c-navbar__c-animals-slider__title"]}>
