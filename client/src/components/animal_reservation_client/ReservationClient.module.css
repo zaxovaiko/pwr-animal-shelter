@@ -1,0 +1,106 @@
+.top-header {
+    width: 100%;
+    height: 25vh;
+    background: rgba(133, 175, 91, 0.23);
+}
+
+.header-reservation {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    top:-7em;
+    height: 30vh;
+}
+
+.animal-photo {
+    position: absolute;
+    top:0;
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+}
+
+.text-header {
+    position: absolute;
+    top: 7em;
+    font-size: 1.9em;
+    color: #686464;
+    font-weight: bolder;
+}
+
+.main-container {
+    margin: 2em 2em;
+    position: relative;
+    display: flex;
+    font-size: 1.3em;
+    color: #686464;
+    height: 60vh;
+}
+
+.info-animal-container {
+    position: absolute;
+    top:0;
+    left:0;
+    width: 50%;
+}
+
+.info-reservation-container {
+    position: absolute;
+    top:0;
+    left:60%;
+    width: 40%;
+}
+
+.text-sub-header {
+    text-align: center;
+    font-size: 1.4em;
+    font-weight: bold;
+    text-decoration: underline;
+    margin-bottom: 2em;
+}
+
+.vl {
+    position: absolute;
+    top: 1em;
+    left: 54%;
+    height: 60vh;
+    width: 10px;
+    border-left: 1px solid #686464;
+}
+
+.nav-area {
+    margin-top: 5%;
+    margin-bottom: 7%;
+    text-align: center;
+    font-size: 1.3em;
+}
+
+.button-green {
+    margin-bottom: 1em;
+    font-size: 1em;
+    font-weight: bold;
+    width: 15em;
+    background-color: #adcf62;
+    border-color: #adcf62;
+
+}
+
+.button-green:hover {
+    background-color: #D2D980;
+    border-color: #D2D980;
+}
+
+.button-blue {
+    font-size: 1em;
+    font-weight: bold;
+    width: 15em;
+    background-color: rgba(14, 87, 111, 0.6);
+    border-color: rgba(14, 87, 111, 0.6);
+}
+
+.button-blue:hover {
+    background-color: #75C3C8;
+    border-color: #75C3C8;
+}
