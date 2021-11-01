@@ -43,8 +43,6 @@ class Reservation extends React.Component {
                         <p>Wzrost: 40 cm</p>
                     </Container>
 
-                    <Row className={styles_main["vl"]} />
-
                     <Container className={styles_main["info-reservation-container"]}>
                         <p className={styles_main["text-sub-header"]}>Dane rezerwacji</p>
 
@@ -57,9 +55,10 @@ class Reservation extends React.Component {
 
                 <Container className={styles_main["nav-area"]}>
                     <Button className={styles_main["button-green"]}>Zarezerwuj</Button>
-                    <p>lub</p>
+                    <p className={styles_main["p"]}>lub</p>
                     <Button className={styles_main["button-blue"]}>Anuluj</Button>
                 </Container>
+
             </>
         )
     }

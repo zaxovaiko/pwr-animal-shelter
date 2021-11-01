@@ -1,6 +1,6 @@
 .top-header {
-    width: 100%;
-    height: 25vh;
+    position: relative;
+    height: 200px;
     background: rgba(133, 175, 91, 0.23);
 }
 
@@ -11,7 +11,8 @@
     align-items: center;
     text-align: center;
     top:-7em;
-    height: 30vh;
+    height: 200px;
+    width: 1500px;
 }
 
 .animal-photo {
@@ -31,26 +32,28 @@
 }
 
 .main-container {
-    margin: 2em 2em;
+    width: max-content;
+    margin: 40px 40px;
     position: relative;
     display: flex;
     font-size: 1.3em;
     color: #686464;
-    height: 60vh;
+    height: 500px;
 }
 
 .info-animal-container {
     position: absolute;
     top:0;
     left:0;
-    width: 50%;
+    width: 720px;
+    border-right: 1px solid #686464;
 }
 
 .info-reservation-container {
     position: absolute;
     top:0;
-    left:60%;
-    width: 40%;
+    left: 760px;
+    width: 600px;
 }
 
 .text-sub-header {
@@ -61,27 +64,24 @@
     margin-bottom: 2em;
 }
 
-.vl {
-    position: absolute;
-    top: 1em;
-    left: 54%;
-    height: 60vh;
-    width: 10px;
-    border-left: 1px solid #686464;
+.nav-area {
+    margin-left: 600px;
+    margin-top: 10vh;
+    margin-bottom: 100px;
+    font-size: 1.3em;
+    width: fit-content;
 }
 
-.nav-area {
-    margin-top: 5%;
-    margin-bottom: 7%;
-    text-align: center;
-    font-size: 1.3em;
+.p {
+    margin-left: 130px;
+    color: #686464;
 }
 
 .button-green {
     margin-bottom: 1em;
     font-size: 1em;
     font-weight: bold;
-    width: 15em;
+    width: 310px;
     background-color: #adcf62;
     border-color: #adcf62;
 
@@ -95,7 +95,7 @@
 .button-blue {
     font-size: 1em;
     font-weight: bold;
-    width: 15em;
+    width: 310px;
     background-color: rgba(14, 87, 111, 0.6);
     border-color: rgba(14, 87, 111, 0.6);
 }
