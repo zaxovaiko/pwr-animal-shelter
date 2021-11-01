@@ -4,7 +4,7 @@ from animals.models import Animal
 
 
 class Building(models.Model):
-    street = models.CharField("Ulica", max_length=100, help_text="")
+    street = models.CharField("Ulica", max_length=100)
     number = models.PositiveIntegerField("Numer budynku")
 
     def __str__(self):

@@ -16,3 +16,5 @@ requests==2.26.0
 sqlparse==0.4.2
 urllib3==1.26.7
 yarg==0.1.9
+drf-extensions==0.7.1
+django-extensions=3.1.3
