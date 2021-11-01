@@ -10,9 +10,11 @@ export type MenuLink = {
 export default function SubMenu({
   isOpened,
   links,
+  parentPath,
 }: {
   isOpened: boolean;
   links?: MenuLink[];
+  parentPath: string;
 }) {
   return (
     <ul
@@ -21,7 +23,7 @@ export default function SubMenu({
       {links &&
         links.map(({ path, text }, i) => (
           <li key={i}>
-            <Link to={path}>{text}</Link>
+            <Link to={parentPath + path}>{text}</Link>
           </li>
         ))}
     </ul>

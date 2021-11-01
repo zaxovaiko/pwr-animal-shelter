@@ -7,13 +7,13 @@ export default function Menu({ isOpened }: { isOpened: boolean }) {
   const [current, setCurrent] = useState<number | undefined>(undefined);
 
   const submenu = [
-    { path: "/", text: "Psy" },
-    { path: "/", text: "Koty" },
-    { path: "/", text: "Inne" },
+    { path: "/dogs", text: "Psy" },
+    { path: "/cats", text: "Koty" },
+    { path: "/other", text: "Inne" },
   ];
 
   const links: MenuLink[] & { submenu?: MenuLink[] } = [
-    { path: "#", text: "Adopcja", submenu },
+    { path: "/adoption", text: "Adopcja", submenu },
     { path: "/contact", text: "Kontakt" },
     { path: "/charity", text: "Jak pomóc?" },
   ];
@@ -22,8 +22,8 @@ export default function Menu({ isOpened }: { isOpened: boolean }) {
     <ul className={styles["c-header__menu"] + (!isOpened ? " d-none" : " d-block")}>
       {links.map(({ path, text, submenu }, i) => (
         <li key={i} onClick={() => setCurrent(i)}>
-          <Link to={path}>{text}</Link>
-          <SubMenu isOpened={current === i} links={submenu} />
+          <Link to={submenu ? "#" : path}>{text}</Link>
+          <SubMenu parentPath={path} isOpened={current === i} links={submenu} />
         </li>
       ))}
     </ul>
