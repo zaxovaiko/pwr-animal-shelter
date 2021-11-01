@@ -1,0 +1,24 @@
+.top-header {
+    height: 25vh;
+    background: rgba(133, 175, 91, 0.23);
+    background-size: cover;
+}
+
+.form-list-row {
+    margin: 5em 2em;
+    height: auto;
+    font-size: 2em;
+}
+
+.form-list-item{
+    list-style-type: none;
+    margin-bottom: 1.5em;
+}
+
+.link {
+    color: #0E576F;
+}
+
+.link:hover {
+    color: #A2E3E9;
+}

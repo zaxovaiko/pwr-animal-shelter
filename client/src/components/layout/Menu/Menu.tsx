@@ -16,6 +16,7 @@ export default function Menu({ isOpened }: { isOpened: boolean }) {
     { path: "#", text: "Adopcja", submenu },
     { path: "/contact", text: "Kontakt" },
     { path: "/charity", text: "Jak pomóc?" },
+    { path: "/forms", text: "Formulary" },
   ];
 
   return (
