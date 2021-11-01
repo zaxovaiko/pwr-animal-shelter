@@ -1,16 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;600;700&display=swap");
 
-body {
-  margin: 0;
-  padding: 0 0 50vh 0;
-}
-
 .registration {
   background-image: url("../../assets/auth/Sign_in_back-bicubic.png");
-  height: 120vh;
   background-size: 100%;
   background-repeat: no-repeat;
   font-family: "Quicksand", sans-serif;
+  padding-bottom: 30vh;
 }
 
 .registration__label-h1 {
@@ -160,8 +155,9 @@ body {
 }
 
 .registration__text-reg {
-  width: 100%;
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  font-size: 2.2vh;
 }
 
 .registration__a-text-reg {

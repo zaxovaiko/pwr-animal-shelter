@@ -107,9 +107,9 @@ export default function Login() {
         </form>
         <div className={styles["login__text-reg"]}>
           Nie masz konta?&nbsp;
-          <Link to="/registration" className={styles["login__a-text-reg"]}>
+          <a href="/registration" className={styles["login__a-text-reg"]}>
             <strong>Zarejestruj się</strong>
-          </Link>
+          </a>
         </div>
       </div>
     </div>

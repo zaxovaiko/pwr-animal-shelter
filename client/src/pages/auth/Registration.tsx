@@ -335,12 +335,10 @@ export default function Registration() {
               style={{
                 display: "flex",
                 justifyContent: "space-between",
-                padding: "0 2vh 0 2vh",
+                paddingLeft: "1.5vh",
               }}
             >
-              <div
-                style={{ display: "flex", alignItems: "center", padding: "0 5vh 0 0" }}
-              >
+              <div style={{ display: "flex", alignItems: "center" }}>
                 <input
                   type="checkbox"
                   name="checkbox1"
@@ -350,7 +348,7 @@ export default function Registration() {
                   value={formik.values.checkbox1}
                 />
               </div>
-              <label>
+              <label style={{ width: "30vh" }}>
                 *Zapoznałem się i akceptuję{" "}
                 <a href="/login" className={styles["registration__a-text-reg"]}>
                   <strong>regulamin</strong>
@@ -369,12 +367,10 @@ export default function Registration() {
               style={{
                 display: "flex",
                 justifyContent: "space-between",
-                padding: "0 2vh 0 2vh",
+                paddingLeft: "1.5vh",
               }}
             >
-              <div
-                style={{ display: "flex", alignItems: "center", padding: "0 5vh 0 0" }}
-              >
+              <div style={{ display: "flex", alignItems: "center" }}>
                 <input
                   type="checkbox"
                   name="checkbox2"
@@ -384,7 +380,9 @@ export default function Registration() {
                   value={formik.values.checkbox2}
                 />
               </div>
-              <label>*Wyrażam zgodę na przetwarzanie moich danych osobowych</label>
+              <label style={{ width: "30vh" }}>
+                *Wyrażam zgodę na przetwarzanie moich danych osobowych
+              </label>
             </div>
             {formik.touched.checkbox2 && formik.errors.checkbox2 ? (
               <div style={{ color: "red", position: "absolute" }}>

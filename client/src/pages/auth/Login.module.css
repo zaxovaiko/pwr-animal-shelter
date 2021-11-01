@@ -1,16 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;600;700&display=swap");
 
-body {
-  margin: 0;
-  padding: 0;
-}
-
 .login {
   background-image: url("../../assets/auth/Sign_in_back-bicubic.png");
-  height: 98vh;
   background-size: 100%;
   background-repeat: no-repeat;
   font-family: "Quicksand", sans-serif;
+  padding-bottom: 30vh;
 }
 
 .login__label-h1 {
@@ -90,13 +85,13 @@ body {
 }
 
 .login__text-reg {
-  width: 55vh;
-  text-align: center;
+  display: flex;
+  width: 42vh;
+  justify-content: center;
   font-size: 2.2vh;
 }
 
 .login__a-text-reg {
   color: #0e576f;
-  margin-right: auto;
   font-weight: bolder;
 }
