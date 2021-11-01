@@ -2,8 +2,10 @@ import { Image, Nav, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import styles from "./AnimalMainCard.module.css";
 
-interface AnimalProps {
+export interface AnimalProps {
   //TODO: add all object data to interface and verify types
+  id: string;
+  image: string;
   chip_code: string;
   name: string;
   age: number;
@@ -19,7 +21,7 @@ interface AnimalProps {
 
 //TODO: add info about link and id
 //TODO: change static photo link to animal custom one
-export default function AnimalMainCard({
+export default function MainAnimalCard({
   chip_code,
   name,
   age,

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useParams } from "react-router-dom";
-import AnimalMainCard from "../../../components/AnimalMainCard/AnimalMainCard";
+import MainAnimalCard from "../../../components/animals/MainAnimalCard/AnimalMainCard";
 import HeaderTitle from "../../../components/HeaderTitle/HeaderTitle";
 import styles from "./AnimalsList.module.css";
 
@@ -42,7 +42,7 @@ export default function AnimalList() {
         <Row className="gx-5">
           {animals.map((data, i) => (
             <Col key={i} xs={12} md={6}>
-              <AnimalMainCard {...data} />
+              <MainAnimalCard {...data} />
             </Col>
           ))}
         </Row>

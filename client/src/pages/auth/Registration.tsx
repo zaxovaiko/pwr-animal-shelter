@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import { useFormik } from "formik";
 import styles from "./Registration.module.css";
-import "bootstrap/dist/css/bootstrap.min.css";
 
 let refToFirstName: React.RefObject<any> = React.createRef();
 let refToLastName: React.RefObject<any> = React.createRef();
