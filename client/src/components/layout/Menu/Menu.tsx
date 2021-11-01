@@ -19,11 +19,7 @@ export default function Menu({ isOpened }: { isOpened: boolean }) {
   ];
 
   return (
-    <ul
-      className={
-        styles["c-header__menu"] + (!isOpened ? " d-none" : " d-block")
-      }
-    >
+    <ul className={styles["c-header__menu"] + (!isOpened ? " d-none" : " d-block")}>
       {links.map(({ path, text, submenu }, i) => (
         <li key={i} onClick={() => setCurrent(i)}>
           <Link to={path}>{text}</Link>

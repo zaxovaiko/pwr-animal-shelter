@@ -11,13 +11,10 @@ export default function Home() {
     slidesToScroll: 1,
   };
 
-  const animalSlider = [
-    "https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Calico_tabby_cat_-_Savannah.jpg/1200px-Calico_tabby_cat_-_Savannah.jpg",
-    "https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Calico_tabby_cat_-_Savannah.jpg/1200px-Calico_tabby_cat_-_Savannah.jpg",
-    "https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Calico_tabby_cat_-_Savannah.jpg/1200px-Calico_tabby_cat_-_Savannah.jpg",
-    "https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Calico_tabby_cat_-_Savannah.jpg/1200px-Calico_tabby_cat_-_Savannah.jpg",
-    "https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Calico_tabby_cat_-_Savannah.jpg/1200px-Calico_tabby_cat_-_Savannah.jpg",
-  ];
+  const animalSlider = Array.from(Array(4)).map(
+    () =>
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Calico_tabby_cat_-_Savannah.jpg/1200px-Calico_tabby_cat_-_Savannah.jpg"
+  );
 
   return (
     <>
@@ -25,12 +22,12 @@ export default function Home() {
       <Container fluid>
         <Row>
           <Col xs={{ offset: 1, span: 10 }}>
-            <Card className={styles["c-navbar__title"]} body>
+            <Card className="h-title" body>
               Witamy!
             </Card>
           </Col>
         </Row>
-        <Row className={styles["c-navbar__c-animals-slider"] + ' mb-5'}>
+        <Row className={styles["c-navbar__c-animals-slider"] + " mb-5"}>
           <Col className="px-5">
             <p className={styles["c-navbar__c-animals-slider__title"]}>
               Nowi w schronisku
@@ -38,7 +35,12 @@ export default function Home() {
             <Slider {...settings}>
               {animalSlider.map((animalImg) => (
                 <div className={styles["c-navbar__c-animals-slider__item"]}>
-                  <Image rounded className={styles["c-navbar__c-animals-slider__item__img"]} src={animalImg} alt=""></Image>
+                  <Image
+                    rounded
+                    className={styles["c-navbar__c-animals-slider__item__img"]}
+                    src={animalImg}
+                    alt=""
+                  ></Image>
                 </div>
               ))}
             </Slider>

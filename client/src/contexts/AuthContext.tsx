@@ -1,9 +1,6 @@
 import { createContext, FC, useState } from "react";
 import { decode } from "jsonwebtoken";
-import {
-  AuthContextValue,
-  AuthContext as AuthContextType,
-} from "../types/AuthContext";
+import { AuthContextValue, AuthContext as AuthContextType } from "../types/AuthContext";
 
 export const initialAuthContextValue: AuthContextValue = {
   user: undefined,
