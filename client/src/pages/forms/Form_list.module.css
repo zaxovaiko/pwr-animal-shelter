@@ -1,13 +1,20 @@
 .top-header {
-    height: 25vh;
+    height: 200px;
     background: rgba(133, 175, 91, 0.23);
     background-size: cover;
+}
+
+.header-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .form-list-row {
     margin: 5em 2em;
     height: auto;
     font-size: 2em;
+    width: fit-content;
 }
 
 .form-list-item{

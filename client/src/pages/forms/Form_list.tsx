@@ -5,7 +5,7 @@ export default function Form_list() {
     return (
         <>
             <Container fluid className={styles_main["top-header"]} />
-            <Container fluid>
+            <Container fluid className={styles_main["header-container"]}>
                 <Row>
                     <Col xs={{ offset: 1, span: 10 }}>
                         <Card className="h-title" body>
