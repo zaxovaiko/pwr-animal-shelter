@@ -15,7 +15,7 @@ export default function Menu({ isOpened }: { isOpened: boolean }) {
   const links: MenuLink[] & { submenu?: MenuLink[] } = [
     { path: "#", text: "Adopcja", submenu },
     { path: "/contact", text: "Kontakt" },
-    { path: "/link2", text: "Jak pomóc?" },
+    { path: "/charity", text: "Jak pomóc?" },
   ];
 
   return (
