@@ -16,8 +16,10 @@
 }
 
 .details-summary {
+    padding-top: 1.3em;
     background: rgba(133, 175, 91, 0.47);
     height: 150px;
+    list-style: none
 }
 
 .details-summary-title {
