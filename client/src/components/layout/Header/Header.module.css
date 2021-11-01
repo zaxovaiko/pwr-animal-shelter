@@ -1,0 +1,26 @@
+.c-header {
+  background-color: #adcf62;
+}
+
+.c-header__icon-links {
+  margin-left: auto;
+  font-size: 3rem;
+  align-items: baseline;
+}
+
+a.c-header__icon-links__link {
+  color: #fff !important;
+  padding: 0 0 0 20px !important;
+}
+
+.c-header__menu-btn {
+  font-size: 30px;
+  font-weight: 600;
+  color: #fff !important;
+}
+
+a {
+  display: flex !important;
+  align-items: center !important;
+}
+

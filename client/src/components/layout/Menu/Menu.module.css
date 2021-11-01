@@ -1,0 +1,25 @@
+.c-header__menu {
+  padding: 0;
+  list-style: none;
+  background: rgba(173, 207, 98, 0.85);
+  position: absolute;
+  top: 77px;
+  z-index: 9999;
+  border-bottom-right-radius: 10px;
+}
+
+.c-header__menu li a {
+  font-weight: 500;
+  color: #fff;
+  text-decoration: none;
+  padding: 18px 35px;
+  position: relative;
+}
+
+.c-header__menu li a:hover {
+  background: #d2d980;
+}
+
+.c-header__menu li:last-child a:hover {
+  border-bottom-right-radius: 10px;
+}
