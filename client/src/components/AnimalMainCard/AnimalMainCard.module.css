@@ -1,21 +1,41 @@
-.main-container {
-  position: relative;
-  font-family: Quicksand, serif;
-  font-size: 1.3em;
-  color: #686464;
-  height: 300px;
-  width: 500px;
-}
-
-.info-container {
-  position: absolute;
-  top: 0;
+.animal-card {
+  margin-bottom: 60px;
   background: rgba(133, 175, 91, 0.23);
-  height: 250px;
-  width: 450px;
 }
 
-.animal-description {
+.animal-card__top {
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.animal-card__top__title {
+  flex-grow: 1;
+  text-align: center;
+}
+
+.animal-card__top__title__name {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.line {
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.animal-card__top__image {
+  border-radius: 50%;
+  width: 180px;
+  height: 180px;
+  margin-top: -65px;
+  margin-right: -40px;
+}
+
+.animal-card__desc {
+  font-size: 0.95em;
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
@@ -23,57 +43,19 @@
   -webkit-box-orient: vertical;
 }
 
-.animal-name {
-  font-weight: bold;
-  text-align: center;
-  padding-top: 0.5em;
-  margin-bottom: 1%;
-  margin-right: 20%;
+.animal-card__link {
+  padding: 0;
+  float: right;
 }
 
-.line {
-  margin-top: 0.1em;
-  margin-left: 25%;
-  width: 30%;
-  text-align: center;
-}
-
-.animal-age {
-  text-align: center;
-  margin-right: 20%;
-  margin-top: 1%;
-}
-
-.animal-description {
-  margin: 1.5em 1em;
-  font-size: 0.65em;
-  text-align: left;
-}
-
-.nav-area {
-  width: fit-content;
-  margin-top: -1em;
-  margin-left: 12em;
-  font-size: 0.9em;
-}
-.nav-link {
+.animal-card__link {
   color: #0e576f;
 }
 
-.nav-link:hover {
+.animal-card__link:hover {
   color: #a2e3e9;
 }
 
-.nav-link:visited {
+.animal-card__link:visited {
   color: #75c3c8;
-}
-
-.animal-photo {
-  position: absolute;
-  top: -2em;
-  left: 12em;
-  border-radius: 50%;
-  width: 180px;
-  height: 180px;
-  display: flex;
 }

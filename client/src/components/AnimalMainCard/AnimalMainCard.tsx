@@ -1,4 +1,5 @@
-import { Container, Image, NavLink, Nav } from "react-bootstrap";
+import { Image, Nav, Card } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import styles from "./AnimalMainCard.module.css";
 
 interface AnimalProps {
@@ -25,25 +26,23 @@ export default function AnimalMainCard({
   description,
 }: AnimalProps) {
   return (
-    <>
-      <Container className={styles["main-container"]}>
-        <Container className={styles["info-container"]}>
-          <p className={styles["animal-name"]}>{name}</p>
+    <Card className={styles["animal-card"]} body>
+      <div className={styles["animal-card__top"]}>
+        <div className={styles["animal-card__top__title"]}>
+          <p className={styles["animal-card__top__title__name"]}>{name}</p>
           <hr className={styles["line"]} />
-          <p className={styles["animal-age"]}>{age} lat</p>
-          <p className={styles["animal-description"]}>{description}</p>
-          <p className={styles["nav-area"]}>
-            <Nav.Link as={NavLink} to={"/link/"} className={styles["nav-link"]}>
-              <u>Więcej</u>
-            </Nav.Link>
-          </p>
-        </Container>
+          <p className={styles["animal-card__top__title__age"]}>{age} lat</p>
+        </div>
         <Image
-          src="https://ieltsninja.com/content/wp-content/uploads/2021/01/Describe-an-Interesting-Animal-Dog.jpg"
-          className={styles["animal-photo"]}
-          alt={"animal photo"}
+          src="https://static8.depositphotos.com/1377527/943/i/600/depositphotos_9431737-stock-photo-portrait-of-gray-striped-cat.jpg"
+          className={styles["animal-card__top__image"]}
+          alt="Animal photo"
         />
-      </Container>
-    </>
+      </div>
+      <p className={styles["animal-card__desc"]}>{description}</p>
+      <Nav.Link as={Link} to="/link" className={styles["animal-card__link"]}>
+        <u>Więcej</u>
+      </Nav.Link>
+    </Card>
   );
 }
