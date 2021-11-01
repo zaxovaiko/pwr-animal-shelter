@@ -1,20 +1,15 @@
-import { Card, Col, Container, Row } from "react-bootstrap";
-import styles_top from "../Home.module.css";
+import { Container } from "react-bootstrap";
+import HeaderTitle from "../../components/HeaderTitle/HeaderTitle";
 import styles_main from "./Charity.module.css";
 
 export default function Charity() {
   return (
     <>
-      <Container fluid className={styles_top["p-home__top-img"]} />
+      <HeaderTitle
+        text="Jak pomóc?"
+        image="https://cdn.mos.cms.futurecdn.net/VSy6kJDNq2pSXsCzb6cvYF-1200-80.jpg"
+      />
       <Container fluid className={styles_main["main-container"]}>
-        <Row>
-          <Col xs={{ offset: 1, span: 10 }}>
-            <Card className="h-title" body>
-              Jak pomóc
-            </Card>
-          </Col>
-        </Row>
-
         <div className={styles_main["main-content"]}>
           <details className={styles_main["details-row"]}>
             <summary className={styles_main["details-summary"]}>
