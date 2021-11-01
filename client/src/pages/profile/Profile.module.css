@@ -1,0 +1,52 @@
+.top-page {
+  height: 220px;
+  background: rgba(133, 175, 91, 0.1);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.06);
+}
+
+.top-page__header__user-img {
+  margin: 0 auto 36px auto;
+  display: flex;
+  width: 230px;
+  height: 230px;
+  margin-top: -115px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
+}
+
+.top-page__header__title {
+  font-size: 35px;
+  text-decoration: underline;
+  color: #686464;
+  margin-bottom: 75px;
+}
+
+.user-info {
+  margin-bottom: 45px;
+}
+
+.user-info p {
+  font-size: 25px;
+  font-weight: bold;
+  color: #686464;
+}
+
+.user-info p > span {
+  font-weight: normal;
+}
+
+.btn-modify {
+  font-size: 1.4rem !important;
+  background: #adcf62;
+  outline: none;
+  border: none;
+  display: flex;
+  margin: 40px auto;
+  border-radius: 25px;
+  padding: 18px 55px;
+}
+
+.btn-modify:hover,
+.btn-modify:active,
+.btn-modify:focus {
+  background: #d2d980;
+}
