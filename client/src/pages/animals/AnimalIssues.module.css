@@ -1,0 +1,92 @@
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;600;700&display=swap");
+
+.animalIssues {
+  background-image: url("../../assets/auth/Sign_in_back-bicubic.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  font-family: "Quicksand", sans-serif;
+  padding-bottom: 30vh;
+}
+
+.anIssues__container {
+  padding-top: 22vh;
+  padding-left: 15vh;
+  display: flex;
+  flex-wrap: wrap;
+  width: 50%;
+  justify-content: center;
+}
+
+.anIssues__label-h1 {
+  color: #686464;
+  width: 100vh;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+.anIssues__form {
+  width: 55vh;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.anIssues__form-input-title {
+  border-width: 0px 0px 2px;
+  border-color: #dadada;
+  margin-top: 8vh;
+  width: 80%;
+  height: 20%;
+}
+
+.anIssues__form-input-contents {
+    margin-top: 8vh;
+    border-color: #dadada;
+}
+
+.anIssues__form-submit-button {
+  background-color: #adcf62;
+  border: none;
+  color: white;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  font-size: 20px;
+  border-radius: 25px;
+  text-decoration: none;
+  width: 80%;
+  height: 8vh;
+  font-weight: bold;
+}
+
+.anIssues__form-cancel-button {
+    background-color: #0e576f;;
+    border: none;
+    color: white;
+    font-size: 20px;
+    border-radius: 25px;
+    text-decoration: none;
+    width: 80%;
+    height: 8vh;
+    font-weight: bold;
+}
+
+.anIssues__form-cancel-button:hover {
+    background-color: #75C3C8
+}
+
+.anIssues__form-submit-button:hover {
+  background-color: #d2d980;
+}
+
+.anIssues__form-input-title:focus {
+  outline-width: 0;
+  border-width: 0px 0px 2px;
+  border-color: #dadada;
+}
+
+.anIssues__form-input-contents:focus {
+    outline-width: 0;
+    border-color: #dadada;
+}

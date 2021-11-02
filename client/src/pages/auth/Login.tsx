@@ -1,5 +1,5 @@
-import React, { Props, useEffect, useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import styles from "./Login.module.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { user } from "./user_example_data";
