@@ -12,7 +12,6 @@
     text-align: center;
     top:-7em;
     height: 200px;
-    width: 1500px;
 }
 
 .animal-photo {
@@ -32,28 +31,44 @@
 }
 
 .main-container {
-    width: max-content;
-    margin: 40px 40px;
-    position: relative;
+    margin: 40px 40px 100px;
     display: flex;
+    flex-direction: row;
     font-size: 1.3em;
     color: #686464;
-    height: 500px;
 }
 
 .info-animal-container {
-    position: absolute;
-    top:0;
-    left:0;
-    width: 720px;
-    border-right: 1px solid #686464;
+    margin-right: 150px;
+    width: 600px;
 }
 
 .info-reservation-container {
-    position: absolute;
-    top:0;
-    left: 760px;
+    padding-left: 40px;
     width: 600px;
+    border-left: 1px solid #686464;
+}
+
+@media (max-width: 1200px) {
+    .main-container {
+        flex-direction: column;
+        margin-left: 0;
+    }
+
+    .info-animal-container {
+        padding-left: 40px;
+        margin-right: 0;
+        margin-left: 0;
+        width: 400px;
+    }
+
+    .info-reservation-container {
+        margin-left: 0;
+        padding-left: 40px;
+        width: 400px;
+        margin-top: 5em;
+        border: none;
+    }
 }
 
 .text-sub-header {
@@ -62,18 +77,19 @@
     font-weight: bold;
     text-decoration: underline;
     margin-bottom: 2em;
+    width: fit-content;
 }
 
 .nav-area {
-    margin-left: 600px;
-    margin-top: 10vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     margin-bottom: 100px;
     font-size: 1.3em;
     width: fit-content;
 }
 
 .p {
-    margin-left: 130px;
     color: #686464;
 }
 
