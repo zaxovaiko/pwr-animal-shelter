@@ -26,13 +26,6 @@
     "eject": "react-scripts eject",
     "lint:fix": "eslint --fix \"./src/**/*.{ts,tsx}\""
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest",
-      "plugin:prettier/recommended"
-    ]
-  },
   "browserslist": {
     "production": [
       ">0.2%",
