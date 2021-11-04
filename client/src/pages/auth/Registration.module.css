@@ -1,0 +1,172 @@
+.registration {
+  background-image: url("../../assets/auth/Sign_in_back-bicubic.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  font-family: "Quicksand", sans-serif;
+  padding-bottom: 30vh;
+}
+
+.registration__label-h1 {
+  color: #686464;
+  width: 100vh;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+.registration__container {
+  padding-top: 15vh;
+  padding-left: 15vh;
+  display: flex;
+  flex-wrap: wrap;
+  width: 50%;
+  justify-content: center;
+}
+
+.registration__form {
+  width: 55vh;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.registration_form-input-div-first {
+  margin-top: 8vh;
+  width: 80%;
+  height: 20%;
+}
+
+.registration_form-input-div {
+  margin-top: 6vh;
+  width: 80%;
+  height: 20%;
+}
+
+.registration_form-input-div-last {
+  margin-top: 3vh;
+  width: 80%;
+  height: 20%;
+}
+
+.registration_form-input-div-pass {
+  margin-top: 12vh;
+  width: 80%;
+  height: 20%;
+}
+
+#registration__form-input-div-name {
+  width: 100%;
+  height: 100%;
+  border-width: 0px 0px 2px;
+  border-color: #dadada;
+  padding-left: 7vh;
+}
+
+#registration__form-input-div-surname {
+  width: 100%;
+  height: 100%;
+  border-width: 0px 0px 2px;
+  border-color: #dadada;
+  padding-left: 12vh;
+}
+
+#registration__form-input-div-pesel {
+  width: 100%;
+  height: 100%;
+  border-width: 0px 0px 2px;
+  border-color: #dadada;
+  padding-left: 9vh;
+}
+
+#registration__form-input-div-tel {
+  width: 100%;
+  height: 100%;
+  border-width: 0px 0px 2px;
+  border-color: #dadada;
+  padding-left: 5vh;
+}
+
+#registration__form-input-div-adress,
+#registration__form-input-div-email,
+#registration__form-input-div-password {
+  width: 100%;
+  height: 100%;
+  border-width: 0px 0px 2px;
+  border-color: #dadada;
+  padding-left: 8vh;
+}
+
+#registration__form-input-div-password-repeat {
+  width: 100%;
+  height: 100%;
+  border-width: 0px 0px 2px;
+  border-color: #dadada;
+  padding-left: 17.5vh;
+}
+
+#registration__form-input-div-name:focus,
+#registration__form-input-div-surname:focus,
+#registration__form-input-div-pesel:focus,
+#registration__form-input-div-tel:focus,
+#registration__form-input-div-adress:focus,
+#registration__form-input-div-email:focus,
+#registration__form-input-div-password:focus,
+#registration__form-input-div-password-repeat:focus {
+  outline-width: 0;
+  border-width: 0px 0px 2px;
+  border-color: #adcf62;
+}
+
+.registration__text-pass {
+  width: 80%;
+  padding-top: 1%;
+  display: flex;
+}
+
+.registration__a-text-pass:hover,
+.registration__a-text-reg:hover {
+  color: #a2e3e9;
+}
+
+.registration__a-text-pass {
+  margin-left: auto;
+}
+
+.registration__form-submit-button {
+  background-color: #adcf62;
+  text-align: center;
+  border: none;
+  color: white;
+  margin-top: 20%;
+  margin-bottom: 5%;
+  font-size: 2.8vh;
+  border-radius: 25px;
+  text-decoration: none;
+  width: 80%;
+  height: 8vh;
+  font-weight: bold;
+}
+
+.registration__form-submit-button:hover {
+  background-color: #d2d980;
+}
+
+.registration__text-reg {
+  display: flex;
+  justify-content: center;
+  font-size: 2.2vh;
+}
+
+.registration__a-text-reg {
+  color: #0e576f;
+  margin-right: auto;
+}
+
+.registration__form-input-div-checkbox {
+  -ms-transform: scale(2); /* IE */
+  -moz-transform: scale(2); /* FF */
+  -webkit-transform: scale(2); /* Safari and Chrome */
+  -o-transform: scale(2); /* Opera */
+  transform: scale(2);
+}
