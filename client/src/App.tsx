@@ -10,6 +10,7 @@ import Charity from "./pages/charity/Charity";
 import Login from "./pages/auth/Login";
 import Registration from "./pages/auth/Registration";
 import AnimalList from "./pages/animals/list/AnimalsList";
+import AnimalIssues from "./pages/animals/AnimalIssues";
 
 function App() {
   const { auth, setAuth } = useContext(AuthContext);
@@ -25,6 +26,7 @@ function App() {
         <Route exact path="/profile/:id" component={Profile} />
         <Route exact path="/adoption/:type" component={AnimalList} />
         <Route exact path="/charity" component={Charity} />
+        <Route exact path="/animal-issues" component={AnimalIssues} />
       </Switch>
       <Footer />
     </>
