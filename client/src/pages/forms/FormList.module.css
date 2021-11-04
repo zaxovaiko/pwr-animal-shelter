@@ -1,0 +1,31 @@
+.top-header {
+  height: 200px;
+  background: rgba(133, 175, 91, 0.23);
+  background-size: cover;
+}
+
+.header-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-list-row {
+  margin: 5em 2em;
+  height: auto;
+  font-size: 2em;
+  width: fit-content;
+}
+
+.form-list-item {
+  list-style-type: none;
+  margin-bottom: 1.5em;
+}
+
+.link {
+  color: #0e576f;
+}
+
+.link:hover {
+  color: #a2e3e9;
+}

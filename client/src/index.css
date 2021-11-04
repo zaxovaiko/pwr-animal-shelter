@@ -12,6 +12,9 @@
   text-align: center;
   border: none;
   color: white;
+  padding-right: 10%;
+  padding-left: 10%;
+  width: fit-content;
   font-size: 1.3rem;
   border-radius: 25px;
   text-decoration: none;
