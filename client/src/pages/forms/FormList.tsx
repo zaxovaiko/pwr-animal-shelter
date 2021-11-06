@@ -1,19 +1,11 @@
-import { Card, Col, Container, Row } from "react-bootstrap";
+import { Container } from "react-bootstrap";
+import HeaderTitle from "../../components/HeaderTitle/HeaderTitle";
 import styles from "./FormList.module.css";
 
 export default function FormList() {
   return (
     <>
-      <Container fluid className={styles["top-header"]} />
-      <Container fluid className={styles["header-container"]}>
-        <Row>
-          <Col xs={{ offset: 1, span: 10 }}>
-            <Card className="h-title" body>
-              Formularzy
-            </Card>
-          </Col>
-        </Row>
-      </Container>
+      <HeaderTitle text="Formularze" color="#ddd" />
 
       <Container className={styles["form-list-row"]}>
         <ul>

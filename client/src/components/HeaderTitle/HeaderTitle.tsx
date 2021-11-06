@@ -1,7 +1,7 @@
 import { Card, Col, Container, Row } from "react-bootstrap";
 import styles from "./HeaderTitle.module.css";
 
-export default function Title({
+export default function HeaderTitle({
   text,
   color,
   image,
