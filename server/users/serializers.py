@@ -1,4 +1,5 @@
 from datetime import timedelta
+from requests.api import delete
 from rest_framework import serializers
 from rest_framework.validators import UniqueValidator
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
@@ -14,6 +15,8 @@ class JWTTokenObtainPairSerializer(TokenObtainPairSerializer):
         token['email'] = user.email
         token['first_name'] = user.first_name
         token['last_name'] = user.last_name
+        token['id'] = user.id
+        token['is_staff'] = user.is_staff
 
         return token
 
@@ -30,8 +33,9 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
+        extra_kwargs = {'password': {'write_only': True}}
         fields = ('first_name', 'last_name', 'address',
-                  'pesel', 'phone', 'email', 'id')
+                  'pesel', 'phone', 'email', 'id', 'is_staff', 'password')
 
     def create(self, validated_data):
         user = User.objects.create(**validated_data)
