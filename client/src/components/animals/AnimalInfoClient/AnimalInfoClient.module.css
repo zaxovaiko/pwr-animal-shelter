@@ -1,0 +1,114 @@
+.top-header {
+    position: relative;
+    height: 200px;
+    background: rgba(133, 175, 91, 0.23);
+}
+
+.header-animal-info {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    top:-7em;
+    height: 200px;
+}
+
+.animal-photo {
+    position: absolute;
+    top:0;
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+}
+
+.text-header {
+    position: absolute;
+    top: 7em;
+    font-size: 1.9em;
+    color: #686464;
+}
+
+.text-header p {
+    margin-bottom: 0;
+}
+
+.text-header hr {
+    margin: 0;
+    width: 150px;
+}
+
+.main-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    font-size: 1.3em;
+    color: #686464;
+}
+
+.animal-description {
+    margin-top: 50px;
+    width: 60%;
+    text-align: center;
+}
+
+.main-info-container {
+    margin-top: 150px;
+    display: flex;
+    flex-direction: row;
+    text-align: left;
+}
+
+.info-decoration-container {
+    height: 200px;
+    width: 25px;
+    margin-right: 40px;
+}
+
+.info-decoration-container span{
+    height: 25px;
+    width: 25px;
+    background-color: rgba(14, 87, 111, 0.44);
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.info-decoration-container hr {
+    margin-left: 12px;
+    margin-top: -8px;
+    width: 1px;
+    height: 100%;
+    border-color: #686464;
+}
+
+.photo-container {
+    margin-top: 40px;
+    margin-left: 70px;
+    width: fit-content;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+
+.photo {
+    width: 200px;
+    height: 150px;
+    border-radius: 10%;
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
+@media (width: 600px) {
+    .photo-container {
+        width: 500px;
+    }
+    
+}
+
+.nav-area {
+    margin-top: 5em;
+    margin-bottom: 5em;
+    text-align: center;
+    width: fit-content;
+}
