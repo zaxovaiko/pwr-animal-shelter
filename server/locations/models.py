@@ -14,7 +14,7 @@ class Building(models.Model):
 class Room(models.Model):
     number = models.PositiveIntegerField("Numer pokoju")
     capacity = models.PositiveIntegerField("Ilość miejsc")
-    building = models.ForeignKey(Building, on_delete=models.CASCADE)
+    building = models.ForeignKey(Building, on_delete=models.CASCADE, related_name='rooms')
 
     def __str__(self):
         return str(self.building) + "room:" + str(self.number)

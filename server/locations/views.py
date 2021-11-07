@@ -8,7 +8,7 @@ from locations.serializers import BuildingSerializer, RoomSerializer, AnimalLoca
 
 class BuildingViewSet(viewsets.ModelViewSet):
     serializer_class = BuildingSerializer
-    queryset = Building.objects.prefetch_related('room_set').all()
+    queryset = Building.objects.prefetch_related('rooms').all()
     permission_classes = [IsAdminUser]
     model = Building
 

@@ -1,16 +1,8 @@
+from django.db.models.fields import related
 from django.utils import timezone
 from rest_framework.serializers import IntegerField, ModelSerializer, ValidationError, DateTimeField, CharField
 from locations.models import Building, Room, AnimalLocation
 from animals.serializers import AnimalSerializer
-
-
-class BuildingSerializer(ModelSerializer):
-    street = CharField(max_length=100, required=True)
-    number = IntegerField(min_value=0, required=True)
-
-    class Meta:
-        model = Building
-        fields = ['number', 'street', 'id', 'room_set']
 
 
 class RoomSerializer(ModelSerializer):
@@ -19,7 +11,17 @@ class RoomSerializer(ModelSerializer):
 
     class Meta:
         model = Room
-        fields = '__all__'
+        fields = ['id', 'number', 'capacity']
+
+
+class BuildingSerializer(ModelSerializer):
+    street = CharField(max_length=100, required=True)
+    number = IntegerField(min_value=0, required=True)
+    rooms = RoomSerializer(read_only=True, many=True)
+
+    class Meta:
+        model = Building
+        fields = ['number', 'street', 'id', 'rooms']
 
 
 class AnimalLocationSerializer(ModelSerializer):
