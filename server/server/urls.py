@@ -3,6 +3,7 @@ from django.urls import include, path
 from django.contrib import admin
 from rest_framework_extensions.routers import ExtendedSimpleRouter
 from animals.views import AnimalViewSet
+from adoptions.views import AnimalAdoptionsViewSet
 from users.views import JWTTokenRefreshView, UserViewSet
 from locations.views import BuildingViewSet, RoomViewSet, AnimalLocationViewSet
 
@@ -11,6 +12,7 @@ router = ExtendedSimpleRouter(trailing_slash=False)
 router.register(r'users', UserViewSet)
 router.register(r'animals', AnimalViewSet)
 router.register(r'animals-locations', AnimalLocationViewSet)
+router.register(r'animals-adoptions', AnimalAdoptionsViewSet)
 router \
     .register(r'buildings', BuildingViewSet, basename='buildings') \
     .register(r'rooms', RoomViewSet, basename='rooms', parents_query_lookups=['building'])
