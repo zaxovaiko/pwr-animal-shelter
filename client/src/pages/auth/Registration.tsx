@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useFormik } from "formik";
 import styles from "./Registration.module.css";
+import { AuthContext } from "../../contexts/AuthContext";
 
 let refToFirstName: React.RefObject<any> = React.createRef();
 let refToLastName: React.RefObject<any> = React.createRef();
@@ -43,7 +44,7 @@ const validate = (values: any) => {
 
   if (!values.pesel) {
     errors.pesel = "*Pole jest obowiązkowe";
-  } else if (values.pesel.length != 11) {
+  } else if (values.pesel.length !== 11) {
     errors.pesel = "*Pole musi mieć 11 znaków";
   } else if (!isNumeric(values.pesel)) {
     errors.pesel = "*Pole musi zawierać wyłącznie cyfry";
@@ -51,7 +52,7 @@ const validate = (values: any) => {
 
   if (!values.phoneNumber) {
     errors.phoneNumber = "*Pole jest obowiązkowe";
-  } else if (values.phoneNumber.length != 9) {
+  } else if (values.phoneNumber.length !== 9) {
     errors.phoneNumber = "*Pole musi mieć 9 znaków";
   } else if (!isNumeric(values.phoneNumber)) {
     errors.phoneNumber = "*Pole musi zawierać wyłącznie cyfry";
@@ -71,7 +72,7 @@ const validate = (values: any) => {
 
   if (!values.repeatPassword) {
     errors.repeatPassword = "*Pole jest obowiązkowe";
-  } else if (values.repeatPassword != values.password) {
+  } else if (values.repeatPassword !== values.password) {
     errors.repeatPassword = "*Hasła nie są identyczne";
     errors.password = "*Hasła nie są identyczne";
   }
@@ -88,6 +89,7 @@ const validate = (values: any) => {
 };
 
 export default function Registration() {
+  const { setAuth } = useContext(AuthContext);
   const history = useHistory();
   const formik = useFormik({
     initialValues: {
@@ -104,7 +106,25 @@ export default function Registration() {
     },
     validate,
     onSubmit: (values) => {
-      history.push("/");
+      fetch(process.env.REACT_APP_SERVER_URI + "/register", {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        method: "POST",
+        body: JSON.stringify({
+          ...values,
+          first_name: values.firstName,
+          last_name: values.lastName,
+          phone: values.phoneNumber,
+        }),
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          console.log(res);
+        })
+        .catch(console.error);
+      console.log("values", values);
+      // history.push("/");
     },
   });
 
