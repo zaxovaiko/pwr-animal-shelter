@@ -1,0 +1,15 @@
+.photo-container {
+    margin-top: 40px;
+    margin-left: 70px;
+    width: fit-content;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+
+.photo {
+    width: 200px;
+    height: 150px;
+    border-radius: 10%;
+    margin-top: 10px;
+    margin-right: 10px;
+}
