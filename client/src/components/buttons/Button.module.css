@@ -1,27 +1,26 @@
 .button-green {
-    margin-bottom: 1em;
-    font-size: 1em;
-    font-weight: bold;
-    width: 310px;
-    background-color: #adcf62;
-    border-color: #adcf62;
-
+  margin-bottom: 1em;
+  font-size: 1em;
+  font-weight: bold;
+  width: 310px;
+  background-color: #adcf62;
+  border-color: #adcf62;
 }
 
 .button-green:hover {
-    background-color: #D2D980;
-    border-color: #D2D980;
+  background-color: #d2d980;
+  border-color: #d2d980;
 }
 
 .button-blue {
-    font-size: 1em;
-    font-weight: bold;
-    width: 310px;
-    background-color: rgba(14, 87, 111, 0.6);
-    border-color: rgba(14, 87, 111, 0.6);
+  font-size: 1em;
+  font-weight: bold;
+  width: 310px;
+  background-color: rgba(14, 87, 111, 0.6);
+  border-color: rgba(14, 87, 111, 0.6);
 }
 
 .button-blue:hover {
-    background-color: #75C3C8;
-    border-color: #75C3C8;
+  background-color: #75c3c8;
+  border-color: #75c3c8;
 }

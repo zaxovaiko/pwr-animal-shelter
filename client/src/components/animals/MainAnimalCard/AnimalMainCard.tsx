@@ -3,8 +3,6 @@ import { Link } from "react-router-dom";
 import styles from "./AnimalMainCard.module.css";
 import { Animal } from "../../../types/Animal";
 
-//TODO: add info about link and id
-//TODO: change static photo link to animal custom one
 export default function MainAnimalCard({
   name,
   age,
