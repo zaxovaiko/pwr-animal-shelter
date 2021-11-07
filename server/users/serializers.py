@@ -10,14 +10,12 @@ class JWTTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
     def get_token(cls, user):
         token = super().get_token(user)
-        token.access_token.set_exp(lifetime=timedelta(days=10))
-
         token['email'] = user.email
         token['first_name'] = user.first_name
         token['last_name'] = user.last_name
         token['id'] = user.id
         token['is_staff'] = user.is_staff
-
+        token['is_superuser'] = user.is_superuser
         return token
 
 
