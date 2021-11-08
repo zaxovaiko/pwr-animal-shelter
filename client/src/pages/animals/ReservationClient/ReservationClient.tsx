@@ -1,5 +1,5 @@
 import { Container, Button } from "react-bootstrap";
-import HeaderTitle from "../HeaderTitle/HeaderTitle";
+import HeaderTitle from "../../../components/HeaderTitle/HeaderTitle";
 import styles from "./ReservationClient.module.css";
 
 export default function Reservation() {

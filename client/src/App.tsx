@@ -8,10 +8,10 @@ import Contact from "./pages/contact/Contact";
 import Profile from "./pages/profile/Profile";
 import Charity from "./pages/charity/Charity";
 import FormList from "./pages/forms/FormList";
-import Login from "./pages/auth/Login";
-import Registration from "./pages/auth/Registration";
-import AnimalList from "./pages/animals/list/AnimalsList";
-import AnimalIssues from "./pages/animals/AnimalIssues";
+import Login from "./pages/auth/Login/Login";
+import Registration from "./pages/auth/Registration/Registration";
+import AnimalList from "./pages/animals/AnimalList/AnimalsList";
+import AnimalIssues from "./pages/animals/AnimalIssues/AnimalIssues";
 
 function App() {
   const { auth, setAuth } = useContext(AuthContext);

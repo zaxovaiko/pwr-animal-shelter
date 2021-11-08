@@ -1,6 +1,5 @@
 import styles from "./AnimalIssues.module.css";
-import React, { useEffect } from "react";
-import { useState } from "react";
+import React from "react";
 import { useHistory } from "react-router-dom";
 import { send } from "emailjs-com";
 import { useFormik } from "formik";
@@ -59,7 +58,10 @@ export default function AnimalIssues() {
         <h1 className={styles["anIssues__label-h1"]}>
           <strong>Zgłoś problem</strong>
         </h1>
-        <form className={styles["anIssues__form"]} onSubmit={formik.handleSubmit}>
+        <form
+          className={styles["anIssues__form"]}
+          onSubmit={formik.handleSubmit}
+        >
           <input
             type="text"
             name="title"
@@ -73,7 +75,9 @@ export default function AnimalIssues() {
             autoFocus
           />
           {formik.touched.title && formik.errors.title ? (
-            <div style={{ color: "red", width: "100%" }}>{formik.errors.title}</div>
+            <div style={{ color: "red", width: "100%" }}>
+              {formik.errors.title}
+            </div>
           ) : null}
           <textarea
             name="contents"
@@ -85,10 +89,15 @@ export default function AnimalIssues() {
             className={styles["anIssues__form-input-contents"]}
           />
           {formik.touched.contents && formik.errors.contents ? (
-            <div style={{ color: "red", width: "100%" }}>{formik.errors.contents}</div>
+            <div style={{ color: "red", width: "100%" }}>
+              {formik.errors.contents}
+            </div>
           ) : null}
 
-          <button type="submit" className={styles["anIssues__form-submit-button"]}>
+          <button
+            type="submit"
+            className={styles["anIssues__form-submit-button"]}
+          >
             Wyślij
           </button>
           <p style={{ width: "100vh", textAlign: "center" }}>lub</p>

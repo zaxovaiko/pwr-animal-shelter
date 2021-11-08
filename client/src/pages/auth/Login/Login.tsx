@@ -2,8 +2,8 @@ import React, { useEffect, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import styles from "./Login.module.css";
 import { useFormik } from "formik";
-import { AuthContext } from "../../contexts/AuthContext";
-import { fetchLoginData } from "../../api/auth";
+import { AuthContext } from "../../../contexts/AuthContext";
+import { fetchLoginData } from "../../../api/auth";
 
 let refToEmail: React.RefObject<any> = React.createRef();
 let refToPassword: React.RefObject<any> = React.createRef();
