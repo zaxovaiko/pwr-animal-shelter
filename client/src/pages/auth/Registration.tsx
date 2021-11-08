@@ -107,16 +107,24 @@ export default function Registration() {
     },
     validate,
     onSubmit: (values) => {
-      fetchRegisterData(
-        JSON.stringify({
+      fetch(process.env.REACT_APP_SERVER_URI + "/register", {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        method: "POST",
+        body: JSON.stringify({
           ...values,
           first_name: values.firstName,
           last_name: values.lastName,
           phone: values.phoneNumber,
+        }),
+      })
+        .then((res) => res.json())
         })
       )
         .then((res) => {
-          console.log(res);
+          alert(res.email);
+          history.push("/");
         })
         .catch(console.error);
       // history.push("/");
@@ -276,6 +284,11 @@ export default function Registration() {
               Adres:
             </label>
             <input
+              name="address"
+              type="text"
+              id={styles["registration__form-input-div-adress"]}
+              onChange={formik.handleChange}
+              value={formik.values.address}
               type="text"
               id={styles["registration__form-input-div-adress"]}
             />
