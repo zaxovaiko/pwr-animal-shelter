@@ -16,11 +16,12 @@ class AnimalAdotpionsSerializer(ModelSerializer):
 
     class Meta:
         model = AnimalAdoption
-        fields = '__all__'
+        fields = ['user_id', 'animal_id', 'user', 'animal', 'date']
 
     def create(self, validated_data):
-        animal_adoption = super().create(validated_data)
         validated_data['animal'].animal_status = AnimalStatus.objects.get(pk=3)
+        validated_data['animal'].save()
+        animal_adoption = super().create(validated_data)
         return animal_adoption
 
     def validate(self, attrs):
