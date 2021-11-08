@@ -9,3 +9,9 @@ export function fetchAnimals() {
     res.json()
   );
 }
+
+export function fetchAnimal(id: string) {
+  return fetch(process.env.REACT_APP_SERVER_URI + "/animals/" + id).then(
+    (res) => res.json()
+  );
+}

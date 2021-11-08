@@ -1,18 +1,13 @@
 import { Container, Row, Image, Button } from "react-bootstrap";
 import styles_main from "./AnimalInfoClient.module.css";
-import styles_photo from "../AnimalPhotoContainer.module.css";
-import styles_button from "../../buttons/Button.module.css";
+import styles_photo from "../../AnimalPhotoContainer.module.css";
+import styles_button from "../../../../components/shared/Button.module.css";
 import { Animal } from "../../../../types/Animal";
+import { useParams } from "react-router";
+import { useQuery } from "react-query";
+import { fetchAnimal } from "../../../../api/animals";
 
-export default function AnimalInfoClient({
-  name,
-  age,
-  height,
-  animal_gender,
-  animal_breed,
-  animal_status,
-  description,
-}: Animal) {
+export default function AnimalInfoClient() {
   const animalPhotos = [
     "https://thumbs.dreamstime.com/b/dog-golden-retriever-jumping-autumn-leaves-autumnal-sunlight-77861618.jpg",
     "https://thumbs.dreamstime.com/b/retriever-%D1%81%D0%BE%D0%B1%D0%B0%D0%BA%D0%B8-%D0%B7%D0%BE%D0%BB%D0%BE%D1%82%D0%B8%D1%81%D1%82%D1%8B%D0%B9-21668976.jpg",
@@ -20,6 +15,23 @@ export default function AnimalInfoClient({
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFv4rsjjJZd23tvUTxzzBQRi-XGDf8_n1vJvP1RMN0_6Q2CgHY_UY5lQh87NwHRXp10F8&usqp=CAU",
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGMvZFqb35VZYb6ZyuSDs37F6L9gduGexaFEai_cbY2f7R-IiCR2dBzWmEKRIE-Yh0Olo&usqp=CAU",
   ];
+
+  const { id } = useParams<{ id: string }>();
+  const { isLoading, isError, data } = useQuery<Animal>("fetchAnimal", () =>
+    fetchAnimal(id)
+  );
+
+  if (isLoading) {
+    return <>Loading</>;
+  }
+
+  if (isError) {
+    return <>Error</>;
+  }
+
+  if (!data) {
+    return <>Something went wrong</>;
+  }
 
   return (
     <>
@@ -32,15 +44,17 @@ export default function AnimalInfoClient({
         />
         <p className={styles_main["text-header"]}>
           <p>
-            <b>{name}</b>
+            <b>{data.name}</b>
           </p>
           <hr />
-          <p>{age} lat</p>
+          <p>{data.age} lat</p>
         </p>
       </Container>
 
       <Container className={styles_main["main-container"]}>
-        <Row className={styles_main["animal-description"]}>{description}</Row>
+        <Row className={styles_main["animal-description"]}>
+          {data.description}
+        </Row>
 
         <Container className={styles_main["main-info-container"]}>
           <Container className={styles_main["info-decoration-container"]}>
@@ -51,19 +65,19 @@ export default function AnimalInfoClient({
           <Container className={styles_main["info"]}>
             <p>
               <b>Status: </b>
-              {animal_status}
+              {data.animal_status.value}
             </p>
             <p>
               <b>Rasa: </b>
-              {animal_breed}
+              {data.animal_breed.value}
             </p>
             <p>
               <b>Płeć: </b>
-              {animal_gender}
+              {data.animal_gender.value}
             </p>
             <p>
               <b>Wzrost: </b>
-              {height} cm
+              {data.height} cm
             </p>
           </Container>
         </Container>
