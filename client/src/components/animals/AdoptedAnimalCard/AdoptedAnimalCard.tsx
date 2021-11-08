@@ -1,8 +1,8 @@
 import { Card, Image } from "react-bootstrap";
-import { AnimalProps } from "../MainAnimalCard/AnimalMainCard";
+import { Animal } from "../../../types/Animal";
 import styles from "./AdoptedAnimalCard.module.css";
 
-export default function AdoptedAnimalCard({ name }: AnimalProps) {
+export default function AdoptedAnimalCard({ name }: Animal) {
   return (
     <Card className={styles["adopted-animal-card"]}>
       <Image
