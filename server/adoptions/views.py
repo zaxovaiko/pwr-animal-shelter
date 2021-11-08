@@ -4,7 +4,7 @@ from adoptions.models import AnimalAdoption
 from adoptions.serializers import AnimalAdotpionsSerializer
 
 
-class AnimalAdoptionsViewSet(viewsets.ModelViewSet):
+class AnimalAdoptionViewSet(viewsets.ModelViewSet):
     serializer_class = AnimalAdotpionsSerializer
     queryset = AnimalAdoption.objects.all()
     permission_classes = [IsAdminUser]

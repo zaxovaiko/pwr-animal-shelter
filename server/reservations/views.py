@@ -1,8 +1,8 @@
 from rest_framework import status, viewsets
 from rest_framework.permissions import AllowAny, IsAdminUser, IsAuthenticated
 from rest_framework.response import Response
-from .serializers import AnimalReservationsSerializer
-from .models import AnimalReservation
+from .serializers import AnimalReservationsSerializer, ReservationStatusSerializer
+from .models import AnimalReservation, ReservationStatus
 
 
 class AnimalReservationsViewSet(viewsets.ModelViewSet):
@@ -21,3 +21,11 @@ class AnimalReservationsViewSet(viewsets.ModelViewSet):
         if self.action == 'retrieve':
             return [AllowAny()]
         return [IsAdminUser()]
+
+
+class ReservationStatusViewSet(viewsets.ModelViewSet):
+    queryset = ReservationStatus.objects.all()
+    serializer_class = ReservationStatusSerializer
+
+    def get_permissions(self):
+        return [AllowAny()] if self.action == 'retrieve' or self.action == 'list' else [IsAdminUser()]
