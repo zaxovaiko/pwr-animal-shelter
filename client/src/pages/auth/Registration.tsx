@@ -112,15 +112,19 @@ export default function Registration() {
         },
         method: "POST",
         body: JSON.stringify({
-          ...values,
           first_name: values.firstName,
           last_name: values.lastName,
+          address: values.address,
+          pesel: values.pesel,
           phone: values.phoneNumber,
+          email: values.email,
+          password: values.password,
         }),
       })
         .then((res) => res.json())
         .then((res) => {
-          console.log(res);
+          alert(res.email);
+          history.push("/");
         })
         .catch(console.error);
       console.log("values", values);
@@ -277,7 +281,13 @@ export default function Registration() {
             >
               Adres:
             </label>
-            <input type="text" id={styles["registration__form-input-div-adress"]} />
+            <input
+              name="address"
+              type="text"
+              id={styles["registration__form-input-div-adress"]}
+              onChange={formik.handleChange}
+              value={formik.values.address}
+            />
           </div>
 
           <div className={styles["registration_form-input-div"]}>
