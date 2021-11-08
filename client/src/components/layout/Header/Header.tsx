@@ -1,11 +1,21 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Container, Nav, Navbar } from "react-bootstrap";
-import { MdAccountCircle, MdGTranslate, MdLiveHelp } from "react-icons/md";
+import { MdAccountCircle, MdLiveHelp, MdLogin, MdLogout } from "react-icons/md";
+import { useHistory } from "react-router";
+import { AuthContext } from "../../../contexts/AuthContext";
 import Menu from "../Menu/Menu";
 import styles from "./Header.module.css";
 
 export default function Header() {
+  const history = useHistory();
   const [isOpened, setIsOpened] = useState(false);
+  const { auth, setAuth } = useContext(AuthContext);
+
+  function logout() {
+    setAuth(null);
+    history.push("/login");
+  }
+
   return (
     <Navbar expand="sm" className={styles["c-header"]}>
       <Container fluid>
@@ -21,15 +31,37 @@ export default function Header() {
             </Nav.Link>
           </Nav>
           <Nav className={styles["c-header__icon-links"]}>
-            <Nav.Link className={styles["c-header__icon-links__link"]} href="#">
+            <Nav.Link
+              className={styles["c-header__icon-links__link"]}
+              href="/contact"
+            >
               <MdLiveHelp />
             </Nav.Link>
-            <Nav.Link className={styles["c-header__icon-links__link"]} href="#">
-              <MdAccountCircle />
-            </Nav.Link>
-            <Nav.Link className={styles["c-header__icon-links__link"]} href="#">
-              <MdGTranslate />
-            </Nav.Link>
+            {auth.user && (
+              <>
+                <Nav.Link
+                  className={styles["c-header__icon-links__link"]}
+                  href={"/profile/" + auth.user.id}
+                >
+                  <MdAccountCircle />
+                </Nav.Link>
+                <Nav.Link
+                  className={styles["c-header__icon-links__link"]}
+                  href="#"
+                  onClick={() => logout()}
+                >
+                  <MdLogout />
+                </Nav.Link>
+              </>
+            )}
+            {!auth.user && (
+              <Nav.Link
+                className={styles["c-header__icon-links__link"]}
+                href="/login"
+              >
+                <MdLogin />
+              </Nav.Link>
+            )}
           </Nav>
         </Navbar.Collapse>
       </Container>

@@ -1,6 +1,9 @@
 import { createContext, FC, useEffect, useState } from "react";
 import { decode } from "jsonwebtoken";
-import { AuthContextValue, AuthContext as AuthContextType } from "../types/AuthContext";
+import {
+  AuthContextValue,
+  AuthContext as AuthContextType,
+} from "../types/AuthContext";
 
 export const initialAuthContextValue: AuthContextValue = {
   user: undefined,
@@ -9,7 +12,7 @@ export const initialAuthContextValue: AuthContextValue = {
 
 export const AuthContext = createContext<AuthContextType>({
   auth: initialAuthContextValue,
-  setAuth: (token: string) => {},
+  setAuth: (token: string | null) => {},
 });
 
 const AuthProvider: FC = ({ children }) => {
@@ -18,7 +21,7 @@ const AuthProvider: FC = ({ children }) => {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
-      setTokenAndParseUser(token);
+      setTokenAndParseUser(token.replace("Bearer ", ""));
     }
   }, []);
 

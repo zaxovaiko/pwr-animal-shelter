@@ -1,8 +1,7 @@
-import React, { useContext, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useFormik } from "formik";
 import styles from "./Registration.module.css";
-import { AuthContext } from "../../contexts/AuthContext";
 import { fetchRegisterData } from "../../api/auth";
 
 let refToFirstName: React.RefObject<any> = React.createRef();
@@ -90,7 +89,6 @@ const validate = (values: any) => {
 };
 
 export default function Registration() {
-  const { setAuth } = useContext(AuthContext);
   const history = useHistory();
   const formik = useFormik({
     initialValues: {
@@ -107,27 +105,19 @@ export default function Registration() {
     },
     validate,
     onSubmit: (values) => {
-      fetch(process.env.REACT_APP_SERVER_URI + "/register", {
-        headers: {
-          "Content-Type": "application/json",
-        },
-        method: "POST",
-        body: JSON.stringify({
-          ...values,
-          first_name: values.firstName,
-          last_name: values.lastName,
-          phone: values.phoneNumber,
-        }),
+      fetchRegisterData({
+        ...values,
+        first_name: values.firstName,
+        last_name: values.lastName,
+        phone: values.phoneNumber,
       })
-        .then((res) => res.json())
-        })
-      )
         .then((res) => {
-          alert(res.email);
-          history.push("/");
+          if (res.id) {
+            history.push("/login");
+          }
+          console.log(res);
         })
         .catch(console.error);
-      // history.push("/");
     },
   });
 
@@ -289,8 +279,6 @@ export default function Registration() {
               id={styles["registration__form-input-div-adress"]}
               onChange={formik.handleChange}
               value={formik.values.address}
-              type="text"
-              id={styles["registration__form-input-div-adress"]}
             />
           </div>
 

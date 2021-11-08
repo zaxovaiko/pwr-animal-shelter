@@ -1,10 +1,9 @@
-import React, { useEffect, useContext, useState } from "react";
+import React, { useEffect, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import styles from "./Login.module.css";
-import "bootstrap/dist/css/bootstrap.min.css";
-import { user } from "./user_example_data";
 import { useFormik } from "formik";
 import { AuthContext } from "../../contexts/AuthContext";
+import { fetchLoginData } from "../../api/auth";
 
 let refToEmail: React.RefObject<any> = React.createRef();
 let refToPassword: React.RefObject<any> = React.createRef();
@@ -31,9 +30,7 @@ const validate = (values: any) => {
 
 export default function Login() {
   const history = useHistory();
-  const { auth, setAuth } = useContext(AuthContext);
-  const [username, setUserName] = useState("");
-  const [pass, setPassword] = useState("");
+  const { setAuth } = useContext(AuthContext);
   let check = false;
 
   const formik = useFormik({
@@ -43,17 +40,10 @@ export default function Login() {
     },
     validate,
     onSubmit: (values) => {
-      fetch(process.env.REACT_APP_SERVER_URI + "/login", {
-        headers: {
-          "Content-Type": "application/json",
-        },
-        method: "POST",
-        body: JSON.stringify({
-          email: values.email,
-          password: values.password,
-        }),
+      fetchLoginData({
+        email: values.email,
+        password: values.password,
       })
-        .then((res) => res.json())
         .then((res) => {
           if (res.access) {
             setAuth(res.access);
@@ -102,7 +92,9 @@ export default function Login() {
             placeholder="Email"
           />
           {formik.touched.email && formik.errors.email ? (
-            <div style={{ color: "red", width: "80%" }}>{formik.errors.email}</div>
+            <div style={{ color: "red", width: "80%" }}>
+              {formik.errors.email}
+            </div>
           ) : null}
           <input
             name="password"
@@ -115,7 +107,9 @@ export default function Login() {
             placeholder="Hasło"
           />
           {formik.touched.password && formik.errors.password ? (
-            <div style={{ color: "red", width: "80%" }}>{formik.errors.password}</div>
+            <div style={{ color: "red", width: "80%" }}>
+              {formik.errors.password}
+            </div>
           ) : null}
           <div className={styles["login__text-pass"]}>
             <a href="/" className={styles["login__a-text-pass"]}>
