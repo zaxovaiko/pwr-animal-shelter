@@ -6,7 +6,7 @@ from users.models import User
 
 class ReservationStatus(models.Model):
     value = models.CharField("Wartość", max_length=100,
-                             unique=True, null=False, help_text="")
+                             unique=True, null=False)
 
     def __str__(self):
         return self.value
@@ -20,4 +20,4 @@ class AnimalReservation(models.Model):
         ReservationStatus, on_delete=models.PROTECT, null=False)
 
     def __str__(self):
-        return str(self.person) + str(self.animal) + str(self.date)
+        return str(self.user) + str(self.animal) + str(self.date)

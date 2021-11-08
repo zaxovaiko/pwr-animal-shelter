@@ -1,0 +1,121 @@
+.top-header {
+  position: relative;
+  height: 200px;
+  background: rgba(133, 175, 91, 0.23);
+}
+
+.header-reservation {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  top: -7em;
+  height: 200px;
+}
+
+.animal-photo {
+  position: absolute;
+  top: 0;
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+}
+
+.text-header {
+  position: absolute;
+  top: 7em;
+  font-size: 1.9em;
+  color: #686464;
+  font-weight: bolder;
+}
+
+.main-container {
+  margin: 40px 40px 100px;
+  display: flex;
+  flex-direction: row;
+  font-size: 1.3em;
+  color: #686464;
+}
+
+.info-animal-container {
+  margin-right: 150px;
+  width: 600px;
+}
+
+.info-reservation-container {
+  padding-left: 40px;
+  width: 600px;
+  border-left: 1px solid #686464;
+}
+
+@media (max-width: 1200px) {
+  .main-container {
+    flex-direction: column;
+    margin-left: 0;
+  }
+
+  .info-animal-container {
+    padding-left: 40px;
+    margin-right: 0;
+    margin-left: 0;
+    width: 400px;
+  }
+
+  .info-reservation-container {
+    margin-left: 0;
+    padding-left: 40px;
+    width: 400px;
+    margin-top: 5em;
+    border: none;
+  }
+}
+
+.text-sub-header {
+  text-align: center;
+  font-size: 1.4em;
+  font-weight: bold;
+  text-decoration: underline;
+  margin-bottom: 2em;
+  width: fit-content;
+}
+
+.nav-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 100px;
+  font-size: 1.3em;
+  width: fit-content;
+}
+
+.p {
+  color: #686464;
+}
+
+.button-green {
+  margin-bottom: 1em;
+  font-size: 1em;
+  font-weight: bold;
+  width: 310px;
+  background-color: #adcf62;
+  border-color: #adcf62;
+}
+
+.button-green:hover {
+  background-color: #d2d980;
+  border-color: #d2d980;
+}
+
+.button-blue {
+  font-size: 1em;
+  font-weight: bold;
+  width: 310px;
+  background-color: rgba(14, 87, 111, 0.6);
+  border-color: rgba(14, 87, 111, 0.6);
+}
+
+.button-blue:hover {
+  background-color: #75c3c8;
+  border-color: #75c3c8;
+}

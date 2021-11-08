@@ -1,32 +1,13 @@
 import { Image, Nav, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import styles from "./AnimalMainCard.module.css";
+import { Animal } from "../../../types/Animal";
 
-export interface AnimalProps {
-  //TODO: add all object data to interface and verify types
-  id: string;
-  image: string;
-  chip_code: string;
-  name: string;
-  age: number;
-  animal_type: string;
-  animal_gender: string;
-  animal_breed: string;
-  color: string;
-  height: number;
-  description: string;
-  vaccinations: string;
-  animal_status: string;
-}
-
-//TODO: add info about link and id
-//TODO: change static photo link to animal custom one
 export default function MainAnimalCard({
-  chip_code,
   name,
   age,
   description,
-}: AnimalProps) {
+}: Animal) {
   return (
     <Card className={styles["animal-card"]} body>
       <div className={styles["animal-card__top"]}>

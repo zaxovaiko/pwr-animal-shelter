@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import { useFormik } from "formik";
 import styles from "./Registration.module.css";
 import { AuthContext } from "../../contexts/AuthContext";
+import { fetchRegisterData } from "../../api/auth";
 
 let refToFirstName: React.RefObject<any> = React.createRef();
 let refToLastName: React.RefObject<any> = React.createRef();
@@ -112,22 +113,20 @@ export default function Registration() {
         },
         method: "POST",
         body: JSON.stringify({
+          ...values,
           first_name: values.firstName,
           last_name: values.lastName,
-          address: values.address,
-          pesel: values.pesel,
           phone: values.phoneNumber,
-          email: values.email,
-          password: values.password,
         }),
       })
         .then((res) => res.json())
+        })
+      )
         .then((res) => {
           alert(res.email);
           history.push("/");
         })
         .catch(console.error);
-      console.log("values", values);
       // history.push("/");
     },
   });
@@ -182,7 +181,10 @@ export default function Registration() {
         <h1 className={styles["registration__label-h1"]}>
           <strong>Zarejestruj się</strong>
         </h1>
-        <form className={styles["registration__form"]} onSubmit={formik.handleSubmit}>
+        <form
+          className={styles["registration__form"]}
+          onSubmit={formik.handleSubmit}
+        >
           <div className={styles["registration_form-input-div-first"]}>
             <label
               htmlFor={styles["registration__form-input-div-name"]}
@@ -287,6 +289,8 @@ export default function Registration() {
               id={styles["registration__form-input-div-adress"]}
               onChange={formik.handleChange}
               value={formik.values.address}
+              type="text"
+              id={styles["registration__form-input-div-adress"]}
             />
           </div>
 
@@ -420,7 +424,10 @@ export default function Registration() {
             ) : null}
           </div>
 
-          <button type="submit" className={styles["registration__form-submit-button"]}>
+          <button
+            type="submit"
+            className={styles["registration__form-submit-button"]}
+          >
             Zarejestruj
           </button>
         </form>
