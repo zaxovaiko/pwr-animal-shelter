@@ -1,12 +1,13 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import styles from "./Login.module.css";
-import "bootstrap/dist/css/bootstrap.min.css";
-import { user } from "./user_example_data";
 import { useFormik } from "formik";
+import { AuthContext } from "../../../contexts/AuthContext";
+import { fetchLoginData } from "../../../api/auth";
 
 let refToEmail: React.RefObject<any> = React.createRef();
 let refToPassword: React.RefObject<any> = React.createRef();
+let refToErrorUser: React.RefObject<any> = React.createRef();
 
 const validate = (values: any) => {
   const errors: {
@@ -29,6 +30,8 @@ const validate = (values: any) => {
 
 export default function Login() {
   const history = useHistory();
+  const { setAuth } = useContext(AuthContext);
+  let check = false;
 
   const formik = useFormik({
     initialValues: {
@@ -36,18 +39,22 @@ export default function Login() {
       password: "",
     },
     validate,
-    onSubmit() {
-      signIn();
+    onSubmit: (values) => {
+      fetchLoginData({
+        email: values.email,
+        password: values.password,
+      })
+        .then((res) => {
+          if (res.access) {
+            setAuth(res.access);
+            history.push("/");
+          } else {
+            refToErrorUser.current.style.visibility = "visible";
+          }
+        })
+        .catch(console.error);
     },
   });
-
-  function signIn() {
-    if (user.email == formik.values.email && user.password == formik.values.password) {
-      history.push("/");
-    } else {
-      alert("Invalid data!");
-    }
-  }
 
   useEffect(() => {
     if (formik.touched.email && formik.errors.email) {
@@ -60,6 +67,11 @@ export default function Login() {
       refToPassword.current.style.borderColor = "red";
     } else {
       refToPassword.current.style.borderColor = "#DADADA";
+    }
+
+    if (check) {
+      alert(check);
+      refToErrorUser.current.style.visibility = "visible";
     }
   });
   return (
@@ -78,10 +90,11 @@ export default function Login() {
             value={formik.values.email}
             className={styles["login__form-input-email"]}
             placeholder="Email"
-            autoFocus
           />
           {formik.touched.email && formik.errors.email ? (
-            <div style={{ color: "red", width: "80%" }}>{formik.errors.email}</div>
+            <div style={{ color: "red", width: "80%" }}>
+              {formik.errors.email}
+            </div>
           ) : null}
           <input
             name="password"
@@ -94,7 +107,9 @@ export default function Login() {
             placeholder="Hasło"
           />
           {formik.touched.password && formik.errors.password ? (
-            <div style={{ color: "red", width: "80%" }}>{formik.errors.password}</div>
+            <div style={{ color: "red", width: "80%" }}>
+              {formik.errors.password}
+            </div>
           ) : null}
           <div className={styles["login__text-pass"]}>
             <a href="/" className={styles["login__a-text-pass"]}>
@@ -104,6 +119,18 @@ export default function Login() {
           <button type="submit" className={styles["login__form-submit-button"]}>
             Zaloguj
           </button>
+          <div
+            ref={refToErrorUser}
+            style={{
+              color: "red",
+              width: "80%",
+              textAlign: "center",
+              visibility: "hidden",
+              marginTop: "0.5vh",
+            }}
+          >
+            E-mail lub hasło są nieprawidłowe
+          </div>
         </form>
         <div className={styles["login__text-reg"]}>
           Nie masz konta?&nbsp;

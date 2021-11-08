@@ -1,34 +1,35 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { Container, Image, Button } from "react-bootstrap";
+import { useQuery } from "react-query";
 import { Link, useParams } from "react-router-dom";
+import { fetchProfileData } from "../../api/profile";
 import { AuthContext } from "../../contexts/AuthContext";
 import styles from "./Profile.module.css";
 
-const fakeUser = {
-  first_name: "Mirina",
-  last_name: "Kowal",
-  pesel: 11111111111,
-  address: "Wrocław, ul. Wiśniowa 14/1",
-  phone: "234-123-123",
-  email: "marina@gmail.com",
-};
+const FIELDS_TO_SHOW = [
+  ["first_name", "Imię"],
+  ["last_name", "Nazwisko"],
+  ["pesel", "PESEL"],
+  ["address", "Adres"],
+  ["phone", "Tel."],
+  ["email", "E-mail"],
+];
 
 export default function Profile() {
-  // Need to load a user by id
   const { id } = useParams<{ id: string }>();
   const { auth } = useContext(AuthContext);
-  const [user, setUser] = useState<any>(null);
+  const { isLoading, isError, data } = useQuery(
+    "getProfileData",
+    () => fetchProfileData(id),
+    { retry: false }
+  );
 
-  useEffect(() => {
-    // Example api fetch
-    Promise.resolve(fakeUser).then((u) => {
-      setUser(u);
-    });
-  }, []);
-
-  // TODO: Replace with preloader
-  if (!user) {
+  if (isLoading) {
     return <>Loading</>;
+  }
+
+  if (isError) {
+    return <h1>Error has occured</h1>;
   }
 
   return (
@@ -44,24 +45,14 @@ export default function Profile() {
         <h1 className={styles["top-page__header__title"]}>Moje dane</h1>
       </div>
       <Container className={styles["user-info"]}>
-        <p>
-          Imię: <span>{user.first_name}</span>
-        </p>
-        <p>
-          Nazwisko: <span>{user.last_name}</span>
-        </p>
-        <p>
-          PESEL: <span>{user.pesel}</span>
-        </p>
-        <p>
-          Adres: <span>{user.address}</span>
-        </p>
-        <p>
-          Tel.: <span>{user.phone}</span>
-        </p>
-        <p>
-          Email: <span>{user.email}</span>
-        </p>
+        {FIELDS_TO_SHOW.map(
+          ([key, text]) =>
+            data[key] && (
+              <p key={key}>
+                {text}: <span>{data[key]}</span>
+              </p>
+            )
+        )}
       </Container>
       {auth.user && (
         <Link to="/profile/2" className="text-decoration-none">

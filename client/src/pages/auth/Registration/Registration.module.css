@@ -1,5 +1,5 @@
 .registration {
-  background-image: url("../../assets/auth/Sign_in_back-bicubic.png");
+  background-image: url("../../../assets/auth/Sign_in_back-bicubic.png");
   background-size: 100%;
   background-repeat: no-repeat;
   font-family: "Quicksand", sans-serif;
@@ -115,7 +115,6 @@
 #registration__form-input-div-password-repeat:focus {
   outline-width: 0;
   border-width: 0px 0px 2px;
-  border-color: #adcf62;
 }
 
 .registration__text-pass {

@@ -5,5 +5,5 @@ export type AuthContextValue = {
 
 export type AuthContext = {
   auth: AuthContextValue;
-  setAuth(token: string): void;
+  setAuth(token: string | null): void;
 };

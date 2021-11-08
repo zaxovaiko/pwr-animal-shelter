@@ -1,6 +1,5 @@
 import styles from "./AnimalIssues.module.css";
-import React, { useEffect } from "react";
-import { useState } from "react";
+import React from "react";
 import { useHistory } from "react-router-dom";
 import { send } from "emailjs-com";
 import { useFormik } from "formik";

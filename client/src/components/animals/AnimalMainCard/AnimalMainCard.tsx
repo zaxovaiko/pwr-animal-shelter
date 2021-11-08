@@ -3,9 +3,8 @@ import { Link } from "react-router-dom";
 import styles from "./AnimalMainCard.module.css";
 import { Animal } from "../../../types/Animal";
 
-//TODO: add info about link and id
-//TODO: change static photo link to animal custom one
 export default function MainAnimalCard({
+  id,
   name,
   age,
   description,
@@ -25,7 +24,7 @@ export default function MainAnimalCard({
         />
       </div>
       <p className={styles["animal-card__desc"]}>{description}</p>
-      <Nav.Link as={Link} to="/link" className={styles["animal-card__link"]}>
+      <Nav.Link as={Link} to={"/animals/" + id} className={styles["animal-card__link"]}>
         <u>Więcej</u>
       </Nav.Link>
     </Card>

@@ -1,7 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;600;700&display=swap");
-
 .login {
-  background-image: url("../../assets/auth/Sign_in_back-bicubic.png");
+  background-image: url("../../../assets/auth/Sign_in_back-bicubic.png");
   background-size: 100%;
   background-repeat: no-repeat;
   font-family: "Quicksand", sans-serif;
@@ -71,7 +69,6 @@
   border: none;
   color: white;
   margin-top: 5%;
-  margin-bottom: 5%;
   font-size: 20px;
   border-radius: 25px;
   text-decoration: none;

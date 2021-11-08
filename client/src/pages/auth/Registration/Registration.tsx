@@ -1,8 +1,8 @@
-import React, { useContext, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useFormik } from "formik";
 import styles from "./Registration.module.css";
-import { AuthContext } from "../../contexts/AuthContext";
+import { fetchRegisterData } from "../../../api/auth";
 
 let refToFirstName: React.RefObject<any> = React.createRef();
 let refToLastName: React.RefObject<any> = React.createRef();
@@ -89,7 +89,6 @@ const validate = (values: any) => {
 };
 
 export default function Registration() {
-  const { setAuth } = useContext(AuthContext);
   const history = useHistory();
   const formik = useFormik({
     initialValues: {
@@ -106,25 +105,19 @@ export default function Registration() {
     },
     validate,
     onSubmit: (values) => {
-      fetch(process.env.REACT_APP_SERVER_URI + "/register", {
-        headers: {
-          "Content-Type": "application/json",
-        },
-        method: "POST",
-        body: JSON.stringify({
-          ...values,
-          first_name: values.firstName,
-          last_name: values.lastName,
-          phone: values.phoneNumber,
-        }),
+      fetchRegisterData({
+        ...values,
+        first_name: values.firstName,
+        last_name: values.lastName,
+        phone: values.phoneNumber,
       })
-        .then((res) => res.json())
         .then((res) => {
+          if (res.id) {
+            history.push("/login");
+          }
           console.log(res);
         })
         .catch(console.error);
-      console.log("values", values);
-      // history.push("/");
     },
   });
 
@@ -178,7 +171,10 @@ export default function Registration() {
         <h1 className={styles["registration__label-h1"]}>
           <strong>Zarejestruj się</strong>
         </h1>
-        <form className={styles["registration__form"]} onSubmit={formik.handleSubmit}>
+        <form
+          className={styles["registration__form"]}
+          onSubmit={formik.handleSubmit}
+        >
           <div className={styles["registration_form-input-div-first"]}>
             <label
               htmlFor={styles["registration__form-input-div-name"]}
@@ -277,7 +273,13 @@ export default function Registration() {
             >
               Adres:
             </label>
-            <input type="text" id={styles["registration__form-input-div-adress"]} />
+            <input
+              name="address"
+              type="text"
+              id={styles["registration__form-input-div-adress"]}
+              onChange={formik.handleChange}
+              value={formik.values.address}
+            />
           </div>
 
           <div className={styles["registration_form-input-div"]}>
@@ -410,7 +412,10 @@ export default function Registration() {
             ) : null}
           </div>
 
-          <button type="submit" className={styles["registration__form-submit-button"]}>
+          <button
+            type="submit"
+            className={styles["registration__form-submit-button"]}
+          >
             Zarejestruj
           </button>
         </form>
