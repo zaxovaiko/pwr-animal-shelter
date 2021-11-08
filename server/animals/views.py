@@ -1,3 +1,4 @@
+import django_filters.rest_framework
 from rest_framework import viewsets
 from rest_framework.permissions import AllowAny, IsAdminUser
 from .serializers import AnimalBreedSerializer, AnimalGenderSerializer, AnimalSerializer, AnimalStatusSerializer, AnimalTypeSerializer
@@ -11,6 +12,8 @@ def get_shared_permissions(action):
 class AnimalViewSet(viewsets.ModelViewSet):
     queryset = Animal.objects.all()
     serializer_class = AnimalSerializer
+    filter_backends = [django_filters.rest_framework.DjangoFilterBackend]
+    filterset_fields = ['age', 'animal_type', 'animal_gender', 'animal_breed', 'animal_status', 'color']
 
     def get_permissions(self):
         return get_shared_permissions(self.action)
