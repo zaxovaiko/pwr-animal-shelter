@@ -35,5 +35,6 @@ urlpatterns = [
     path('api/login', JWTTokenRefreshView.as_view(), name='token_obtain_pair'),
     path('api/login/refresh', JWTTokenRefreshView.as_view(), name='token_refresh'),
     path('api/register', UserViewSet.as_view({'post': 'create'})),
+    path('api/adopted', AnimalAdoptionViewSet.as_view({'get': 'adopted'})),
     path('api/', include(router.urls))
 ]

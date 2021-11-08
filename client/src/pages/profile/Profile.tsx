@@ -19,7 +19,7 @@ export default function Profile() {
   const { id } = useParams<{ id: string }>();
   const { auth } = useContext(AuthContext);
   const { isLoading, isError, data } = useQuery(
-    "getProfileData",
+    ["getProfileData", id],
     () => fetchProfileData(id),
     { retry: false }
   );

@@ -15,3 +15,11 @@ export function fetchAnimal(id: string) {
     (res) => res.json()
   );
 }
+
+export function fetchAdoptedAnimals(token: string) {
+  return fetch(process.env.REACT_APP_SERVER_URI + "/adopted", {
+    headers: {
+      Authorization: token,
+    },
+  }).then((res) => res.json());
+}
