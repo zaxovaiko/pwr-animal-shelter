@@ -1,7 +1,14 @@
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.base_user import BaseUserManager
 from django.db import models
+from uuid import uuid4
 from django.contrib.auth.models import AbstractUser
+
+
+def image_path(instance, filename):
+    ext = filename.split('.')[-1]
+    new_filename = "user_%s.%s" % (uuid4().hex, ext)
+    return 'images/users/' + new_filename
 
 
 class UserManager(BaseUserManager):
@@ -41,6 +48,7 @@ class User(AbstractUser):
     address = models.CharField("Adres", max_length=200)
     pesel = models.CharField("PESEL", max_length=11, unique=True)
     phone = models.CharField("Telefon", max_length=20)
+    image = models.ImageField(upload_to=image_path, default='default.jpg')
 
     objects = UserManager()
 
