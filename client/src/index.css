@@ -1,0 +1,26 @@
+@import "~bootstrap/dist/css/bootstrap.min.css";
+@import "~slick-carousel/slick/slick.css";
+@import "~slick-carousel/slick/slick-theme.css";
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap");
+
+* {
+  font-family: "Quicksand", sans-serif;
+}
+
+.c-btn {
+  background-color: #adcf62;
+  text-align: center;
+  border: none;
+  color: white;
+  padding-right: 10%;
+  padding-left: 10%;
+  width: fit-content;
+  font-size: 1.3rem;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.c-btn:hover {
+  background-color: #d2d980;
+}
