@@ -15,3 +15,52 @@
   bottom: 50px;
   right: 0;
 }
+
+.main-container {
+  position: absolute;
+  top: 30px;
+  text-align: center;
+  align-content: center;
+}
+
+.info {
+  padding-left: 50px;
+  width: fit-content;
+  position: relative;
+  margin-bottom: 40px;
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  align-items: center;
+}
+
+.link {
+  text-align: center;
+  color: white;
+  font-size: 1em;
+  margin-right: 50px;
+}
+
+.link:hover {
+  color: aqua;
+}
+
+.image {
+  margin-left: 20px;
+  position: relative;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  display: inline-flex;
+  opacity: 90%;
+}
+
+.text {
+  text-align: left;
+  position: relative;
+  display: inline-flex;
+  margin-left: 35px;
+  color: white;
+  font-size: 0.9em;
+  width: 200px;
+}

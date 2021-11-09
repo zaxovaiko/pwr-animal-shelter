@@ -95,3 +95,7 @@
   text-align: center;
   width: fit-content;
 }
+
+.link {
+  text-decoration: none;
+}

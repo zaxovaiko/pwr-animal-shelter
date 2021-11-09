@@ -3,20 +3,11 @@ import styles_main from "./AnimalInfoWorker.module.css";
 import styles_photo from "../AnimalPhotoContainer.module.css";
 import styles_button from "../../buttons/Button.module.css";
 import { Animal } from "../../../../types/Animal";
+import {useParams} from "react-router";
+import {useQuery} from "react-query";
+import {fetchAnimal} from "../../../../api/animals";
 
-export default function AnimalInfoWorker({
-  chip_code,
-  animal_type,
-  name,
-  age,
-  height,
-  animal_gender,
-  animal_breed,
-  animal_status,
-  color,
-  description,
-  vaccinations,
-}: Animal) {
+export default function AnimalInfoWorker () {
   const animalPhotos = [
     "https://thumbs.dreamstime.com/b/dog-golden-retriever-jumping-autumn-leaves-autumnal-sunlight-77861618.jpg",
     "https://thumbs.dreamstime.com/b/retriever-%D1%81%D0%BE%D0%B1%D0%B0%D0%BA%D0%B8-%D0%B7%D0%BE%D0%BB%D0%BE%D1%82%D0%B8%D1%81%D1%82%D1%8B%D0%B9-21668976.jpg",
@@ -24,6 +15,24 @@ export default function AnimalInfoWorker({
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFv4rsjjJZd23tvUTxzzBQRi-XGDf8_n1vJvP1RMN0_6Q2CgHY_UY5lQh87NwHRXp10F8&usqp=CAU",
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGMvZFqb35VZYb6ZyuSDs37F6L9gduGexaFEai_cbY2f7R-IiCR2dBzWmEKRIE-Yh0Olo&usqp=CAU",
   ];
+
+  const { id } = useParams<{ id: string }>();
+  const { isLoading, isError, data } = useQuery<Animal>("fetchAnimal", () =>
+      fetchAnimal(id)
+  );
+
+  if (isLoading) {
+    return <>Loading</>;
+  }
+
+  if (isError) {
+    return <>Error</>;
+  }
+
+  if (!data) {
+    return <>Something went wrong</>;
+  }
+
 
   return (
     <>
@@ -42,39 +51,39 @@ export default function AnimalInfoWorker({
         <Row>
           <p>
             <b>Identyfikator: </b>
-            {chip_code}
+            {data.chip_code}
           </p>
           <p>
             <b>Typ: </b>
-            {animal_type}
+            {data.animal_type.value}
           </p>
           <p>
             <b>Imię: </b>
-            {name}
+            {data.name}
           </p>
           <p>
             <b>Wiek: </b>
-            {age} lat
+            {data.age} lat
           </p>
           <p>
             <b>Wzrost: </b>
-            {height} cm
+            {data.height} cm
           </p>
           <p>
             <b>Płeć: </b>
-            {animal_gender}
+            {data.animal_gender.value}
           </p>
           <p>
             <b>Rasa: </b>
-            {animal_breed}
+            {data.animal_breed.value}
           </p>
           <p>
             <b>Status: </b>
-            {animal_status}
+            {data.animal_status.value}
           </p>
           <p>
             <b>Kolor: </b>
-            {color}
+            {data.color}
           </p>
 
           <hr />
@@ -83,7 +92,7 @@ export default function AnimalInfoWorker({
         <p className={styles_main["text-header"]}>Charakterystyka</p>
 
         <Row className={styles_main["animal-description"]}>
-          {description}
+          {data.description}
           <br />
           <hr />
         </Row>
@@ -91,7 +100,7 @@ export default function AnimalInfoWorker({
         <p className={styles_main["text-header"]}>Dane wetyrynaryjne</p>
 
         <Row className={styles_main["animal-description"]}>
-          {vaccinations}
+          {data.vaccinations}
           <br />
           <hr />
         </Row>
