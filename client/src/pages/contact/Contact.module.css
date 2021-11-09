@@ -19,3 +19,10 @@
     align-items:center;
 }
 
+@media (max-width: 1000px) {
+    .main-container {
+        margin-left: -50px;
+        width: 500px;
+    }
+}
+

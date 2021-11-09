@@ -17,6 +17,7 @@ export type Animal = {
   animal_gender: AnimalGender;
   animal_breed: AnimalGender;
   color: string;
+  image: string;
   height: number;
   description: string;
   vaccinations: string;

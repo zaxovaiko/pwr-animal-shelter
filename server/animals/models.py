@@ -1,4 +1,11 @@
 from django.db import models
+from uuid import uuid4
+
+
+def image_path(instance, filename):
+    ext = filename.split('.')[-1]
+    new_filename = "animal_%s.%s" % (uuid4().hex, ext)
+    return 'images/animals/' + new_filename
 
 
 class AnimalType(models.Model):
@@ -43,6 +50,7 @@ class Animal(models.Model):
     animal_gender = models.ForeignKey(AnimalGender, on_delete=models.PROTECT)
     color = models.TextField("Kolor", max_length=500,
                              help_text="Opisanie koloru")
+    image = models.ImageField(upload_to=image_path, default='animals/default.jpg')
     height = models.PositiveSmallIntegerField("Wzrost")
     description = models.TextField("Komentarz", max_length=1000)
     vaccinations = models.TextField(

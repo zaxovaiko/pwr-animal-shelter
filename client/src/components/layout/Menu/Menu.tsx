@@ -19,8 +19,8 @@ export default function Menu({ isOpened }: { isOpened: boolean }) {
     return <></>;
   }
 
-  const submenu = data?.map(({ id, value }: { id: string; value: string }) => ({
-    path: "/" + value.toLowerCase(),
+  const submenu = data?.results.map(({ id, value }: { id: string; value: string }) => ({
+    path: "/" + id,
     text: value,
   }));
 

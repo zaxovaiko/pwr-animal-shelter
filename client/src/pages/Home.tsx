@@ -30,8 +30,8 @@ export default function Home() {
               Nowi w schronisku
             </p>
             <Slider {...settings}>
-              {animalSlider.map((animalImg) => (
-                <div className={styles["c-navbar__c-animals-slider__item"]}>
+              {animalSlider.map((animalImg, i) => (
+                <div key={i} className={styles["c-navbar__c-animals-slider__item"]}>
                   <Image
                     rounded
                     className={styles["c-navbar__c-animals-slider__item__img"]}

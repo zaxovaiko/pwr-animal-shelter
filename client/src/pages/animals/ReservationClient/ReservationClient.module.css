@@ -93,29 +93,10 @@
   color: #686464;
 }
 
-.button-green {
-  margin-bottom: 1em;
-  font-size: 1em;
-  font-weight: bold;
-  width: 310px;
-  background-color: #adcf62;
-  border-color: #adcf62;
+.bolder {
+  font-weight: bolder;
 }
 
-.button-green:hover {
-  background-color: #d2d980;
-  border-color: #d2d980;
-}
-
-.button-blue {
-  font-size: 1em;
-  font-weight: bold;
-  width: 310px;
-  background-color: rgba(14, 87, 111, 0.6);
-  border-color: rgba(14, 87, 111, 0.6);
-}
-
-.button-blue:hover {
-  background-color: #75c3c8;
-  border-color: #75c3c8;
+.link {
+  text-decoration: none;
 }

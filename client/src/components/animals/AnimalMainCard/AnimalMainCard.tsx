@@ -8,7 +8,9 @@ export default function MainAnimalCard({
   name,
   age,
   description,
+  image,
 }: Animal) {
+  console.log(image);
   return (
     <Card className={styles["animal-card"]} body>
       <div className={styles["animal-card__top"]}>
@@ -18,13 +20,17 @@ export default function MainAnimalCard({
           <p className={styles["animal-card__top__title__age"]}>{age} lat</p>
         </div>
         <Image
-          src="https://static8.depositphotos.com/1377527/943/i/600/depositphotos_9431737-stock-photo-portrait-of-gray-striped-cat.jpg"
+          src={image}
           className={styles["animal-card__top__image"]}
           alt="Animal photo"
         />
       </div>
       <p className={styles["animal-card__desc"]}>{description}</p>
-      <Nav.Link as={Link} to={"/animals/" + id} className={styles["animal-card__link"]}>
+      <Nav.Link
+        as={Link}
+        to={"/animals/" + id}
+        className={styles["animal-card__link"]}
+      >
         <u>Więcej</u>
       </Nav.Link>
     </Card>

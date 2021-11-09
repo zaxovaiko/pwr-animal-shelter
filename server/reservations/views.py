@@ -1,3 +1,4 @@
+import django_filters.rest_framework
 from rest_framework import status, viewsets
 from rest_framework.permissions import AllowAny, IsAdminUser, IsAuthenticated
 from rest_framework.response import Response
@@ -8,6 +9,8 @@ from .models import AnimalReservation, ReservationStatus
 class AnimalReservationsViewSet(viewsets.ModelViewSet):
     queryset = AnimalReservation.objects.all()
     serializer_class = AnimalReservationsSerializer
+    filter_backends = [django_filters.rest_framework.DjangoFilterBackend]
+    filterset_fields = ['user', 'date']
 
     def list(self, request, *args, **kwargs):
         user_id = request.user.id
