@@ -5,6 +5,7 @@ export type User = {
   password: string;
   is_staff: boolean;
   is_superuser: boolean;
+  image: string;
   pesel: string;
   phone: string;
   address: string;

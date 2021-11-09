@@ -50,7 +50,7 @@ class Animal(models.Model):
     animal_gender = models.ForeignKey(AnimalGender, on_delete=models.PROTECT)
     color = models.TextField("Kolor", max_length=500,
                              help_text="Opisanie koloru")
-    image = models.ImageField(upload_to=image_path, default='default.jpg')
+    image = models.ImageField(upload_to=image_path, default='animals/default.jpg')
     height = models.PositiveSmallIntegerField("Wzrost")
     description = models.TextField("Komentarz", max_length=1000)
     vaccinations = models.TextField(

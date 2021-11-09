@@ -32,6 +32,7 @@ export default function Profile() {
     return <h1>Error has occured</h1>;
   }
 
+  console.log(data)
   return (
     <>
       <Container fluid className={styles["top-page"]} />
@@ -39,7 +40,7 @@ export default function Profile() {
         <Image
           roundedCircle
           className={styles["top-page__header__user-img"]}
-          src="https://ath2.unileverservices.com/wp-content/uploads/sites/4/2020/02/IG-annvmariv-1024x1016.jpg"
+          src={data.image}
           alt="User's image"
         />
         <h1 className={styles["top-page__header__title"]}>Moje dane</h1>

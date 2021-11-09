@@ -1,4 +1,6 @@
 from django.contrib.auth import admin
+from django.conf import settings
+from django.conf.urls.static import static
 from django.urls import include, path
 from django.contrib import admin
 from rest_framework_extensions.routers import ExtendedSimpleRouter
@@ -37,4 +39,4 @@ urlpatterns = [
     path('api/register', UserViewSet.as_view({'post': 'create'})),
     path('api/adopted', AnimalAdoptionViewSet.as_view({'get': 'adopted'})),
     path('api/', include(router.urls))
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
