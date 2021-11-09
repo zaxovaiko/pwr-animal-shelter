@@ -1,5 +1,4 @@
 import { Image, Nav, Card } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import { AnimalReservation } from "../../../types/AnimalReservation";
 import styles from "./ReservedAnimalCard.module.css";
 import { fetchDeleteReservation } from "../../../api/reservations";

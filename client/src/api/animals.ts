@@ -9,7 +9,7 @@ export function fetchAnimals(type: number) {
     process.env.REACT_APP_SERVER_URI +
       "/animals?page=1&animal_type=" +
       type +
-      "&animal_status=3"
+      "&animal_status=1"
   ).then((res) => res.json());
 }
 

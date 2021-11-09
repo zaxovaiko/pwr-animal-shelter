@@ -1,9 +1,10 @@
+import { User } from "./User";
+import { Animal } from "./Animal";
+
 type Entity = {
   id: string;
   value: string;
 };
-import { User } from "./User";
-import { Animal } from "./Animal";
 
 export type ReservationStatus = Entity;
 

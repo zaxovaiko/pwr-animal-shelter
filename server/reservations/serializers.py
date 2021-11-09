@@ -1,6 +1,6 @@
 from rest_framework.relations import PrimaryKeyRelatedField
 from rest_framework.serializers import ModelSerializer, DateTimeField, CharField
-from animals.models import Animal
+from animals.models import Animal, AnimalStatus
 from reservations.models import AnimalReservation, ReservationStatus
 from users.serializers import UserSerializer
 from users.models import User
@@ -31,3 +31,9 @@ class AnimalReservationsSerializer(ModelSerializer):
         model = AnimalReservation
         fields = ['id', 'user', 'animal', 'user_id', 'animal_id',
                   'reservation_status', 'reservation_status_id', 'date']
+
+    def create(self, validated_data):
+        validated_data['animal'].animal_status = AnimalStatus.objects.get(pk=4)
+        validated_data['animal'].save()
+        animal_reservation = super().create(validated_data)
+        return animal_reservation

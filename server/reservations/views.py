@@ -11,19 +11,13 @@ class AnimalReservationsViewSet(viewsets.ModelViewSet):
     serializer_class = AnimalReservationsSerializer
     filter_backends = [django_filters.rest_framework.DjangoFilterBackend]
     filterset_fields = ['user', 'date']
+    permission_classes = [IsAuthenticated]
 
     def list(self, request, *args, **kwargs):
         user_id = request.user.id
         queryset = AnimalReservation.objects.filter(user=user_id)
         serializer = AnimalReservationsSerializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
-
-    def get_permissions(self):
-        if self.action == 'list':
-            return [IsAuthenticated()]
-        if self.action == 'retrieve':
-            return [AllowAny()]
-        return [IsAdminUser()]
 
 
 class ReservationStatusViewSet(viewsets.ModelViewSet):
