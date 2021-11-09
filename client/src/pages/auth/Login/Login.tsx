@@ -30,7 +30,7 @@ const validate = (values: any) => {
 
 export default function Login() {
   const history = useHistory();
-  const { setAuth } = useContext(AuthContext);
+  const { auth, setAuth } = useContext(AuthContext);
   let check = false;
 
   const formik = useFormik({
