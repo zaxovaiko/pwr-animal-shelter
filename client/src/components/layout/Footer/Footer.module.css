@@ -34,15 +34,14 @@
   align-items: center;
 }
 
-.info span {
+.link {
   text-align: center;
-  text-decoration: underline;
   color: white;
   font-size: 1em;
   margin-right: 50px;
 }
 
-.info span:hover {
+.link:hover {
   color: aqua;
 }
 

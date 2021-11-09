@@ -1,4 +1,5 @@
 import { Container, Row, Image, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import styles_main from "./AnimalInfoClient.module.css";
 import styles_photo from "../../AnimalPhotoContainer.module.css";
 import styles_button from "../../../../components/shared/Button.module.css";
@@ -6,6 +7,7 @@ import { Animal } from "../../../../types/Animal";
 import { useParams } from "react-router";
 import { useQuery } from "react-query";
 import { fetchAnimal } from "../../../../api/animals";
+import { useHistory } from 'react-router-dom';
 
 export default function AnimalInfoClient() {
   const animalPhotos = [
@@ -15,6 +17,11 @@ export default function AnimalInfoClient() {
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFv4rsjjJZd23tvUTxzzBQRi-XGDf8_n1vJvP1RMN0_6Q2CgHY_UY5lQh87NwHRXp10F8&usqp=CAU",
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGMvZFqb35VZYb6ZyuSDs37F6L9gduGexaFEai_cbY2f7R-IiCR2dBzWmEKRIE-Yh0Olo&usqp=CAU",
   ];
+
+  let history = useHistory();
+  const redirect = () => {
+    history.push("/animal-reservation/"+id)
+  }
 
   const { id } = useParams<{ id: string }>();
   const { isLoading, isError, data } = useQuery<Animal>("fetchAnimal", () =>
@@ -95,7 +102,9 @@ export default function AnimalInfoClient() {
       </Container>
 
       <Container className={styles_main["nav-area"]}>
-        <Button className={styles_button["button-green"]}>Zarezerwuj</Button>
+        <Link to={"/animal-reservation/"+id} className={styles_main["link"]}>
+          <Button className={styles_button["button-green"]} onClick={redirect}>Zarezerwuj</Button>
+        </Link>
       </Container>
     </>
   );
