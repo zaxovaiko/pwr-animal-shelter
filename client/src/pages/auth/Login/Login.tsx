@@ -4,6 +4,7 @@ import styles from "./Login.module.css";
 import { useFormik } from "formik";
 import { AuthContext } from "../../../contexts/AuthContext";
 import { fetchLoginData } from "../../../api/auth";
+import { useAlert } from "react-alert";
 
 let refToEmail: React.RefObject<any> = React.createRef();
 let refToPassword: React.RefObject<any> = React.createRef();
@@ -29,8 +30,9 @@ const validate = (values: any) => {
 };
 
 export default function Login() {
+  const alert = useAlert();
   const history = useHistory();
-  const { auth, setAuth } = useContext(AuthContext);
+  const { setAuth } = useContext(AuthContext);
   let check = false;
 
   const formik = useFormik({
@@ -47,10 +49,11 @@ export default function Login() {
         .then((res) => {
           if (res.access) {
             setAuth(res.access);
-            history.push("/");
-          } else {
-            refToErrorUser.current.style.visibility = "visible";
+            alert.success("Zostałeś zalogowany do swojego konta.");
+            return history.push("/");
           }
+          alert.error("Coś poszło nie tak. Spróbuj ponownie.");
+          refToErrorUser.current.style.visibility = "visible";
         })
         .catch(console.error);
     },
@@ -70,7 +73,6 @@ export default function Login() {
     }
 
     if (check) {
-      alert(check);
       refToErrorUser.current.style.visibility = "visible";
     }
   });

@@ -5,7 +5,6 @@ import { fetchAdoptedAnimals } from "../../../api/animals";
 import AdoptedAnimalCard from "../../../components/animals/AdoptedAnimalCard/AdoptedAnimalCard";
 import HeaderTitle from "../../../components/HeaderTitle/HeaderTitle";
 import { AuthContext } from "../../../contexts/AuthContext";
-import styles from "./AdoptedAnimalsList.module.css";
 
 export default function AdoptedAnimalsList() {
   const { auth } = useContext(AuthContext);
@@ -21,8 +20,6 @@ export default function AdoptedAnimalsList() {
   if (isError) {
     return <>Error</>;
   }
-
-  console.log(data);
 
   return (
     <>

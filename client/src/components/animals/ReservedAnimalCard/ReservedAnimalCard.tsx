@@ -1,16 +1,18 @@
-import { Image, Nav, Card } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 import { AnimalReservation } from "../../../types/AnimalReservation";
 import styles from "./ReservedAnimalCard.module.css";
 import { fetchDeleteReservation } from "../../../api/reservations";
 import { useContext } from "react";
 import { AuthContext } from "../../../contexts/AuthContext";
 
-export default function ReservedAnimalCard(
-  { id, animal, date, reservation_status }: AnimalReservation,
-  token: any
-) {
+export default function ReservedAnimalCard({
+  id,
+  animal,
+  date,
+  reservation_status,
+}: AnimalReservation) {
   function addThreeDays(date: string) {
-    var result = new Date(date);
+    const result = new Date(date);
     result.setDate(result.getDate() + 3);
     return result.toISOString().substring(0, 10);
   }

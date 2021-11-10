@@ -1,4 +1,5 @@
 import { useContext, useState } from "react";
+import { useAlert } from "react-alert";
 import { Container, Nav, Navbar } from "react-bootstrap";
 import { MdAccountCircle, MdLiveHelp, MdLogin, MdLogout } from "react-icons/md";
 import { useHistory } from "react-router";
@@ -7,6 +8,7 @@ import Menu from "../Menu/Menu";
 import styles from "./Header.module.css";
 
 export default function Header() {
+  const alert = useAlert();
   const history = useHistory();
   const [isOpened, setIsOpened] = useState(false);
   const { auth, setAuth } = useContext(AuthContext);
@@ -14,6 +16,7 @@ export default function Header() {
   function logout() {
     setAuth(null);
     history.push("/login");
+    alert.success("Zostałeś wylogowany ze swojego konta.");
   }
 
   return (

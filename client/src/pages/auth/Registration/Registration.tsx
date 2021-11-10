@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import { useFormik } from "formik";
 import styles from "./Registration.module.css";
 import { fetchRegisterData } from "../../../api/auth";
+import { useAlert } from "react-alert";
 
 let refToFirstName: React.RefObject<any> = React.createRef();
 let refToLastName: React.RefObject<any> = React.createRef();
@@ -89,6 +90,7 @@ const validate = (values: any) => {
 };
 
 export default function Registration() {
+  const alert = useAlert();
   const history = useHistory();
   const formik = useFormik({
     initialValues: {
@@ -113,8 +115,10 @@ export default function Registration() {
       })
         .then((res) => {
           if (res.id) {
-            history.push("/login");
+            alert.success("Teraz juz możesz zalogować się.");
+            return history.push("/login");
           }
+          alert.error("Coś poszło nie tak. Spróbuj ponownie.");
           console.log(res);
         })
         .catch(console.error);

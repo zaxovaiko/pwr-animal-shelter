@@ -1,6 +1,5 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import { useParams } from "react-router-dom";
 import { useQuery } from "react-query";
 import ReservedAnimalCard from "../../../components/animals/ReservedAnimalCard/ReservedAnimalCard";
 import HeaderTitle from "../../../components/HeaderTitle/HeaderTitle";
