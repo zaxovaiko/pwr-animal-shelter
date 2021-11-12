@@ -61,3 +61,8 @@ class Animal(models.Model):
 
     def __str__(self):
         return str(self.name) + " " + str(self.chip_code)
+
+
+class AnimalImage(models.Model):
+    animal = models.ForeignKey(Animal, on_delete=models.CASCADE, null=False)
+    image = models.ImageField(upload_to=image_path, null=False)
