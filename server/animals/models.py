@@ -52,6 +52,7 @@ class Animal(models.Model):
                              help_text="Opisanie koloru")
     image = models.ImageField(upload_to=image_path, default='animals/default.jpg')
     height = models.PositiveSmallIntegerField("Wzrost")
+    weight = models.PositiveSmallIntegerField("Waga")
     description = models.TextField("Komentarz", max_length=1000)
     vaccinations = models.TextField(
         "Szczepienia", max_length=1000, help_text="Tu opisz jakie szczepienia miało")

@@ -50,6 +50,7 @@ class AnimalSerializer(ModelSerializer):
         source='animal_gender', queryset=AnimalGender.objects.all(), required=True, write_only=True)
     color = CharField(max_length=500, required=True)
     height = IntegerField(min_value=0, required=True)
+    weight = IntegerField(min_value=0, required=True)
     description = CharField(max_length=1000, required=True)
     vaccinations = CharField(max_length=1000, required=True)
     image = ImageField(max_length=1000, required=True, allow_empty_file=False)
@@ -59,5 +60,5 @@ class AnimalSerializer(ModelSerializer):
 
     class Meta:
         model = Animal
-        fields = ['id', 'chip_code', 'name', 'age', 'animal_type_id', 'animal_breed_id', 'animal_gender_id', 'animal_status_id',
+        fields = ['id', 'weight', 'chip_code', 'name', 'age', 'animal_type_id', 'animal_breed_id', 'animal_gender_id', 'animal_status_id',
                   'animal_type', 'animal_breed', 'animal_gender', 'color', 'height', 'description', 'vaccinations', 'animal_status', 'image']
