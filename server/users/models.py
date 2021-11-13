@@ -48,7 +48,7 @@ class User(AbstractUser):
     address = models.CharField("Adres", max_length=200)
     pesel = models.CharField("PESEL", max_length=11, unique=True)
     phone = models.CharField("Telefon", max_length=20)
-    image = models.ImageField(upload_to=image_path, default='users/default.jpeg')
+    image = models.ImageField(upload_to=image_path, default='users/default.jpg')
 
     objects = UserManager()
 

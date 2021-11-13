@@ -5,7 +5,7 @@ from uuid import uuid4
 def image_path(instance, filename):
     ext = filename.split('.')[-1]
     new_filename = "animal_%s.%s" % (uuid4().hex, ext)
-    return 'images/animals/' + new_filename
+    return 'animals/' + new_filename
 
 
 class AnimalType(models.Model):
@@ -64,5 +64,5 @@ class Animal(models.Model):
 
 
 class AnimalImage(models.Model):
-    animal = models.ForeignKey(Animal, on_delete=models.CASCADE, null=False)
+    animal = models.ForeignKey(Animal, on_delete=models.CASCADE, null=False, related_name="images")
     image = models.ImageField(upload_to=image_path, null=False)
