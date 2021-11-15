@@ -1,0 +1,33 @@
+.main-container {
+    margin-top: 0;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 40px;
+}
+
+.image {
+    position: relative;
+    width: 480px;
+    height: 480px;
+}
+
+.text {
+    margin-top: 200px;
+    margin-left: 40px;
+    position: relative;
+    font-weight: bold;
+    font-size: 3em;
+    color: #686464;
+}
+
+@media (max-width: 1000px) {
+    .main-container {
+        flex-direction: column;
+    }
+
+    .text {
+        margin-top: 40px;
+    }
+
+}
+

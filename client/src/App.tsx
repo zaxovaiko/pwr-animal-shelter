@@ -14,6 +14,8 @@ import AnimalInfoClient from "./pages/animals/info/AnimalInfoClient/AnimalInfoCl
 import ReservedAnimalsList from "./pages/animals/ReservedAnimalList/ReservedAnimalsList";
 import AdoptedAnimalsList from "./pages/animals/AdoptedAnimalsList/AdoptedAnimalsList";
 import ReservationClient from "./pages/animals/ReservationClient/ReservationClient";
+import ErrorPage from "./pages/error_loading/ErrorPage";
+import LoadingPage from "./pages/error_loading/LoadingPage";
 
 function App() {
   return (
@@ -33,6 +35,8 @@ function App() {
         <Route exact path="/forms" component={FormList} />
         <Route exact path="/animal-issues" component={AnimalIssues} />
         <Route exact path="/animal-reservation/:id" component={ReservationClient} />
+        <Route exact path="/error" component={ErrorPage} />
+        <Route exact path="/loading" component={LoadingPage} />
       </Switch>
       <Footer />
     </>
