@@ -1,0 +1,180 @@
+.modProfile {
+  background-image: url("../../assets/auth/Sign_in_back-bicubic.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  font-family: "Quicksand", sans-serif;
+  padding-bottom: 30vh;
+}
+
+.mod-profile__label-h1 {
+  color: #686464;
+  width: 100vh;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+.mod-profile__container {
+  padding-top: 15vh;
+  padding-left: 15vh;
+  display: flex;
+  flex-wrap: wrap;
+  width: 50%;
+  justify-content: center;
+}
+
+.mod-profile__form {
+  width: 55vh;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.mod-profile_form-input-div-first {
+  margin-top: 8vh;
+  width: 80%;
+  height: 20%;
+}
+
+.mod-profile_form-input-div {
+  margin-top: 6vh;
+  width: 80%;
+  height: 20%;
+}
+
+.mod-profile_form-input-div-pass {
+  margin-top: 12vh;
+  width: 80%;
+  height: 20%;
+}
+
+#mod-profile__form-input-div-name {
+  width: 100%;
+  height: 100%;
+  border-width: 0px 0px 2px;
+  border-color: #dadada;
+  padding-left: 7vh;
+}
+
+#mod-profile__form-input-div-surname {
+  width: 100%;
+  height: 100%;
+  border-width: 0px 0px 2px;
+  border-color: #dadada;
+  padding-left: 12vh;
+}
+
+#mod-profile__form-input-div-pesel {
+  width: 100%;
+  height: 100%;
+  border-width: 0px 0px 2px;
+  border-color: #dadada;
+  padding-left: 9vh;
+}
+
+#mod-profile__form-input-div-tel {
+  width: 100%;
+  height: 100%;
+  border-width: 0px 0px 2px;
+  border-color: #dadada;
+  padding-left: 5vh;
+}
+
+.mod-profile__form-cancel-button {
+  background-color: #0e576f;
+  border: none;
+  color: white;
+  font-size: 20px;
+  border-radius: 25px;
+  text-decoration: none;
+  width: 80%;
+  height: 8vh;
+  font-weight: bold;
+}
+
+.mod-profile__form-cancel-button:hover {
+  background-color: #75c3c8;
+}
+
+#mod-profile__form-input-div-adress,
+#mod-profile__form-input-div-email,
+#mod-profile__form-input-div-password {
+  width: 100%;
+  height: 100%;
+  border-width: 0px 0px 2px;
+  border-color: #dadada;
+  padding-left: 8vh;
+}
+
+#mod-profile__form-input-div-password-repeat {
+  width: 100%;
+  height: 100%;
+  border-width: 0px 0px 2px;
+  border-color: #dadada;
+  padding-left: 17.5vh;
+}
+
+#mod-profile__form-input-div-name:focus,
+#mod-profile__form-input-div-surname:focus,
+#mod-profile__form-input-div-pesel:focus,
+#mod-profile__form-input-div-tel:focus,
+#mod-profile__form-input-div-adress:focus,
+#mod-profile__form-input-div-email:focus,
+#mod-profile__form-input-div-password:focus {
+  outline-width: 0;
+  border-width: 0px 0px 2px;
+}
+
+.mod-profile__text-pass {
+  width: 80%;
+  padding-top: 1%;
+  display: flex;
+}
+
+.mod-profile__a-text-pass:hover,
+.mod-profile__a-text-reg:hover {
+  color: #a2e3e9;
+}
+
+.mod-profile__a-text-pass {
+  margin-left: auto;
+}
+
+.mod-profile__form-submit-button {
+  background-color: #adcf62;
+  text-align: center;
+  border: none;
+  color: white;
+  margin-top: 20%;
+  margin-bottom: 5%;
+  font-size: 2.8vh;
+  border-radius: 25px;
+  text-decoration: none;
+  width: 80%;
+  height: 8vh;
+  font-weight: bold;
+}
+
+.mod-profile__form-submit-button:hover {
+  background-color: #d2d980;
+}
+
+.mod-profile__text-reg {
+  display: flex;
+  justify-content: center;
+  font-size: 2.2vh;
+}
+
+.mod-profile__a-text-reg {
+  color: #0e576f;
+  margin-right: auto;
+}
+
+.mod-profile__form-input-div-checkbox {
+  -ms-transform: scale(2); /* IE */
+  -moz-transform: scale(2); /* FF */
+  -webkit-transform: scale(2); /* Safari and Chrome */
+  -o-transform: scale(2); /* Opera */
+  transform: scale(2);
+}
