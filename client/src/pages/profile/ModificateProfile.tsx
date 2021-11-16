@@ -30,14 +30,14 @@ const validate = (values: any) => {
   } = {};
   if (!values.first_name) {
     errors.first_name = "*Pole jest obowiązkowe";
-  } else if (values.first_name.length > 15) {
-    errors.first_name = "*Pole musi mieć nie więcej niż 15 znaków";
+  } else if (values.first_name.length > 50) {
+    errors.first_name = "*Pole musi mieć nie więcej niż 50 znaków";
   }
 
   if (!values.last_name) {
     errors.last_name = "*Pole jest obowiązkowe";
-  } else if (values.last_name.length > 20) {
-    errors.last_name = "*Pole musi mieć nie więcej niż 20 znaków";
+  } else if (values.last_name.length > 50) {
+    errors.last_name = "*Pole musi mieć nie więcej niż 50 znaków";
   }
 
   if (!values.pesel) {

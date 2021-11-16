@@ -32,7 +32,7 @@ function App() {
         <Route exact path="/reserved-animals" component={ReservedAnimalsList} />
         <Route exact path="/charity" component={Charity} />
         <Route exact path="/forms" component={FormList} />
-        <Route exact path="/animal-issues" component={AnimalIssues} />
+        <Route exact path="/animal-issue/:id" component={AnimalIssues} />
         <Route exact path="/animal-reservation/:id" component={ReservationClient} />
       </Switch>
       <Footer />

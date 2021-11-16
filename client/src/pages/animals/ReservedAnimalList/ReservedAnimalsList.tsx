@@ -25,7 +25,7 @@ export default function ReservedAnimalsList() {
       <HeaderTitle text={"Moje rezerwacje"} color="#ddd" />
       <Container className={styles["animal-list"] + " gx-4"}>
         <Row className="gx-5">
-          {data.length === 0 && <h3>There is no any reservation yet</h3>}
+          {data.length === 0 && <h3>Nie ma jeszcze żadnej rezerwacji</h3>}
           {data.length > 0 &&
             data.map((reservation: any, i: number) => (
               <Col key={i} xs={12} md={6}>
