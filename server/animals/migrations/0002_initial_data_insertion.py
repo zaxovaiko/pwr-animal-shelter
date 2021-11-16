@@ -19,7 +19,7 @@ def insert_genders(apps, schema_editor):
 
 
 def insert_statuses(apps, schema_editor):
-    statuses = ['Do adopcji', 'Kwarantanna', 'Zaadoptowany', 'Zarezerwowany']
+    statuses = ['Gotowe do adopcji', 'Kwarantanna', 'Zaadoptowane', 'Zarezerwowane', 'Nie żyje']
     AnimalStatus = apps.get_model('animals', 'AnimalStatus')
     for status in statuses:
         AnimalStatus.objects.create(value=status)

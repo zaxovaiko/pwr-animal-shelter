@@ -1,6 +1,9 @@
 from django.db import models
 from django.utils import timezone
 from animals.models import Animal
+# from django.core.exceptions import ValidationError
+from django.db import DatabaseError
+from rest_framework.exceptions import ValidationError
 from users.models import User
 
 
@@ -21,3 +24,9 @@ class AnimalReservation(models.Model):
 
     def __str__(self):
         return str(self.user) + str(self.animal) + str(self.date)
+
+    def save(self, *args, **kwargs):
+        try:
+            return super(AnimalReservation, self).save(*args, **kwargs)
+        except BaseException as e:
+            raise ValidationError({ 'error': str(e).split('\n')[0] })

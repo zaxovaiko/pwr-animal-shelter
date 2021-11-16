@@ -34,10 +34,10 @@ def insert_locations(apps, schema_editor):
     AnimalLocation = apps.get_model('locations', 'AnimalLocation')
 
     for animal in Animal.objects.all():
-        date_to = timezone.make_aware(fake.future_datetime(end_date='+120d'), timezone.get_current_timezone())
+        # date_to = fake.past_date(start_date='-120d')
         room = Room.objects.order_by('?').first()
         AnimalLocation.objects.create(
-            room=room, animal=animal, date_to=date_to)
+            room=room, animal=animal)
 
 
 class Migration(migrations.Migration):

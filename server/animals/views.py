@@ -37,8 +37,10 @@ class AnimalViewSet(viewsets.ModelViewSet):
             return Response({ **animal_serializer.data, 'images': images }, status=status.HTTP_201_CREATED)
         return Response({'error': 'Invalid data or images'}, status=status.HTTP_400_BAD_REQUEST)
 
-    def attach_images(self, request):
-        pass
+    def destroy(self, request, *args, **kwargs):
+        # TODO: Remove images when removing animal
+        print(self.get_object())
+        # return super().destroy(request, *args, **kwargs)
 
     def get_permissions(self):
         return get_shared_permissions(self.action)

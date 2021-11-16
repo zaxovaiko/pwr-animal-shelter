@@ -23,7 +23,7 @@ class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True, required=True)
     first_name = serializers.CharField(max_length=100, required=True)
     last_name = serializers.CharField(max_length=100, required=True)
-    pesel = serializers.CharField(max_length=11, required=True, validators=[
+    pesel = serializers.CharField(min_length=11, max_length=11, required=True, validators=[
         UniqueValidator(queryset=User.objects.all())])
     address = serializers.CharField(max_length=200, required=False)
     image = serializers.ImageField(
@@ -43,6 +43,7 @@ class UserSerializer(serializers.ModelSerializer):
         return user
 
     def update(self, instance, validated_data):
+        # TODO: Check for uniqueness
         instance = super().update(instance, validated_data)
         instance.set_password(validated_data['password'])
         instance.save()
