@@ -32,6 +32,9 @@ export default function Header() {
             >
               Menu
             </Nav.Link>
+            <Nav.Link href="/" className="text-white fs-5">
+              Główna strona
+            </Nav.Link>
           </Nav>
           <Nav className={styles["c-header__icon-links"]}>
             <Nav.Link

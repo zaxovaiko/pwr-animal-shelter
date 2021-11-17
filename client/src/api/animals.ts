@@ -32,3 +32,9 @@ export function fetchAnimalType(id: number) {
     (res) => res.json()
   );
 }
+
+export function fetchNewAnimals() {
+  return fetch(
+    process.env.REACT_APP_SERVER_URI + "/animals-arrivals?ordering=-date"
+  ).then((res) => res.json());
+}

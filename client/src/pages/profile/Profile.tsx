@@ -32,7 +32,6 @@ export default function Profile() {
     return <h1>Error has occured</h1>;
   }
 
-  console.log(data)
   return (
     <>
       <Container fluid className={styles["top-page"]} />

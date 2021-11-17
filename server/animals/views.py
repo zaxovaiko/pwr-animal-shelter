@@ -1,5 +1,5 @@
 import django_filters.rest_framework
-from rest_framework import status, viewsets
+from rest_framework import filters, status, viewsets
 from rest_framework.permissions import AllowAny, IsAdminUser
 from rest_framework.response import Response
 from .serializers import AnimalBreedSerializer, AnimalGenderSerializer, AnimalImageSerializer, AnimalSerializer, AnimalStatusSerializer, AnimalTypeSerializer
@@ -13,9 +13,10 @@ def get_shared_permissions(action):
 class AnimalViewSet(viewsets.ModelViewSet):
     queryset = Animal.objects.all()
     serializer_class = AnimalSerializer
-    filter_backends = [django_filters.rest_framework.DjangoFilterBackend]
+    filter_backends = [django_filters.rest_framework.DjangoFilterBackend, filters.OrderingFilter]
     filterset_fields = ['age', 'animal_type', 'animal_gender',
                         'animal_breed', 'animal_status', 'color']
+    ordering_fields = ['age', 'weight', 'height', 'animal_status', 'animal_greed', 'animal_type']
 
     def attach_files_decorator(func):
         def wrapper(*args, **kwargs):

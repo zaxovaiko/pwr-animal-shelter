@@ -1,19 +1,19 @@
 import { Switch, Route } from "react-router-dom";
 import Footer from "./components/layout/Footer/Footer";
 import Header from "./components/layout/Header/Header";
-import Home from "./pages/Home";
+import Home from "./pages/home/Home";
 import Contact from "./pages/contact/Contact";
 import Profile from "./pages/profile/Profile";
 import Charity from "./pages/charity/Charity";
 import FormList from "./pages/forms/FormList";
-import Login from "./pages/auth/Login/Login";
-import Registration from "./pages/auth/Registration/Registration";
-import AnimalList from "./pages/animals/AnimalList/AnimalsList";
-import AnimalIssues from "./pages/animals/AnimalIssues/AnimalIssues";
-import AnimalInfoClient from "./pages/animals/info/AnimalInfoClient/AnimalInfoClient";
-import ReservedAnimalsList from "./pages/animals/ReservedAnimalList/ReservedAnimalsList";
-import AdoptedAnimalsList from "./pages/animals/AdoptedAnimalsList/AdoptedAnimalsList";
-import ReservationClient from "./pages/animals/ReservationClient/ReservationClient";
+import Login from "./pages/auth/login/Login";
+import Registration from "./pages/auth/registration/Registration";
+import AnimalList from "./pages/animals/animals-list/AnimalsList";
+import AnimalIssues from "./pages/animals/animal-issues/AnimalIssues";
+import AnimalInfoClient from "./pages/animals/info/animal-info-client/AnimalInfoClient";
+import ReservedAnimalsList from "./pages/animals/reserved-animals-list/ReservedAnimalsList";
+import AdoptedAnimalsList from "./pages/animals/adopted-animals-list/AdoptedAnimalsList";
+import ReservationClient from "./pages/animals/reservation-client/ReservationClient";
 
 function App() {
   return (

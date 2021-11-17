@@ -1,4 +1,6 @@
 import os
+from django_filters.rest_framework.backends import DjangoFilterBackend
+from rest_framework import filters
 from rest_framework import viewsets
 from rest_framework.permissions import OR, IsAdminUser, BasePermission
 from rest_framework_simplejwt.views import TokenObtainPairView
@@ -24,6 +26,9 @@ class UserViewSet(viewsets.ModelViewSet):
         'update': [IsAuthenticatedAndIsOwnerOrIsAdmin],
         'partial_update': [IsAuthenticatedAndIsOwnerOrIsAdmin],
     }
+    filter_backends = [filters.OrderingFilter, DjangoFilterBackend]
+    ordering_fields = ['first_name', 'email', 'last_name', 'pesel', 'id']
+    filterset_fields = ['first_name', 'last_name', 'email', 'pesel', 'id', 'is_staff', 'is_superuser']
 
     def update(self, request, *args, **kwargs):
         if 'image' in request.data:

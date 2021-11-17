@@ -1,5 +1,5 @@
 import django_filters.rest_framework
-from rest_framework import viewsets, status
+from rest_framework import filters, viewsets, status
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny, IsAdminUser
 from adoptions.models import AnimalAdoption
@@ -10,8 +10,9 @@ class AnimalAdoptionViewSet(viewsets.ModelViewSet):
     serializer_class = AnimalAdotpionsSerializer
     queryset = AnimalAdoption.objects.all()
     model = AnimalAdoption
-    filter_backends = [django_filters.rest_framework.DjangoFilterBackend]
+    filter_backends = [django_filters.rest_framework.DjangoFilterBackend, filters.OrderingFilter]
     filterset_fields = ['user', 'date']
+    ordering_fields = ['date']
 
     def get_permissions(self):
         return [AllowAny()] if self.action == 'adopted' else [IsAdminUser()]

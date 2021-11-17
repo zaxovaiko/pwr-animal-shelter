@@ -1,5 +1,4 @@
 import { Container, Row, Image, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import styles_main from "./AnimalInfoClient.module.css";
 import styles_photo from "../../AnimalPhotoContainer.module.css";
 import styles_button from "../../../../components/shared/Button.module.css";
@@ -7,21 +6,22 @@ import { Animal } from "../../../../types/Animal";
 import { useParams } from "react-router";
 import { useQuery } from "react-query";
 import { fetchAnimal } from "../../../../api/animals";
-import { useHistory } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
+import { useAlert } from "react-alert";
+import { useContext } from "react";
+import { AuthContext } from "../../../../contexts/AuthContext";
 
 export default function AnimalInfoClient() {
-  const animalPhotos = [
-    "https://thumbs.dreamstime.com/b/dog-golden-retriever-jumping-autumn-leaves-autumnal-sunlight-77861618.jpg",
-    "https://thumbs.dreamstime.com/b/retriever-%D1%81%D0%BE%D0%B1%D0%B0%D0%BA%D0%B8-%D0%B7%D0%BE%D0%BB%D0%BE%D1%82%D0%B8%D1%81%D1%82%D1%8B%D0%B9-21668976.jpg",
-    "https://thumbs.dreamstime.com/b/retriever-%D1%81%D0%BE%D0%B1%D0%B0%D0%BA%D0%B8-%D0%B7%D0%BE%D0%BB%D0%BE%D1%82%D0%B8%D1%81%D1%82%D1%8B%D0%B9-683752.jpg",
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFv4rsjjJZd23tvUTxzzBQRi-XGDf8_n1vJvP1RMN0_6Q2CgHY_UY5lQh87NwHRXp10F8&usqp=CAU",
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGMvZFqb35VZYb6ZyuSDs37F6L9gduGexaFEai_cbY2f7R-IiCR2dBzWmEKRIE-Yh0Olo&usqp=CAU",
-  ];
-
-  let history = useHistory();
+  const history = useHistory();
+  const { auth } = useContext(AuthContext);
+  const alert = useAlert();
   const redirect = () => {
-    history.push("/animal-reservation/"+id)
-  }
+    if (auth.user) {
+      history.push("/animal-reservation/" + id);
+    } else {
+      alert.error("Musisz być zalogowany!");
+    }
+  };
 
   const { id } = useParams<{ id: string }>();
   const { isLoading, isError, data } = useQuery<Animal>("fetchAnimal", () =>
@@ -45,9 +45,9 @@ export default function AnimalInfoClient() {
       <Container fluid className={styles_main["top-header"]} />
       <Container fluid className={styles_main["header-animal-info"]}>
         <Image
-          src="https://ieltsninja.com/content/wp-content/uploads/2021/01/Describe-an-Interesting-Animal-Dog.jpg"
+          src={data.image}
           className={styles_main["animal-photo"]}
-          alt={"animal photo"}
+          alt=""
         />
         <p className={styles_main["text-header"]}>
           <p>
@@ -90,21 +90,22 @@ export default function AnimalInfoClient() {
         </Container>
 
         <Container className={styles_photo["photo-container"]}>
-          {animalPhotos.map((photo) => (
+          {data.images.map((photo) => (
             <Image
+              key={photo.id}
               className={styles_photo["photo"]}
-              src={photo}
+              src={photo.image}
               alt="animal photo"
-              onClick={() => window.open(photo)}
+              onClick={() => window.open(photo.image)}
             />
           ))}
         </Container>
       </Container>
 
       <Container className={styles_main["nav-area"]}>
-        <Link to={"/animal-reservation/"+id} className={styles_main["link"]}>
-          <Button className={styles_button["button-green"]} onClick={redirect}>Zarezerwuj</Button>
-        </Link>
+        <Button className={styles_button["button-green"]} onClick={redirect}>
+          Zarezerwuj
+        </Button>
       </Container>
     </>
   );
