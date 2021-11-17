@@ -1,6 +1,5 @@
 import { Container, Row, Image, Button } from "react-bootstrap";
 import styles_main from "./AnimalInfoClient.module.css";
-import styles_photo from "../../AnimalPhotoContainer.module.css";
 import styles_button from "../../../../components/shared/Button.module.css";
 import { Animal } from "../../../../types/Animal";
 import { useParams } from "react-router";
@@ -89,14 +88,19 @@ export default function AnimalInfoClient() {
           </Container>
         </Container>
 
-        <Container className={styles_photo["photo-container"]}>
-          {data.images.map((photo) => (
-            <Image
-              key={photo.id}
-              className={styles_photo["photo"]}
-              src={photo.image}
-              alt="animal photo"
-              onClick={() => window.open(photo.image)}
+        <Container
+          className={" d-flex flex-row flex-wrap justify-content-center"}
+        >
+          {data.images.map((photo, i) => (
+            <div
+              key={i}
+              className="mx-4 rounded mt-5"
+              style={{
+                backgroundImage: `url(${photo.image})`,
+                height: "150px",
+                width: "200px",
+                backgroundSize: "cover",
+              }}
             />
           ))}
         </Container>
