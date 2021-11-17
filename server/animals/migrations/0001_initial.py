@@ -2,6 +2,7 @@
 
 from django.db import migrations, models
 import django.db.models.deletion
+import animals.models
 
 
 class Migration(migrations.Migration):
@@ -49,12 +50,22 @@ class Migration(migrations.Migration):
                 ('age', models.PositiveSmallIntegerField(verbose_name='Pełnych lat')),
                 ('color', models.TextField(help_text='Opisanie koloru', max_length=500, verbose_name='Kolor')),
                 ('height', models.PositiveSmallIntegerField(verbose_name='Wzrost')),
+                ('weight', models.PositiveSmallIntegerField(verbose_name='Masa')),
                 ('description', models.TextField(max_length=1000, verbose_name='Komentarz')),
                 ('vaccinations', models.TextField(help_text='Tu opisz jakie szczepienia miało', max_length=1000, verbose_name='Szczepienia')),
-                ('animal_breed', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='animals.animalbreed')),
-                ('animal_gender', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='animals.animalgender')),
-                ('animal_status', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='animals.animalstatus')),
-                ('animal_type', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='animals.animaltype')),
+                ('animal_breed', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='animals.animalbreed')),
+                ('animal_gender', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='animals.animalgender')),
+                ('animal_status', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='animals.animalstatus')),
+                ('animal_type', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='animals.animaltype')),
+                ('image', models.ImageField(default='animals/default.jpg', upload_to=animals.models.image_path))
+            ],
+        ),
+        migrations.CreateModel(
+            name='AnimalImage',
+            fields=[
+                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('image', models.ImageField(upload_to=animals.models.image_path)),
+                ('animal', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='animals.animal', related_name='images')),
             ],
         ),
     ]

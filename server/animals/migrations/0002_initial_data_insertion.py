@@ -57,6 +57,7 @@ def insert_animals(apps, schema_editor):
         gender = get_random(AnimalGender)
 
         height = fake.pyint(min_value=20, max_value=200)
+        weight = fake.pyint(min_value=20, max_value=200)
         age = fake.pyint(min_value=1, max_value=20)
         vaccinations = fake.paragraph(nb_sentences=1)
         color = fake.safe_color_name()
@@ -64,7 +65,7 @@ def insert_animals(apps, schema_editor):
         chip_code = fake.uuid4()
         description = fake.paragraph(nb_sentences=5)
 
-        Animal.objects.create(age=age, color=color, chip_code=chip_code, description=description, height=height,
+        Animal.objects.create(age=age, color=color, weight=weight, chip_code=chip_code, description=description, height=height,
                               vaccinations=vaccinations, name=name, animal_breed=breed, animal_status=status, animal_gender=gender, animal_type=type_, )
 
 

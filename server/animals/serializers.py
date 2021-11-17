@@ -49,6 +49,7 @@ class AnimalImageSerializer(ModelSerializer):
     class Meta:
         model = AnimalImage
         fields = ['id', 'image', 'animal']
+        depth = 1
 
 
 class AnimalSerializer(ModelSerializer):
@@ -80,9 +81,6 @@ class AnimalSerializer(ModelSerializer):
         model = Animal
         fields = ['id', 'weight', 'images', 'chip_code', 'name', 'age', 'animal_type_id', 'animal_breed_id', 'animal_gender_id', 'animal_status_id',
                   'animal_type', 'animal_breed', 'animal_gender', 'color', 'height', 'description', 'vaccinations', 'animal_status', 'image']
-
-    def delete(self):
-        pass
 
     def validate(self, attrs):
         if 'request' in self.context:
