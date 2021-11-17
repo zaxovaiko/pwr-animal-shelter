@@ -8,7 +8,7 @@ from django.contrib.auth.models import AbstractUser
 def image_path(instance, filename):
     ext = filename.split('.')[-1]
     new_filename = "user_%s.%s" % (uuid4().hex, ext)
-    return 'images/users/' + new_filename
+    return 'users/' + new_filename
 
 
 class UserManager(BaseUserManager):

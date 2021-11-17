@@ -1,3 +1,4 @@
+import os
 from rest_framework import viewsets
 from rest_framework.permissions import OR, IsAdminUser, BasePermission
 from rest_framework_simplejwt.views import TokenObtainPairView
@@ -23,6 +24,13 @@ class UserViewSet(viewsets.ModelViewSet):
         'update': [IsAuthenticatedAndIsOwnerOrIsAdmin],
         'partial_update': [IsAuthenticatedAndIsOwnerOrIsAdmin],
     }
+
+    def update(self, request, *args, **kwargs):
+        if 'image' in request.data:
+            user = self.get_object()
+            if os.path.isfile(user.image.path):
+                os.unlink(user.image.path)
+        return super().update(request, *args, **kwargs)
 
     def get_permissions(self):
         return [ i() for i in self.action_permissions.get(self.action, []) ]

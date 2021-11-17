@@ -34,7 +34,7 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         extra_kwargs = {'password': {'write_only': True}}
         fields = ('first_name', 'last_name', 'address',
-                  'pesel', 'phone', 'email', 'id', 'is_staff', 'password', 'image')
+                  'pesel', 'phone', 'email', 'id', 'is_staff', 'password', 'image', 'is_superuser')
 
     def create(self, validated_data):
         user = User.objects.create(**validated_data)
@@ -43,8 +43,8 @@ class UserSerializer(serializers.ModelSerializer):
         return user
 
     def update(self, instance, validated_data):
-        # TODO: Check for uniqueness
         instance = super().update(instance, validated_data)
-        instance.set_password(validated_data['password'])
+        if 'password' in validated_data:
+            instance.set_password(validated_data['password'])
         instance.save()
         return instance

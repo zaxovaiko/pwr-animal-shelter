@@ -1,4 +1,5 @@
 from django.db import models
+from rest_framework.validators import ValidationError
 from django.utils import timezone
 from animals.models import Animal
 
@@ -28,3 +29,9 @@ class AnimalLocation(models.Model):
 
     def __str__(self):
         return str(self.room) + " " + str(self.animal) + " " + str(self.date_from) + " " + str(self.date_to)
+
+    def save(self, *args, **kwargs):
+        try:
+            return super(AnimalLocation, self).save(*args, **kwargs)
+        except BaseException as e:
+            raise ValidationError({ 'error': str(e).split('\n')[0] })
