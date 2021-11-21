@@ -18,6 +18,7 @@ const FIELDS_TO_SHOW = [
 export default function Profile() {
   const { id } = useParams<{ id: string }>();
   const { auth } = useContext(AuthContext);
+  const infoToEdit: string = "/profile/edit/" + id;
   const { isLoading, isError, data } = useQuery(
     ["getProfileData", id],
     () => fetchProfileData(id),
@@ -55,7 +56,7 @@ export default function Profile() {
         )}
       </Container>
       {auth.user && (
-        <Link to="/profile/2" className="text-decoration-none">
+        <Link to={infoToEdit} className="text-decoration-none">
           <Button className={styles["btn-modify"]}>Modyfikuj</Button>
         </Link>
       )}

@@ -27,7 +27,7 @@ export default function ReservedAnimalCard({
       <div className={styles["animal-card__top"]}>
         <div className={styles["animal-card__top__title"]}>
           <p>Chip: {animal.chip_code}</p>
-          <p>Zwierzęto: {animal.name}</p>
+          <p>Zwierzę: {animal.name}</p>
           <p>Data od: {date.substring(0, 10)}</p>
           <p>Data do: {addThreeDays(date)}</p>
         </div>
