@@ -8,6 +8,8 @@ import {useParams} from "react-router";
 import {useQuery} from "react-query";
 import {fetchAnimal} from "../../../../api/animals";
 import {fetchLocation} from "../../../../api/location";
+import {useContext} from "react";
+import {AuthContext} from "../../../../contexts/AuthContext";
 
 export default function AnimalInfoWorker () {
   const animalPhotos = [
@@ -19,12 +21,14 @@ export default function AnimalInfoWorker () {
   ];
 
   const { id } = useParams<{ id: string }>();
+  const { auth } = useContext(AuthContext);
   const { isLoading, isError, data: Animal } = useQuery<Animal>("fetchAnimal", () =>
       fetchAnimal(id)
   );
 
-  const { isLoading: isLoading2, isError: isError2, data: Location } = useQuery<AnimalLocation>("fetchLocation", () =>
-      fetchLocation(id)
+  const { isLoading: isLoading2, isError: isError2, data: Location } = useQuery<AnimalLocation>(
+      ["fetchLocation", auth.token], () =>
+      fetchLocation(id, auth.token as string)
   );
 
   if (isLoading) {
@@ -110,8 +114,8 @@ export default function AnimalInfoWorker () {
         <p className={styles_main["text-header"]}>Lokalizacja</p>
 
         <Row className={styles_main["animal-description"]}>
-          <span> <b> Data od: </b>{Location.date_from} </span>
-          {/*<span> <b>Lokalizacja: </b>{Location.room.building.street} {Location.room.building.number}, p. {Location.room.number}</span>*/}
+          <span> <b> Data od: </b>{Location.date_from.split("T")[0]} </span>
+          <span> <b>Lokalizacja: </b>, p. {Location.room.number}</span> 
           <br />
           <hr />
         </Row>
