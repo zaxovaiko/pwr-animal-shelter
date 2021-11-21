@@ -1,57 +1,40 @@
 import { Container, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import HeaderTitle from "../../../components/HeaderTitle/HeaderTitle";
-import styles from "./ReservationClient.module.css";
+import HeaderTitle from "../../../components/header-title/HeaderTitle";
 import { useHistory, useParams } from "react-router-dom";
 import { useQuery } from "react-query";
 import { Animal } from "../../../types/Animal";
 import { fetchAnimal } from "../../../api/animals";
-import { useContext } from "react";
 import { AuthContext } from "../../../contexts/AuthContext";
 import { fetchProfileData } from "../../../api/profile";
+import styles from "./ReservationClient.module.css";
 import styles_button from "../../../components/shared/Button.module.css";
+import { User } from "../../../types/User";
+import { useContext } from "react";
 
 export default function Reservation() {
+  const { auth } = useContext(AuthContext);
   const history = useHistory();
   const { id } = useParams<{ id: string }>();
-  const {
-    isLoading,
-    isError,
-    data: dataAnimal,
-  } = useQuery<Animal>(["fetchAnimal", id], () => fetchAnimal(id));
-  const { auth } = useContext(AuthContext);
-  const {
-    isLoading: isLoading2,
-    isError: isError2,
-    data: dataPerson,
-  } = useQuery(
-    ["getProfileData", auth.user.id],
-    () => fetchProfileData(auth.user.id),
-    { retry: false }
+
+  const animalQuery = useQuery<Animal>(["fetchAnimal", id], () =>
+    fetchAnimal(id)
+  );
+  const profileQuery = useQuery<User>(["getProfileData", auth.user.id], () =>
+    fetchProfileData(auth.user.id)
   );
 
-  if (isLoading) {
+  if (animalQuery.isLoading || profileQuery.isLoading) {
     return <>Loading</>;
   }
 
-  if (isError) {
-    return <>Error with loading animal data</>;
-  }
-
-  if (!dataAnimal) {
-    return <>Something went wrong</>;
-  }
-
-  if (isLoading2) {
-    return <>Loading</>;
-  }
-
-  if (isError2) {
-    return <>Error with loading person data</>;
-  }
-
-  if (!dataPerson) {
-    return <>Something went wrong</>;
+  if (
+    animalQuery.isError ||
+    profileQuery.isError ||
+    !animalQuery.data ||
+    !profileQuery.data
+  ) {
+    return <>Error with loading data</>;
   }
 
   function handleReservation() {
@@ -62,9 +45,9 @@ export default function Reservation() {
         Authorization: auth.token as string,
       },
       body: JSON.stringify({
-        user_id: dataPerson.id,
+        user_id: profileQuery.data?.id,
         animal_id: id,
-        reservation_status_id: "1",
+        reservation_status_id: 1,
       }),
     })
       .then((res) => res.json())
@@ -87,29 +70,35 @@ export default function Reservation() {
           <p className={styles["text-sub-header"]}>Dane zwierzęcia</p>
           <p>
             <span className={styles["bolder"]}>Typ:</span>{" "}
-            {dataAnimal.animal_type.value}
+            {animalQuery.data.animal_type.value}
           </p>
           <p>
             <span className={styles["bolder"]}>Identyfikator:</span>{" "}
-            {dataAnimal.chip_code}
+            {animalQuery.data.chip_code}
           </p>
           <p>
-            <span className={styles["bolder"]}>Imię:</span> {dataAnimal.name}
+            <span className={styles["bolder"]}>Imię:</span>{" "}
+            {animalQuery.data.name}
           </p>
           <p>
-            <span className={styles["bolder"]}>Wiek:</span> {dataAnimal.age} lat
+            <span className={styles["bolder"]}>Wiek:</span>{" "}
+            {animalQuery.data.age} lat
           </p>
           <p>
             <span className={styles["bolder"]}>Płeć:</span>{" "}
-            {dataAnimal.animal_gender.value}
+            {animalQuery.data.animal_gender.value}
           </p>
           <p>
             <span className={styles["bolder"]}>Rasa:</span>{" "}
-            {dataAnimal.animal_breed.value}
+            {animalQuery.data.animal_breed.value}
           </p>
           <p>
             <span className={styles["bolder"]}>Wzrost:</span>{" "}
-            {dataAnimal.height} cm
+            {animalQuery.data.height} cm
+          </p>
+          <p>
+            <span className={styles["bolder"]}>Masa:</span>{" "}
+            {animalQuery.data.weight} gr
           </p>
         </Container>
 
@@ -129,7 +118,7 @@ export default function Reservation() {
           </p>
           <p>
             <span className={styles["bolder"]}>Osoba rezerwująca: </span>
-            {dataPerson.name} {dataPerson.last_name}
+            {profileQuery.data.first_name} {profileQuery.data.last_name}
           </p>
         </Container>
       </Container>

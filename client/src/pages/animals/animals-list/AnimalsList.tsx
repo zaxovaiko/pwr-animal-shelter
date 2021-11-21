@@ -2,8 +2,8 @@ import { Col, Container, Row } from "react-bootstrap";
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 import { fetchAnimals, fetchAnimalType } from "../../../api/animals";
-import MainAnimalCard from "../../../components/animals/AnimalMainCard/AnimalMainCard";
-import HeaderTitle from "../../../components/HeaderTitle/HeaderTitle";
+import MainAnimalCard from "../../../components/animals/animal-main-card/AnimalMainCard";
+import HeaderTitle from "../../../components/header-title/HeaderTitle";
 import styles from "./AnimalsList.module.css";
 
 export default function AnimalList() {

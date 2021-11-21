@@ -1,10 +1,12 @@
 from rest_framework.exceptions import ValidationError
+from rest_framework.validators import UniqueValidator
 from rest_framework.serializers import ModelSerializer, CharField, PrimaryKeyRelatedField, IntegerField, ImageField
 from animals.models import *
 
 
 class AnimalBreedSerializer(ModelSerializer):
-    value = CharField(max_length=100, required=True)
+    value = CharField(max_length=100, required=True, validators=[
+        UniqueValidator(queryset=AnimalBreed.objects.all())])
 
     class Meta:
         model = AnimalBreed
@@ -12,7 +14,8 @@ class AnimalBreedSerializer(ModelSerializer):
 
 
 class AnimalStatusSerializer(ModelSerializer):
-    value = CharField(max_length=100, required=True)
+    value = CharField(max_length=100, required=True, validators=[
+        UniqueValidator(queryset=AnimalStatus.objects.all())])
 
     class Meta:
         model = AnimalStatus
@@ -20,7 +23,8 @@ class AnimalStatusSerializer(ModelSerializer):
 
 
 class AnimalTypeSerializer(ModelSerializer):
-    value = CharField(max_length=100, required=True)
+    value = CharField(max_length=100, required=True, validators=[
+        UniqueValidator(queryset=AnimalType.objects.all())])
 
     class Meta:
         model = AnimalType
@@ -28,7 +32,8 @@ class AnimalTypeSerializer(ModelSerializer):
 
 
 class AnimalGenderSerializer(ModelSerializer):
-    value = CharField(max_length=100, required=True)
+    value = CharField(max_length=100, required=True,  validators=[
+        UniqueValidator(queryset=AnimalGender.objects.all())])
 
     class Meta:
         model = AnimalGender
@@ -36,17 +41,20 @@ class AnimalGenderSerializer(ModelSerializer):
 
 
 class AnimalImageSerializer(ModelSerializer):
-    animal = PrimaryKeyRelatedField(queryset=Animal.objects.all(), required=True, write_only=True)
+    animal = PrimaryKeyRelatedField(
+        queryset=Animal.objects.all(), required=True, write_only=True)
     image = ImageField(
         max_length=1000, required=True, allow_empty_file=False)
 
     class Meta:
         model = AnimalImage
         fields = ['id', 'image', 'animal']
+        depth = 1
 
 
 class AnimalSerializer(ModelSerializer):
-    chip_code = CharField(max_length=100, required=True)
+    chip_code = CharField(max_length=100, required=True, validators=[
+        UniqueValidator(queryset=Animal.objects.all())])
     name = CharField(max_length=100, required=True)
     age = IntegerField(min_value=0, required=True)
     animal_type = AnimalTypeSerializer(read_only=True)

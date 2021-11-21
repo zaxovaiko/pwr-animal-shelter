@@ -2,8 +2,8 @@ import { useContext } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useQuery } from "react-query";
 import { fetchAdoptedAnimals } from "../../../api/animals";
-import AdoptedAnimalCard from "../../../components/animals/AdoptedAnimalCard/AdoptedAnimalCard";
-import HeaderTitle from "../../../components/HeaderTitle/HeaderTitle";
+import AdoptedAnimalCard from "../../../components/animals/adopted-animal-card/AdoptedAnimalCard";
+import HeaderTitle from "../../../components/header-title/HeaderTitle";
 import { AuthContext } from "../../../contexts/AuthContext";
 
 export default function AdoptedAnimalsList() {

@@ -32,6 +32,7 @@ class Migration(migrations.Migration):
                 ('phone', models.CharField(max_length=20, verbose_name='Telefon')),
                 ('groups', models.ManyToManyField(blank=True, help_text='The groups this user belongs to. A user will get all permissions granted to each of their groups.', related_name='user_set', related_query_name='user', to='auth.Group', verbose_name='groups')),
                 ('user_permissions', models.ManyToManyField(blank=True, help_text='Specific permissions for this user.', related_name='user_set', related_query_name='user', to='auth.Permission', verbose_name='user permissions')),
+                ('image', models.ImageField(default='users/default.jpg', upload_to=users.models.image_path)),
             ],
             options={
                 'verbose_name': 'user',

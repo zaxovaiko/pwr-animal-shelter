@@ -1,8 +1,8 @@
 import { useContext } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useQuery } from "react-query";
-import ReservedAnimalCard from "../../../components/animals/ReservedAnimalCard/ReservedAnimalCard";
-import HeaderTitle from "../../../components/HeaderTitle/HeaderTitle";
+import ReservedAnimalCard from "../../../components/animals/reserved-animal-card/ReservedAnimalCard";
+import HeaderTitle from "../../../components/header-title/HeaderTitle";
 import { AuthContext } from "../../../contexts/AuthContext";
 import styles from "./ReservedAnimalsList.module.css";
 import { fetchReservations } from "../../../api/reservations";

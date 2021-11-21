@@ -1,4 +1,5 @@
-from rest_framework import viewsets
+from django_filters.rest_framework.backends import DjangoFilterBackend
+from rest_framework import filters, viewsets
 from rest_framework.generics import get_object_or_404
 from rest_framework.permissions import IsAdminUser
 from rest_framework_extensions.mixins import NestedViewSetMixin
@@ -32,3 +33,6 @@ class AnimalLocationViewSet(viewsets.ModelViewSet):
     queryset = AnimalLocation.objects.all()
     permission_classes = [IsAdminUser]
     model = AnimalLocation
+    filter_backends = [filters.OrderingFilter, DjangoFilterBackend]
+    ordering_fields = ['date_from', 'date_to', 'room']
+    filterset_fields = ['date_from', 'date_to', 'room']

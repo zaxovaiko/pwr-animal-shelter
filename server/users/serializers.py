@@ -23,7 +23,8 @@ class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True, required=True)
     first_name = serializers.CharField(max_length=100, required=True)
     last_name = serializers.CharField(max_length=100, required=True)
-    pesel = serializers.CharField(max_length=11, required=True)
+    pesel = serializers.CharField(min_length=11, max_length=11, required=True, validators=[
+        UniqueValidator(queryset=User.objects.all())])
     address = serializers.CharField(max_length=200, required=False)
     image = serializers.ImageField(
         max_length=1000, required=False, allow_empty_file=False)
@@ -33,17 +34,17 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         extra_kwargs = {'password': {'write_only': True}}
         fields = ('first_name', 'last_name', 'address',
-                  'pesel', 'phone', 'email', 'id', 'is_staff', 'password', 'image')
+                  'pesel', 'phone', 'email', 'id', 'is_staff', 'password', 'image', 'is_superuser')
 
     def create(self, validated_data):
         user = User.objects.create(**validated_data)
         user.set_password(validated_data['password'])
         user.save()
-
         return user
 
     def update(self, instance, validated_data):
         instance = super().update(instance, validated_data)
-        instance.set_password(validated_data['password'])
+        if 'password' in validated_data:
+            instance.set_password(validated_data['password'])
         instance.save()
         return instance
