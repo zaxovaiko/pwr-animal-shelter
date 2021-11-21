@@ -59,3 +59,8 @@
   text-align: center;
   width: fit-content;
 }
+
+.animal-description {
+  width: 100%;
+  text-align: left;
+}

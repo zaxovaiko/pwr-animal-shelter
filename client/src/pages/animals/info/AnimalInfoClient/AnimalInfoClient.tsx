@@ -86,6 +86,10 @@ export default function AnimalInfoClient() {
               <b>Wzrost: </b>
               {data.height} cm
             </p>
+            <p>
+              <b>Masa: </b>
+              {data.weight} kg
+            </p>
           </Container>
         </Container>
 

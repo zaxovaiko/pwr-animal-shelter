@@ -22,4 +22,5 @@ export type Animal = {
   description: string;
   vaccinations: string;
   animal_status: AnimalStatus;
+  weight: string;
 };

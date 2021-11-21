@@ -11,6 +11,7 @@ import Registration from "./pages/auth/Registration/Registration";
 import AnimalList from "./pages/animals/AnimalList/AnimalsList";
 import AnimalIssues from "./pages/animals/AnimalIssues/AnimalIssues";
 import AnimalInfoClient from "./pages/animals/info/AnimalInfoClient/AnimalInfoClient";
+import AnimalInfoWorker from "./pages/animals/info/AnimalInfoWorker/AnimalInfoWorker";
 import ReservedAnimalsList from "./pages/animals/ReservedAnimalList/ReservedAnimalsList";
 import AdoptedAnimalsList from "./pages/animals/AdoptedAnimalsList/AdoptedAnimalsList";
 import ReservationClient from "./pages/animals/ReservationClient/ReservationClient";
@@ -30,6 +31,7 @@ function App() {
         <Route exact path="/adopted" component={AdoptedAnimalsList} />
         <Route exact path="/adoption/:type" component={AnimalList} />
         <Route exact path="/animals/:id" component={AnimalInfoClient} />
+        <Route exact path="/animal/:id" component={AnimalInfoWorker} />
         <Route exact path="/reserved-animals" component={ReservedAnimalsList} />
         <Route exact path="/charity" component={Charity} />
         <Route exact path="/forms" component={FormList} />

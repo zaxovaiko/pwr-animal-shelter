@@ -1,11 +1,13 @@
 import { Container, Row, Image, Button } from "react-bootstrap";
 import styles_main from "./AnimalInfoWorker.module.css";
-import styles_photo from "../AnimalPhotoContainer.module.css";
-import styles_button from "../../buttons/Button.module.css";
+import styles_photo from "../../AnimalPhotoContainer.module.css"
+import styles_button from "../../../../components/shared/Button.module.css"
 import { Animal } from "../../../../types/Animal";
+import { AnimalLocation } from "../../../../types/Location";
 import {useParams} from "react-router";
 import {useQuery} from "react-query";
 import {fetchAnimal} from "../../../../api/animals";
+import {fetchLocation} from "../../../../api/location";
 
 export default function AnimalInfoWorker () {
   const animalPhotos = [
@@ -17,8 +19,12 @@ export default function AnimalInfoWorker () {
   ];
 
   const { id } = useParams<{ id: string }>();
-  const { isLoading, isError, data } = useQuery<Animal>("fetchAnimal", () =>
+  const { isLoading, isError, data: Animal } = useQuery<Animal>("fetchAnimal", () =>
       fetchAnimal(id)
+  );
+
+  const { isLoading: isLoading2, isError: isError2, data: Location } = useQuery<AnimalLocation>("fetchLocation", () =>
+      fetchLocation(id)
   );
 
   if (isLoading) {
@@ -29,7 +35,11 @@ export default function AnimalInfoWorker () {
     return <>Error</>;
   }
 
-  if (!data) {
+  if (!Animal) {
+    return <>Something went wrong</>;
+  }
+
+  if (!Location) {
     return <>Something went wrong</>;
   }
 
@@ -51,39 +61,39 @@ export default function AnimalInfoWorker () {
         <Row>
           <p>
             <b>Identyfikator: </b>
-            {data.chip_code}
+            {Animal.chip_code}
           </p>
           <p>
             <b>Typ: </b>
-            {data.animal_type.value}
+            {Animal.animal_type.value}
           </p>
           <p>
             <b>Imię: </b>
-            {data.name}
+            {Animal.name}
           </p>
           <p>
             <b>Wiek: </b>
-            {data.age} lat
+            {Animal.age} lat
           </p>
           <p>
             <b>Wzrost: </b>
-            {data.height} cm
+            {Animal.height} cm
           </p>
           <p>
             <b>Płeć: </b>
-            {data.animal_gender.value}
+            {Animal.animal_gender.value}
           </p>
           <p>
             <b>Rasa: </b>
-            {data.animal_breed.value}
+            {Animal.animal_breed.value}
           </p>
           <p>
             <b>Status: </b>
-            {data.animal_status.value}
+            {Animal.animal_status.value}
           </p>
           <p>
             <b>Kolor: </b>
-            {data.color}
+            {Animal.color}
           </p>
 
           <hr />
@@ -92,7 +102,16 @@ export default function AnimalInfoWorker () {
         <p className={styles_main["text-header"]}>Charakterystyka</p>
 
         <Row className={styles_main["animal-description"]}>
-          {data.description}
+          {Animal.description}
+          <br />
+          <hr />
+        </Row>
+
+        <p className={styles_main["text-header"]}>Lokalizacja</p>
+
+        <Row className={styles_main["animal-description"]}>
+          <span> <b> Data od: </b>{Location.date_from} </span>
+          {/*<span> <b>Lokalizacja: </b>{Location.room.building.street} {Location.room.building.number}, p. {Location.room.number}</span>*/}
           <br />
           <hr />
         </Row>
@@ -100,7 +119,7 @@ export default function AnimalInfoWorker () {
         <p className={styles_main["text-header"]}>Dane wetyrynaryjne</p>
 
         <Row className={styles_main["animal-description"]}>
-          {data.vaccinations}
+          {Animal.vaccinations}
           <br />
           <hr />
         </Row>
