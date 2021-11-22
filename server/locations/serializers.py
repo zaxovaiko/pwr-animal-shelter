@@ -26,6 +26,7 @@ class BuildingSerializer(ModelSerializer):
 
 class AnimalLocationSerializer(ModelSerializer):
     room = RoomSerializer(read_only=True)
+    building = BuildingSerializer(source='room.building', read_only=True)
     room_id = IntegerField(required=True, write_only=True)
     animal = AnimalSerializer(read_only=True)
     animal_id = IntegerField(required=True, write_only=True)
