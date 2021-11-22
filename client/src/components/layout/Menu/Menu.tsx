@@ -41,6 +41,7 @@ export default function Menu({ isOpened }: { isOpened: boolean }) {
           { path: "/adoption", text: "Adopcja", submenu },
           { path: "/contact", text: "Kontakt" },
           { path: "/charity", text: "Jak pomóc?" },
+          { path: "/reservations", text: "Rezerwacje"},
           { path: "/forms", text: "Formularzy" },
           { path: "/", text: "Strona główna"},
         ]

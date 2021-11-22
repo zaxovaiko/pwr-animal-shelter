@@ -17,6 +17,7 @@ import AdoptedAnimalsList from "./pages/animals/AdoptedAnimalsList/AdoptedAnimal
 import ReservationClient from "./pages/animals/ReservationClient/ReservationClient";
 import ErrorPage from "./pages/error_loading/ErrorPage";
 import LoadingPage from "./pages/error_loading/LoadingPage";
+import ReservationList from "./pages/animals/ReservationList/ReservationList";
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
         <Route exact path="/animal-reservation/:id" component={ReservationClient} />
         <Route exact path="/error" component={ErrorPage} />
         <Route exact path="/loading" component={LoadingPage} />
+        <Route exact path="/reservations" component={ReservationList} />
       </Switch>
       <Footer />
     </>
