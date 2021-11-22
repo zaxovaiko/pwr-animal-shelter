@@ -6,6 +6,8 @@ import HeaderTitle from "../../../components/header-title/HeaderTitle";
 import { AuthContext } from "../../../contexts/AuthContext";
 import styles from "./ReservedAnimalsList.module.css";
 import { fetchReservations } from "../../../api/reservations";
+import { useHistory } from "react-router-dom";
+import { useAlert } from "react-alert";
 
 export default function ReservedAnimalsList() {
   const { auth } = useContext(AuthContext);

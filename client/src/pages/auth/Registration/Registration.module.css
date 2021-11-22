@@ -97,6 +97,38 @@
   padding-left: 8vh;
 }
 
+#registration__form-input-div-adress-building {
+  width: 100%;
+  height: 100%;
+  border-width: 0px 0px 2px;
+  border-color: #dadada;
+  padding-left: 19vh;
+}
+
+#registration__form-input-div-adress-apartment {
+  width: 100%;
+  height: 100%;
+  border-width: 0px 0px 2px;
+  border-color: #dadada;
+  padding-left: 22vh;
+}
+
+#registration__form-input-div-adress-city {
+  width: 100%;
+  height: 100%;
+  border-width: 0px 0px 2px;
+  border-color: #dadada;
+  padding-left: 10vh;
+}
+
+#registration__form-input-div-adress-zip {
+  width: 100%;
+  height: 100%;
+  border-width: 0px 0px 2px;
+  border-color: #dadada;
+  padding-left: 6vh;
+}
+
 #registration__form-input-div-password-repeat {
   width: 100%;
   height: 100%;
@@ -112,7 +144,11 @@
 #registration__form-input-div-adress:focus,
 #registration__form-input-div-email:focus,
 #registration__form-input-div-password:focus,
-#registration__form-input-div-password-repeat:focus {
+#registration__form-input-div-password-repeat:focus,
+#registration__form-input-div-adress-building:focus,
+#registration__form-input-div-adress-apartment:focus,
+#registration__form-input-div-adress-city:focus,
+#registration__form-input-div-adress-zip:focus {
   outline-width: 0;
   border-width: 0px 0px 2px;
 }
