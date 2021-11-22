@@ -4,6 +4,8 @@ import styles from "./ReservedAnimalCard.module.css";
 import { fetchDeleteReservation } from "../../../api/reservations";
 import { useContext } from "react";
 import { AuthContext } from "../../../contexts/AuthContext";
+import { useHistory } from "react-router-dom";
+import { useAlert } from "react-alert";
 
 export default function ReservedAnimalCard({
   id,
@@ -17,9 +19,16 @@ export default function ReservedAnimalCard({
     return result.toISOString().substring(0, 10);
   }
   const { auth } = useContext(AuthContext);
+  const alert = useAlert();
+  const history = useHistory();
 
   function handleClick() {
-    fetchDeleteReservation(auth.token, id);
+    fetchDeleteReservation(auth.token, id).then((res) => {
+      if (res) {
+        alert.success("Rezerwacja została anulowana.");
+        history.go(0);
+      }
+    });
   }
 
   return (

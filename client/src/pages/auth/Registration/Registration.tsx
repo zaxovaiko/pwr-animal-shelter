@@ -27,6 +27,9 @@ const validate = (values: any) => {
     var zip = require("zippo");
     return zip.validate(zipCode);
   }
+  function isInDesiredForm(number: string) {
+    return /^\+?(0|[1-9]\d*)$/.test(number);
+  }
 
   const errors: {
     firstName?: String;
@@ -85,6 +88,8 @@ const validate = (values: any) => {
     errors.apartmentNumber = "*Pole jest obowiązkowe";
   } else if (!isNumeric(values.apartmentNumber)) {
     errors.apartmentNumber = "*Pole musi zawierać wyłącznie cyfry";
+  } else if (!isInDesiredForm(values.apartmentNumber)) {
+    errors.apartmentNumber = "*Niepoprawne dane";
   }
 
   if (!values.city) {
@@ -105,8 +110,8 @@ const validate = (values: any) => {
 
   if (!values.password) {
     errors.password = "*Pole jest obowiązkowe";
-  } else if (values.password.length > 11) {
-    errors.password = "*Pole musi mieć więcej niż 11 znaków";
+  } else if (values.password.length < 6) {
+    errors.password = "*Pole musi mieć więcej niż 5 znaków";
   }
 
   if (!values.repeatPassword) {

@@ -7,7 +7,7 @@ export function fetchReservations(token: any) {
   }).then((res) => res.json());
 }
 
-export function fetchDeleteReservation(token: any , id: any) {
+export function fetchDeleteReservation(token: any, id: any) {
   return fetch(
     process.env.REACT_APP_SERVER_URI + "/animals-reservations/" + id,
     {
@@ -17,5 +17,5 @@ export function fetchDeleteReservation(token: any , id: any) {
       },
       method: "DELETE",
     }
-  ).then((res) => res.json());
+  );
 }
