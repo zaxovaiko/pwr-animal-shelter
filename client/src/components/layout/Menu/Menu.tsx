@@ -40,7 +40,6 @@ export default function Menu({ isOpened }: { isOpened: boolean }) {
         links = [
           { path: "/adoption", text: "Adopcja", submenu },
           { path: "/contact", text: "Kontakt" },
-          { path: "/charity", text: "Jak pomóc?" },
           { path: "/reservations", text: "Rezerwacje"},
           { path: "/forms", text: "Formularzy" },
           { path: "/", text: "Strona główna"},
@@ -50,6 +49,7 @@ export default function Menu({ isOpened }: { isOpened: boolean }) {
           { path: "/adoption", text: "Adopcja", submenu },
           { path: "/contact", text: "Kontakt" },
           { path: "/charity", text: "Jak pomóc?" },
+          { path: "/about-us", text: "O nas"},
           { path: "/reserved-animals", text: "Moje rezerwacje" },
           { path: "/", text: "Strona główna"},
         ]
@@ -60,6 +60,7 @@ export default function Menu({ isOpened }: { isOpened: boolean }) {
         { path: "/adoption", text: "Adopcja", submenu },
         { path: "/contact", text: "Kontakt" },
         { path: "/charity", text: "Jak pomóc?" },
+        { path: "/about-us", text: "O nas"},
         { path: "/", text: "Strona główna"},
       ]
     }

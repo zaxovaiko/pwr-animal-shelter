@@ -1,0 +1,68 @@
+.main-container {
+    font-family: Quicksand, serif;
+    font-size: 1.3em;
+    color: #686464;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    margin-bottom: 200px;
+}
+
+.text-header {
+    position: relative;
+    width: fit-content;
+    margin-top: 50px;
+    margin-bottom: 30px;
+    font-weight: bold;
+    font-size: 35px;
+}
+
+.activity-row {
+    margin-top: 30px;
+    margin-bottom: 100px;
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+}
+
+.activity-element {
+    position: relative;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.activity-img {
+    width: 30px;
+    height: 30px;
+}
+
+@media (max-width: 1000px) {
+    .activity-element {
+        margin-bottom: 50px;
+    }
+}
+.text {
+    text-align: center;
+    width: 80%;
+}
+
+.style-img {
+    width: 100%;
+    margin-top: 70px;
+}
+
+.link {
+    color: #0E576F;
+    width: fit-content;
+}
+
+.link:hover {
+    color: aqua;
+}

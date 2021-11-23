@@ -6,8 +6,8 @@ import Contact from "./pages/contact/Contact";
 import Profile from "./pages/profile/Profile";
 import Charity from "./pages/charity/Charity";
 import FormList from "./pages/forms/FormList";
-import Login from "./pages/auth/login/Login";
-import Registration from "./pages/auth/registration/Registration";
+import Login from "./pages/auth/Login/Login";
+import Registration from "./pages/auth/Registration/Registration";
 import AnimalList from "./pages/animals/animals-list/AnimalsList";
 import AnimalIssues from "./pages/animals/animal-issues/AnimalIssues";
 import AnimalInfoClient from "./pages/animals/info/animal-info-client/AnimalInfoClient";
@@ -19,6 +19,7 @@ import ErrorPage from "./pages/errors/ErrorPage";
 import LoadingPage from "./pages/errors/LoadingPage";
 import ReservationList from "./pages/animals/reservation-list/ReservationList";
 import AnimalInfoWorker from "./pages/animals/info/animal-info-worker/AnimalInfoWorker";
+import AboutUs from "./pages/about-us/AboutUs";
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function App() {
         <Route exact path="/error" component={ErrorPage} />
         <Route exact path="/loading" component={LoadingPage} />
         <Route exact path="/reservations" component={ReservationList} />
+        <Route exact path="/about-us" component={AboutUs} />
       </Switch>
       <Footer />
     </>
