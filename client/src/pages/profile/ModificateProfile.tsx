@@ -1,32 +1,49 @@
 import styles from "./ModificateProfile.module.css";
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { useFormik } from "formik";
 import { AuthContext } from "../../contexts/AuthContext";
 import { useQuery } from "react-query";
 import { fetchProfileData, fetchUpdateProfileData } from "../../api/profile";
 import { useAlert } from "react-alert";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/material.css";
+
 
 let refTofirst_name: React.RefObject<any> = React.createRef();
 let refTolast_name: React.RefObject<any> = React.createRef();
 let refToPesel: React.RefObject<any> = React.createRef();
 let refTophone: React.RefObject<any> = React.createRef();
 let refToEmail: React.RefObject<any> = React.createRef();
-let refToPassword: React.RefObject<any> = React.createRef();
+let refToStreet: React.RefObject<any> = React.createRef();
+let refToBuilding: React.RefObject<any> = React.createRef();
+let refToApartment: React.RefObject<any> = React.createRef();
+let refToCity: React.RefObject<any> = React.createRef();
+let refToZip: React.RefObject<any> = React.createRef();
 
 const validate = (values: any) => {
   function isNumeric(value: string) {
     return /^-?\d+$/.test(value);
   }
+  function validateZip(zipCode: string) {
+    var zip = require("zippo");
+    return zip.validate(zipCode);
+  }
+  function isInDesiredForm(number: string) {
+    return /^\+?(0|[1-9]\d*)$/.test(number);
+  }
 
   const errors: {
     first_name?: String;
     last_name?: String;
-    address?: String;
+    street?: String;
+    buildingNumber?: String;
+    apartmentNumber?: String;
+    city?: String;
+    zip?: String;
     pesel?: String;
     phone?: String;
     email?: String;
-    password?: String;
   } = {};
   if (!values.first_name) {
     errors.first_name = "*Pole jest obowiązkowe";
@@ -50,10 +67,8 @@ const validate = (values: any) => {
 
   if (!values.phone) {
     errors.phone = "*Pole jest obowiązkowe";
-  } else if (values.phone.length !== 9) {
-    errors.phone = "*Pole musi mieć 9 znaków";
-  } else if (!isNumeric(values.phone)) {
-    errors.phone = "*Pole musi zawierać wyłącznie cyfry";
+  } else if (values.phone.length < 11) {
+    errors.phone = "*Niepoprawne dane";
   }
 
   if (!values.email) {
@@ -62,10 +77,31 @@ const validate = (values: any) => {
     errors.email = "*Niepoprawne dane";
   }
 
-  if (!values.password) {
-    errors.password = "*Pole jest obowiązkowe";
+  if (!values.street) {
+    errors.street = "*Pole jest obowiązkowe";
   }
 
+  if (!values.buildingNumber) {
+    errors.buildingNumber = "*Pole jest obowiązkowe";
+  }
+
+  if (!values.apartmentNumber) {
+    errors.apartmentNumber = "*Pole jest obowiązkowe";
+  } else if (!isNumeric(values.apartmentNumber)) {
+    errors.apartmentNumber = "*Pole musi zawierać wyłącznie cyfry";
+  } else if (!isInDesiredForm(values.apartmentNumber)) {
+    errors.apartmentNumber = "*Niepoprawne dane";
+  }
+
+  if (!values.city) {
+    errors.city = "*Pole jest obowiązkowe";
+  }
+
+  if (!values.zip) {
+    errors.zip = "*Pole jest obowiązkowe";
+  } else if (!validateZip(values.zip)) {
+    errors.zip = "*Niepoprawny kod pocztowy";
+  }
   return errors;
 };
 
@@ -80,16 +116,27 @@ export default function ModificateProfile() {
     () => fetchProfileData(id),
     { retry: false }
   );
+  const [phoneNumber, setPhone] = useState(data == undefined ? "" : data.phone);
+  function handleOnChangePhone(value: any) {
+    setPhone(value);
+    formik.values.phone = value;
+  }
+  const addressInfo = data.address.split(",");
+  const streetAndBuilding = addressInfo[0].split(" ");
+
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
       first_name: data == undefined ? "" : data.first_name,
       last_name: data == undefined ? "" : data.last_name,
-      address: data == undefined ? "" : data.address,
+      street: data == undefined ? "" : streetAndBuilding[0],
+      buildingNumber: data == undefined ? "" : streetAndBuilding[1],
+      apartmentNumber: data == undefined ? "" : addressInfo[1],
+      city: data == undefined ? "" : addressInfo[2],
+      zip: data == undefined ? "" : addressInfo[3],
       pesel: data == undefined ? "" : data.pesel,
-      phone: data == undefined ? "" : data.phone,
+      phone: phoneNumber,
       email: data == undefined ? "" : data.email,
-      password: "",
     },
     validate,
     onSubmit: (values) => {
@@ -97,24 +144,96 @@ export default function ModificateProfile() {
         {
           first_name: values.first_name,
           last_name: values.last_name,
-          address: values.address,
+          address:
+            values.street +
+            " " +
+            values.buildingNumber +
+            "," +
+            values.apartmentNumber +
+            "," +
+            values.city +
+            "," +
+            values.zip,
           pesel: values.pesel,
           phone: values.phone,
           email: values.email,
-          password: values.password,
         },
         data.id,
         auth.token
       )
         .then((res: any) => {
-          if (res) {
+          if (res.id) {
             alert.success("Twoje dane zostały zmodyfikowane!");
             return history.push(infoToGoBack);
           }
-          alert.error("Coś poszło nie tak. Spróbuj ponownie.");
+          if (res.pesel) {
+            alert.error(
+              "W systemie istnieje już użytkownik z podanym numerem PESEL"
+            );
+          } else if (res.email) {
+            alert.error("W systemie istnieje już użytkownik z podanym e-mail");
+          } else {
+            alert.error("Coś poszło nie tak. Spróbuj ponownie.");
+          }
         })
         .catch(console.error);
     },
+  });
+  console.log(phoneNumber)
+  useEffect(() => {
+    if (formik.touched.first_name && formik.errors.first_name) {
+      refTofirst_name.current.style.borderColor = "red";
+    } else {
+      refTofirst_name.current.style.borderColor = "#DADADA";
+    }
+
+    if (formik.touched.last_name && formik.errors.last_name) {
+      refTolast_name.current.style.borderColor = "red";
+    } else {
+      refTolast_name.current.style.borderColor = "#DADADA";
+    }
+
+    if (formik.touched.pesel && formik.errors.pesel) {
+      refToPesel.current.style.borderColor = "red";
+    } else {
+      refToPesel.current.style.borderColor = "#DADADA";
+    }
+
+    if (formik.touched.email && formik.errors.email) {
+      refToEmail.current.style.borderColor = "red";
+    } else {
+      refToEmail.current.style.borderColor = "#DADADA";
+    }
+
+    if (formik.touched.street && formik.errors.street) {
+      refToStreet.current.style.borderColor = "red";
+    } else {
+      refToStreet.current.style.borderColor = "#DADADA";
+    }
+
+    if (formik.touched.buildingNumber && formik.errors.buildingNumber) {
+      refToBuilding.current.style.borderColor = "red";
+    } else {
+      refToBuilding.current.style.borderColor = "#DADADA";
+    }
+
+    if (formik.touched.apartmentNumber && formik.errors.apartmentNumber) {
+      refToApartment.current.style.borderColor = "red";
+    } else {
+      refToApartment.current.style.borderColor = "#DADADA";
+    }
+
+    if (formik.touched.city && formik.errors.city) {
+      refToCity.current.style.borderColor = "red";
+    } else {
+      refToCity.current.style.borderColor = "#DADADA";
+    }
+
+    if (formik.touched.zip && formik.errors.zip) {
+      refToZip.current.style.borderColor = "red";
+    } else {
+      refToZip.current.style.borderColor = "#DADADA";
+    }
   });
 
   if (isLoading) {
@@ -211,13 +330,17 @@ export default function ModificateProfile() {
             >
               *Tel:
             </label>
-            <input
-              name="phone"
-              id={styles["mod-profile__form-input-div-tel"]}
-              value={formik.values.phone}
-              onBlur={formik.handleBlur}
-              onChange={formik.handleChange}
-              ref={refTophone}
+            <PhoneInput
+              country={"pl"}
+              placeholder={""}
+              specialLabel="*Numer telefonu"
+              value={phoneNumber}
+              onChange={handleOnChangePhone}
+              inputProps={{
+                name: "phone",
+                id: styles["mod-profile__form-input-div-tel"],
+                onBlur: formik.handleBlur,
+              }}
             />
             {formik.touched.phone && formik.errors.phone ? (
               <div style={{ color: "red", position: "absolute" }}>
@@ -231,15 +354,114 @@ export default function ModificateProfile() {
               htmlFor={styles["mod-profile__form-input-div-adress"]}
               style={{ position: "absolute" }}
             >
-              Adres:
+              *Ulica:
             </label>
             <input
-              name="address"
+              name="street"
               type="text"
+              ref={refToStreet}
               id={styles["mod-profile__form-input-div-adress"]}
               onChange={formik.handleChange}
-              value={formik.values.address}
+              onBlur={formik.handleBlur}
+              value={formik.values.street}
             />
+            {formik.touched.street && formik.errors.street ? (
+              <div style={{ color: "red", position: "absolute" }}>
+                {formik.errors.street}
+              </div>
+            ) : null}
+          </div>
+
+          <div className={styles["mod-profile_form-input-div"]}>
+            <label
+              htmlFor={styles["mod-profile__form-input-div-adress-building"]}
+              style={{ position: "absolute" }}
+            >
+              *Numer budynku:
+            </label>
+            <input
+              name="buildingNumber"
+              type="text"
+              ref={refToBuilding}
+              id={styles["mod-profile__form-input-div-adress-building"]}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.buildingNumber}
+            />
+            {formik.touched.buildingNumber && formik.errors.buildingNumber ? (
+              <div style={{ color: "red", position: "absolute" }}>
+                {formik.errors.buildingNumber}
+              </div>
+            ) : null}
+          </div>
+
+          <div className={styles["mod-profile_form-input-div"]}>
+            <label
+              htmlFor={styles["mod-profile__form-input-div-adress-apartment"]}
+              style={{ position: "absolute" }}
+            >
+              *Numer mieszkania:
+            </label>
+            <input
+              name="apartmentNumber"
+              type="text"
+              ref={refToApartment}
+              id={styles["mod-profile__form-input-div-adress-apartment"]}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.apartmentNumber}
+            />
+            {formik.touched.apartmentNumber && formik.errors.apartmentNumber ? (
+              <div style={{ color: "red", position: "absolute" }}>
+                {formik.errors.apartmentNumber}
+              </div>
+            ) : null}
+          </div>
+
+          <div className={styles["mod-profile_form-input-div"]}>
+            <label
+              htmlFor={styles["mod-profile__form-input-div-adress-city"]}
+              style={{ position: "absolute" }}
+            >
+              *Miasto:
+            </label>
+            <input
+              name="city"
+              type="text"
+              ref={refToCity}
+              id={styles["mod-profile__form-input-div-adress-city"]}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.city}
+            />
+            {formik.touched.city && formik.errors.city ? (
+              <div style={{ color: "red", position: "absolute" }}>
+                {formik.errors.city}
+              </div>
+            ) : null}
+          </div>
+
+          <div className={styles["mod-profile_form-input-div"]}>
+            <label
+              htmlFor={styles["mod-profile__form-input-div-adress-zip"]}
+              style={{ position: "absolute" }}
+            >
+              *ZIP:
+            </label>
+            <input
+              name="zip"
+              type="text"
+              ref={refToZip}
+              id={styles["mod-profile__form-input-div-adress-zip"]}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.zip}
+            />
+            {formik.touched.zip && formik.errors.zip ? (
+              <div style={{ color: "red", position: "absolute" }}>
+                {formik.errors.zip}
+              </div>
+            ) : null}
           </div>
 
           <div className={styles["mod-profile_form-input-div"]}>
@@ -261,29 +483,6 @@ export default function ModificateProfile() {
             {formik.touched.email && formik.errors.email ? (
               <div style={{ color: "red", position: "absolute" }}>
                 {formik.errors.email}
-              </div>
-            ) : null}
-          </div>
-
-          <div className={styles["mod-profile_form-input-div"]}>
-            <label
-              htmlFor={styles["mod-profile__form-input-div-password"]}
-              style={{ position: "absolute" }}
-            >
-              *Hasło:
-            </label>
-            <input
-              type="password"
-              name="password"
-              ref={refToPassword}
-              id={styles["mod-profile__form-input-div-password"]}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.password}
-            />
-            {formik.touched.password && formik.errors.password ? (
-              <div style={{ color: "red", position: "absolute" }}>
-                {formik.errors.password}
               </div>
             ) : null}
           </div>

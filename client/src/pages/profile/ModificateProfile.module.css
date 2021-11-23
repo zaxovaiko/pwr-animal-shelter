@@ -76,9 +76,40 @@
 #mod-profile__form-input-div-tel {
   width: 100%;
   height: 100%;
+  border-width: 2px;
+  border-color: #dadada;
+}
+
+#mod-profile__form-input-div-adress-building {
+  width: 100%;
+  height: 100%;
   border-width: 0px 0px 2px;
   border-color: #dadada;
-  padding-left: 5vh;
+  padding-left: 19vh;
+}
+
+#mod-profile__form-input-div-adress-apartment {
+  width: 100%;
+  height: 100%;
+  border-width: 0px 0px 2px;
+  border-color: #dadada;
+  padding-left: 22vh;
+}
+
+#mod-profile__form-input-div-adress-city {
+  width: 100%;
+  height: 100%;
+  border-width: 0px 0px 2px;
+  border-color: #dadada;
+  padding-left: 10vh;
+}
+
+#mod-profile__form-input-div-adress-zip {
+  width: 100%;
+  height: 100%;
+  border-width: 0px 0px 2px;
+  border-color: #dadada;
+  padding-left: 6vh;
 }
 
 .mod-profile__form-cancel-button {
@@ -121,7 +152,11 @@
 #mod-profile__form-input-div-tel:focus,
 #mod-profile__form-input-div-adress:focus,
 #mod-profile__form-input-div-email:focus,
-#mod-profile__form-input-div-password:focus {
+#mod-profile__form-input-div-password:focus,
+#mod-profile__form-input-div-adress-building:focus,
+#mod-profile__form-input-div-adress-apartment:focus,
+#mod-profile__form-input-div-adress-city:focus,
+#mod-profile__form-input-div-adress-zip:focus {
   outline-width: 0;
   border-width: 0px 0px 2px;
 }

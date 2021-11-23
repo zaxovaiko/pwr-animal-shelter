@@ -11,6 +11,6 @@ export function fetchUpdateProfileData(body: any, id: string, token: any) {
       Authorization: token,
     },
     body: JSON.stringify(body),
-    method: "PUT",
+    method: "PATCH",
   }).then((res) => res.json());
 }
