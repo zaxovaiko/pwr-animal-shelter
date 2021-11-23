@@ -12,29 +12,22 @@ import { fetchLocation } from "../../../../api/location";
 import { AuthContext } from "../../../../contexts/AuthContext";
 
 export default function AnimalInfoWorker() {
-  const animalPhotos = [
-    "https://thumbs.dreamstime.com/b/dog-golden-retriever-jumping-autumn-leaves-autumnal-sunlight-77861618.jpg",
-    "https://thumbs.dreamstime.com/b/retriever-%D1%81%D0%BE%D0%B1%D0%B0%D0%BA%D0%B8-%D0%B7%D0%BE%D0%BB%D0%BE%D1%82%D0%B8%D1%81%D1%82%D1%8B%D0%B9-21668976.jpg",
-    "https://thumbs.dreamstime.com/b/retriever-%D1%81%D0%BE%D0%B1%D0%B0%D0%BA%D0%B8-%D0%B7%D0%BE%D0%BB%D0%BE%D1%82%D0%B8%D1%81%D1%82%D1%8B%D0%B9-683752.jpg",
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFv4rsjjJZd23tvUTxzzBQRi-XGDf8_n1vJvP1RMN0_6Q2CgHY_UY5lQh87NwHRXp10F8&usqp=CAU",
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGMvZFqb35VZYb6ZyuSDs37F6L9gduGexaFEai_cbY2f7R-IiCR2dBzWmEKRIE-Yh0Olo&usqp=CAU",
-  ];
-
   const { id } = useParams<{ id: string }>();
   const { auth } = useContext(AuthContext);
-  console.log(auth);
+
   const animalQuery = useQuery<Animal>(["fetchAnimal", id], () =>
     fetchAnimal(id)
   );
-  const locationQuery = useQuery<AnimalLocation>(["fetchLocation", id, auth.token], () =>
-    fetchLocation(id, auth.token as string)
+  const locationQuery = useQuery<AnimalLocation>(
+    ["fetchLocation", id, auth.token],
+    () => fetchLocation(id, auth.token as string)
   );
 
   if (animalQuery.isError || locationQuery.isError) {
     return <>Error</>;
   }
 
-  if (animalQuery.isLoading || locationQuery.isLoading) {
+  if (animalQuery.isLoading || locationQuery.isLoading || !animalQuery.data) {
     return <>Loading</>;
   }
 
@@ -72,15 +65,23 @@ export default function AnimalInfoWorker() {
           </p>
           <p>
             <b>Wiek: </b>
-            {animalQuery.data?.age} lat
+            {animalQuery.data?.age ? animalQuery.data?.age + " lat" : "Brak"}
           </p>
           <p>
             <b>Wzrost: </b>
-            {animalQuery.data?.height} cm
+            {animalQuery.data?.height
+              ? animalQuery.data?.height + " cm"
+              : "Brak"}
+          </p>
+          <p>
+            <b>Waga: </b>
+            {animalQuery.data?.weight
+              ? animalQuery.data?.weight + " kg"
+              : "Brak"}
           </p>
           <p>
             <b>Płeć: </b>
-            {animalQuery.data?.animal_gender.value}
+            {animalQuery.data?.animal_gender.value || "Brak"}
           </p>
           <p>
             <b>Rasa: </b>
@@ -116,7 +117,8 @@ export default function AnimalInfoWorker() {
           </span>
           <span>
             {" "}
-            <b>Lokalizacja: </b>, p. {locationQuery.data?.room.number}
+            <b>Lokalizacja: </b>ul. {locationQuery.data?.building.street}, p.{" "}
+            {locationQuery.data?.room.number}
           </span>
           <br />
           <hr />
@@ -130,18 +132,22 @@ export default function AnimalInfoWorker() {
           <hr />
         </Row>
 
-        <p className={styles_main["text-header"]}>Zdjęcia</p>
-
-        <Container className={styles_photo["photo-container"]}>
-          {animalPhotos.map((photo) => (
-            <Image
-              className={styles_photo["photo"]}
-              src={photo}
-              alt="animal photo"
-              onClick={() => window.open(photo)}
-            />
-          ))}
-        </Container>
+        {animalQuery.data.images.length > 0 && (
+          <>
+            <p className={styles_main["text-header"]}>Zdjęcia</p>
+            <Container className={styles_photo["photo-container"]}>
+              {animalQuery.data?.images.map((photo, i) => (
+                <Image
+                  key={i}
+                  className={styles_photo["photo"]}
+                  src={photo.image}
+                  alt="animal photo"
+                  onClick={() => window.open(photo.image)}
+                />
+              ))}
+            </Container>
+          </>
+        )}
       </Container>
 
       <Container className={styles_main["nav-area"]}>
