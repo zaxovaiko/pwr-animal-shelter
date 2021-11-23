@@ -1,14 +1,15 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useFormik } from "formik";
 import styles from "./Registration.module.css";
 import { fetchRegisterData } from "../../../api/auth";
 import { useAlert } from "react-alert";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/material.css";
 
 let refToFirstName: React.RefObject<any> = React.createRef();
 let refToLastName: React.RefObject<any> = React.createRef();
 let refToPesel: React.RefObject<any> = React.createRef();
-let refToPhoneNumber: React.RefObject<any> = React.createRef();
 let refToEmail: React.RefObject<any> = React.createRef();
 let refToPassword: React.RefObject<any> = React.createRef();
 let refToRepeatPassword: React.RefObject<any> = React.createRef();
@@ -70,10 +71,8 @@ const validate = (values: any) => {
 
   if (!values.phoneNumber) {
     errors.phoneNumber = "*Pole jest obowiązkowe";
-  } else if (values.phoneNumber.length !== 9) {
-    errors.phoneNumber = "*Pole musi mieć 9 znaków";
-  } else if (!isNumeric(values.phoneNumber)) {
-    errors.phoneNumber = "*Pole musi zawierać wyłącznie cyfry";
+  } else if (values.phoneNumber.length < 11) {
+    errors.phoneNumber = "*Niepoprawne dane";
   }
 
   if (!values.street) {
@@ -135,6 +134,12 @@ const validate = (values: any) => {
 export default function Registration() {
   const alert = useAlert();
   const history = useHistory();
+  const [phone, setPhone] = useState("");
+  function handleOnChangePhone(value: any) {
+    setPhone(value);
+    formik.values.phoneNumber = value;
+  }
+
   const formik = useFormik({
     initialValues: {
       firstName: "",
@@ -163,7 +168,7 @@ export default function Registration() {
           values.street +
           " " +
           values.buildingNumber +
-          ", m. " +
+          "," +
           values.apartmentNumber +
           ", " +
           values.city +
@@ -207,12 +212,6 @@ export default function Registration() {
       refToPesel.current.style.borderColor = "red";
     } else {
       refToPesel.current.style.borderColor = "#DADADA";
-    }
-
-    if (formik.touched.phoneNumber && formik.errors.phoneNumber) {
-      refToPhoneNumber.current.style.borderColor = "red";
-    } else {
-      refToPhoneNumber.current.style.borderColor = "#DADADA";
     }
 
     if (formik.touched.email && formik.errors.email) {
@@ -350,13 +349,17 @@ export default function Registration() {
             >
               *Tel:
             </label>
-            <input
-              name="phoneNumber"
-              id={styles["registration__form-input-div-tel"]}
-              value={formik.values.phoneNumber}
-              onBlur={formik.handleBlur}
-              onChange={formik.handleChange}
-              ref={refToPhoneNumber}
+            <PhoneInput
+              country={"pl"}
+              placeholder={""}
+              specialLabel="*Numer telefonu"
+              value={phone}
+              onChange={handleOnChangePhone}
+              inputProps={{
+                name: "phoneNumber",
+                id: styles["registration__form-input-div-tel"],
+                onBlur: formik.handleBlur,
+              }}
             />
             {formik.touched.phoneNumber && formik.errors.phoneNumber ? (
               <div style={{ color: "red", position: "absolute" }}>
