@@ -3,8 +3,7 @@
     margin-bottom: 100px;
 }
 
-.table-header {
-    background-color: rgba(14, 87, 111, 0.25);
+.table{
     text-align: center;
     color: #686464;
     font-size: 20px;

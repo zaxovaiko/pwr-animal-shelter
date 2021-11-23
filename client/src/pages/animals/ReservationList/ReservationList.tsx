@@ -2,7 +2,7 @@ import {Container} from "react-bootstrap";
 import styles_main from "./ReservationList.module.css";
 import HeaderTitle from "../../../components/HeaderTitle/HeaderTitle";
 
-import React, {Component, useContext} from 'react';
+import React, {useContext} from 'react';
 import ReactTable from "react-table-6";
 import "react-table-6/react-table.css";
 import {useQuery} from "react-query";
@@ -39,15 +39,15 @@ export default function ReservationList() {
         },
         {
             Header: "Zwierzę",
-            accessor: "animal.chip_code"
+            accessor: "chip_code"
         },
         {
             Header: "Osoba",
-            accessor: "user.email"
+            accessor: "email"
         },
         {
             Header: "Status",
-            accessor: "reservation_status"
+            accessor: "animal_status.value"
         },
     ];
 
@@ -55,11 +55,11 @@ export default function ReservationList() {
         <>
             <HeaderTitle text={"Rezerwacje"} color="rgba(133, 175, 91, 0.23)"/>
             <Container className={styles_main["main-container"]}>
-                <ReactTable
-                    data={data || []}
+                <ReactTable className={styles_main["table"]}
+                    data={data.results}
                     columns={columns}
                     defaultPageSize = {2}
-                    pageSizeOptions = {[2,4, 6]}
+                    pageSizeOptions = {[3,6, 9]}
                 />
             </Container>
         </>
