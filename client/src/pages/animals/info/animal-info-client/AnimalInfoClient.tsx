@@ -83,7 +83,11 @@ export default function AnimalInfoClient() {
             </p>
             <p>
               <b>Wzrost: </b>
-              {data.height} cm
+              {data.height ? data.height + "cm" : "Brak"}
+            </p>
+            <p>
+              <b>Waga: </b>
+              {data.weight ? data.weight + "kg" : "Brak"}
             </p>
             <p>
               <b>Masa: </b>
