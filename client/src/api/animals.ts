@@ -38,3 +38,14 @@ export function fetchNewAnimals() {
     process.env.REACT_APP_SERVER_URI + "/animals-arrivals?ordering=-date"
   ).then((res) => res.json());
 }
+
+export function fetchReservedAnimals(token: string) {
+  return fetch(
+    process.env.REACT_APP_SERVER_URI + "/animals?page=1&animal_status=4",
+    {
+      headers: {
+        Authorization: token,
+      },
+    }
+  ).then((res) => res.json());
+}

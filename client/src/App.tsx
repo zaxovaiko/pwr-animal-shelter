@@ -6,8 +6,8 @@ import Contact from "./pages/contact/Contact";
 import Profile from "./pages/profile/Profile";
 import Charity from "./pages/charity/Charity";
 import FormList from "./pages/forms/FormList";
-import Login from "./pages/auth/Login/Login";
-import Registration from "./pages/auth/Registration/Registration";
+import Login from "./pages/auth/login/Login";
+import Registration from "./pages/auth/registration/Registration";
 import AnimalList from "./pages/animals/animals-list/AnimalsList";
 import AnimalIssues from "./pages/animals/animal-issues/AnimalIssues";
 import AnimalInfoClient from "./pages/animals/info/animal-info-client/AnimalInfoClient";
@@ -15,6 +15,10 @@ import ReservedAnimalsList from "./pages/animals/reserved-animals-list/ReservedA
 import AdoptedAnimalsList from "./pages/animals/adopted-animals-list/AdoptedAnimalsList";
 import ReservationClient from "./pages/animals/reservation-client/ReservationClient";
 import ModificateProfile from "./pages/profile/ModificateProfile";
+import ErrorPage from "./pages/errors/ErrorPage";
+import LoadingPage from "./pages/errors/LoadingPage";
+import ReservationList from "./pages/animals/reservation-list/ReservationList";
+import AnimalInfoWorker from "./pages/animals/info/animal-info-worker/AnimalInfoWorker";
 
 function App() {
   return (
@@ -30,11 +34,15 @@ function App() {
         <Route exact path="/adoption/:type" component={AnimalList} />
         <Route exact path="/adopted-animals" component={AdoptedAnimalsList} />
         <Route exact path="/animals/:id" component={AnimalInfoClient} />
+        <Route exact path="/animal/:id" component={AnimalInfoWorker} />
         <Route exact path="/reserved-animals" component={ReservedAnimalsList} />
         <Route exact path="/charity" component={Charity} />
         <Route exact path="/forms" component={FormList} />
         <Route exact path="/animal-issue/:id" component={AnimalIssues} />
         <Route exact path="/animal-reservation/:id" component={ReservationClient} />
+        <Route exact path="/error" component={ErrorPage} />
+        <Route exact path="/loading" component={LoadingPage} />
+        <Route exact path="/reservations" component={ReservationList} />
       </Switch>
       <Footer />
     </>
