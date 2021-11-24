@@ -3,6 +3,7 @@ from django.contrib.auth.base_user import BaseUserManager
 from django.db import models
 from uuid import uuid4
 from django.contrib.auth.models import AbstractUser
+from rest_framework.exceptions import ValidationError
 
 
 def image_path(instance, filename):
@@ -57,3 +58,9 @@ class User(AbstractUser):
 
     def __str__(self):
         return self.email + ' ' + self.pesel
+
+    def save(self, *args, **kwargs):
+        try:
+            return super(AbstractUser, self).save(*args, **kwargs)
+        except BaseException as e:
+            raise ValidationError({ 'error': str(e).split('\n')[0] })
