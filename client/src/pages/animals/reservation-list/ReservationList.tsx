@@ -28,14 +28,29 @@ export default function ReservationList() {
     {
       Header: "ID",
       accessor: "id",
+      minWidth: 40
     },
     {
       Header: "Od",
       accessor: "date",
+      minWidth: 80,
+      Cell: (row: { original: { date: any; }; }) => {
+        const date = row.original.date
+        if (!date) return "";
+        return date.substring(0, 10) + " ,g.  " + date.substring(11, 16);
+      }
     },
     {
       Header: "Do",
       accessor: "date",
+      minWidth: 50,
+      Cell: (row: { original: { date: any; }; }) => {
+        const date = row.original.date
+        if (!date) return "";
+        const date_d: Date = new Date(date.substring(0, 10));
+        const date_to = new Date(date_d.getTime()+(3*24*60*60*1000));
+        return date_to.getFullYear()+"-"+(date_to.getMonth()+1) + "-"+date_to.getDate();
+      }
     },
     {
       Header: "Zwierzę",
@@ -55,7 +70,7 @@ export default function ReservationList() {
     <>
       <HeaderTitle text={"Rezerwacje"} color="rgba(133, 175, 91, 0.23)" />
       <Container className={styles_main["main-container"]}>
-        <ReactTable data={data.results} columns={columns} defaultPageSize={2} />
+        <ReactTable data={data.results} columns={columns} defaultPageSize={5} />
       </Container>
     </>
   );
