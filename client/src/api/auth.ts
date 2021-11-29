@@ -1,7 +1,7 @@
 import { User } from "../types/User";
 
 const options = {
-  headers: { "Content-Type": "application/json", mode: "no-cors" },
+  headers: { "Content-Type": "application/json" },
   method: "POST",
 };
 

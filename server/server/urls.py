@@ -38,6 +38,7 @@ urlpatterns = [
     path('api/login/refresh', JWTTokenRefreshView.as_view(), name='token_refresh'),
     path('api/password_reset', include('django_rest_passwordreset.urls', namespace='password_reset')),
     path('api/register', UserViewSet.as_view({'post': 'create'})),
+    path('api/animals-reservations/users', AnimalReservationsViewSet.as_view({'get': 'get_users'})),
     path('api/adopted', AnimalAdoptionViewSet.as_view({'get': 'adopted'})),
     path('api/', include(router.urls))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

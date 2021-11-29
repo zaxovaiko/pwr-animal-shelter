@@ -14,7 +14,7 @@ class AnimalReservationsViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
     ordering_fields = ['date']
 
-    def list(self, request, *args, **kwargs):
+    def get_users(self, request, *args, **kwargs):
         user_id = request.user.id
         queryset = AnimalReservation.objects.filter(user=user_id)
         serializer = AnimalReservationsSerializer(queryset, many=True)

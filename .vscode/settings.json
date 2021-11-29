@@ -1,0 +1,14 @@
+{
+  "sqltools.connections": [
+    {
+      "previewLimit": 50,
+      "server": "localhost",
+      "port": 5432,
+      "driver": "PostgreSQL",
+      "name": "pwr-animal-shelter",
+      "database": "animal_shelter_database",
+      "username": "postgres",
+      "password": "password"
+    }
+  ]
+}
