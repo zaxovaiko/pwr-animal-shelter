@@ -1,71 +1,67 @@
-import React, { useEffect, useContext } from "react";
-import { Link, useHistory } from "react-router-dom";
-import styles from "./Login.module.css";
 import { useFormik } from "formik";
-import { AuthContext } from "../../../contexts/AuthContext";
-import { fetchLoginData } from "../../../api/auth";
+import { useEffect, createRef } from "react";
 import { useAlert } from "react-alert";
+import { Link, useHistory, useLocation } from "react-router-dom";
+import { fetchPasswordResetConfirmation } from "../../../api/auth";
+import styles from "../login/Login.module.css";
 
-let refToEmail: React.RefObject<any> = React.createRef();
-let refToPassword: React.RefObject<any> = React.createRef();
-let refToErrorUser: React.RefObject<any> = React.createRef();
+let refToPassword: React.RefObject<any> = createRef();
+let refToPasswordConfirmation: React.RefObject<any> = createRef();
+let refToErrorUser: React.RefObject<any> = createRef();
 
 const validate = (values: any) => {
   const errors: {
-    email?: String;
     password?: String;
+    password_confirmation?: String;
   } = {};
-
-  if (!values.email) {
-    errors.email = "Podaj email";
-  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-    errors.email = "*Niepoprawne dane";
-  }
 
   if (!values.password) {
     errors.password = "Podaj hasło";
   }
 
+  if (!values.password_confirmation) {
+    errors.password = "Podaj potwierdzenie hasła";
+  }
+
+  if (values.password !== values.password_confirmation) {
+    errors.password_confirmation = "Hasła muszą być jednakowe";
+  }
+
   return errors;
 };
 
-export default function Login() {
+export default function PasswordResetConfirm() {
   const alert = useAlert();
+  const location = useLocation();
   const history = useHistory();
-  const { setAuth } = useContext(AuthContext);
   let check = false;
 
   const formik = useFormik({
     initialValues: {
-      email: "",
       password: "",
+      password_confirmation: "",
     },
     validate,
     onSubmit: (values) => {
-      fetchLoginData({
-        email: values.email,
+      const token = new URLSearchParams(location.search).get("token");
+      fetchPasswordResetConfirmation({
         password: values.password,
-      })
+        token,
+      } as any)
         .then((res) => {
-          if (res.access) {
-            setAuth(res.access);
-            alert.success("Zostałeś zalogowany do swojego konta.");
-            return history.push("/");
+          console.log(res);
+          if (res.status === "OK") {
+            alert.success("Teraz możesz zalogować się z nowych hasłem");
+            return history.push("/login");
           }
           alert.error("Coś poszło nie tak. Spróbuj ponownie.");
           refToErrorUser.current.style.visibility = "visible";
         })
-        .catch(console.error);
+        .catch(() => alert.error("Coś poszło nie tak. Spróbuj ponownie."));
     },
   });
 
   useEffect(() => {
-    if (formik.touched.email && formik.errors.email) {
-      refToEmail.current.style.borderColor = "red";
-    } else {
-      refToEmail.current.style.borderColor = "#DADADA";
-    }
-
     if (formik.touched.password && formik.errors.password) {
       refToPassword.current.style.borderColor = "red";
     } else {
@@ -76,50 +72,52 @@ export default function Login() {
       refToErrorUser.current.style.visibility = "visible";
     }
   });
+
   return (
     <div className={styles.login}>
       <div className={styles["login__container"]}>
         <h1 className={styles["login__label-h1"]}>
-          <strong>Zaloguj się</strong>
+          <strong>
+            Wygenerowanie <br /> nowego hasła
+          </strong>
         </h1>
         <form className={styles["login__form"]} onSubmit={formik.handleSubmit}>
           <input
-            type="email"
-            name="email"
-            ref={refToEmail}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.email}
-            className={styles["login__form-input-email"]}
-            placeholder="Email"
-          />
-          {formik.touched.email && formik.errors.email ? (
-            <div style={{ color: "red", width: "80%" }}>
-              {formik.errors.email}
-            </div>
-          ) : null}
-          <input
-            name="password"
             type="password"
+            name="password"
             ref={refToPassword}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.password}
-            className={styles["login__form-input-password"]}
-            placeholder="Hasło"
+            className={styles["login__form-input-email"]}
+            placeholder="Password"
           />
           {formik.touched.password && formik.errors.password ? (
             <div style={{ color: "red", width: "80%" }}>
               {formik.errors.password}
             </div>
           ) : null}
-          <div className={styles["login__text-pass"]}>
-            <Link className={styles["login__a-text-pass"]} to="/password-reset">
-              Nie pamiętam hasła
-            </Link>
-          </div>
-          <button type="submit" className={styles["login__form-submit-button"]}>
-            Zaloguj
+          <input
+            type="password"
+            name="password_confirmation"
+            ref={refToPasswordConfirmation}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.password_confirmation}
+            className={styles["login__form-input-email"]}
+            placeholder="Password confirmation"
+          />
+          {formik.touched.password_confirmation &&
+          formik.errors.password_confirmation ? (
+            <div style={{ color: "red", width: "80%" }}>
+              {formik.errors.password_confirmation}
+            </div>
+          ) : null}
+          <button
+            type="submit"
+            className={"mt-5 " + styles["login__form-submit-button"]}
+          >
+            Wyślij link
           </button>
           <div
             ref={refToErrorUser}
@@ -131,7 +129,7 @@ export default function Login() {
               marginTop: "0.5vh",
             }}
           >
-            E-mail lub hasło są nieprawidłowe
+            Hasło jest nieprawidłowe
           </div>
         </form>
         <div className={styles["login__text-reg"]}>

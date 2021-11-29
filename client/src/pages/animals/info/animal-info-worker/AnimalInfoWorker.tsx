@@ -10,6 +10,7 @@ import { useQuery } from "react-query";
 import { fetchAnimal } from "../../../../api/animals";
 import { fetchLocation } from "../../../../api/location";
 import { AuthContext } from "../../../../contexts/AuthContext";
+import ErrorPage from "../../../errors/ErrorPage";
 
 export default function AnimalInfoWorker() {
   const { id } = useParams<{ id: string }>();
@@ -24,7 +25,7 @@ export default function AnimalInfoWorker() {
   );
 
   if (animalQuery.isError || locationQuery.isError) {
-    return <>Error</>;
+    return <ErrorPage />;
   }
 
   if (animalQuery.isLoading || locationQuery.isLoading || !animalQuery.data) {
@@ -34,7 +35,6 @@ export default function AnimalInfoWorker() {
   if (!auth.token) {
     return <>Nie masz uprawnień do przeglądu</>;
   }
-  console.log(animalQuery.data, locationQuery.data);
 
   return (
     <>
