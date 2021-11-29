@@ -65,23 +65,23 @@ export default function AnimalInfoWorker() {
           </p>
           <p>
             <b>Wiek: </b>
-            {animalQuery.data?.age ? animalQuery.data?.age + " lat" : "Brak"}
+            {animalQuery.data?.age ? animalQuery.data?.age + " lat" : "Brak danych"}
           </p>
           <p>
             <b>Wzrost: </b>
             {animalQuery.data?.height
               ? animalQuery.data?.height + " cm"
-              : "Brak"}
+              : "Brak danych"}
           </p>
           <p>
             <b>Waga: </b>
             {animalQuery.data?.weight
               ? animalQuery.data?.weight + " kg"
-              : "Brak"}
+              : "Brak danych"}
           </p>
           <p>
             <b>Płeć: </b>
-            {animalQuery.data?.animal_gender.value || "Brak"}
+            {animalQuery.data?.animal_gender.value || "Brak danych"}
           </p>
           <p>
             <b>Rasa: </b>

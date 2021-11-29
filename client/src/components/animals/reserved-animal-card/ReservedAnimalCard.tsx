@@ -1,4 +1,4 @@
-import { Card } from "react-bootstrap";
+import {Card, Image} from "react-bootstrap";
 import { AnimalReservation } from "../../../types/AnimalReservation";
 import styles from "./ReservedAnimalCard.module.css";
 import { fetchDeleteReservation } from "../../../api/reservations";
@@ -39,10 +39,14 @@ export default function ReservedAnimalCard({
           <p>Zwierzę: {animal.name}</p>
           <p>Data od: {date.substring(0, 10)}</p>
           <p>Data do: {addThreeDays(date)}</p>
+          <br/>
+          <p className={styles["bold"]}>Status rezerwacji: {reservation_status.value}</p>
         </div>
-        <div className={styles["animal-card__top__status"]}>
-          {reservation_status.value}
-        </div>
+        <Image
+            src={animal.image}
+            className={styles["animal-card__top__image"]}
+            alt="Animal photo"
+        />
       </div>
       <button
         className={styles["animal-card__link"]}

@@ -1,5 +1,5 @@
 export function fetchReservations(token: any) {
-  return fetch(process.env.REACT_APP_SERVER_URI + "/animals-reservations", {
+  return fetch(process.env.REACT_APP_SERVER_URI + "/animals-reservations/users", {
     headers: {
       "Content-Type": "application/json",
       Authorization: token,
