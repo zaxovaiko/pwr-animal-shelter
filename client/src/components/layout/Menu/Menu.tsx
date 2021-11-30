@@ -39,7 +39,6 @@ export default function Menu({ isOpened }: { isOpened: boolean }) {
           { path: "/contact", text: "Kontakt" },
           { path: "/reservations", text: "Rezerwacje" },
           { path: "/forms", text: "Formularzy" },
-          { path: "/", text: "Strona główna" },
         ];
       } else {
         links = [
@@ -48,7 +47,7 @@ export default function Menu({ isOpened }: { isOpened: boolean }) {
           { path: "/charity", text: "Jak pomóc?" },
           { path: "/about-us", text: "O nas" },
           { path: "/reserved-animals", text: "Moje rezerwacje" },
-          { path: "/", text: "Strona główna" },
+          { path: "/adopted-animals", text: "Moje zwierzęta" },
         ];
         return links;
       }
@@ -58,7 +57,6 @@ export default function Menu({ isOpened }: { isOpened: boolean }) {
         { path: "/contact", text: "Kontakt" },
         { path: "/charity", text: "Jak pomóc?" },
         { path: "/about-us", text: "O nas" },
-        { path: "/", text: "Strona główna" },
       ];
     }
     return links;

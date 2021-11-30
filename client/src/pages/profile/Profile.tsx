@@ -40,7 +40,7 @@ export default function Profile() {
         <Image
           roundedCircle
           className={styles["top-page__header__user-img"]}
-          src={data.image}
+          src="https://d2v9ipibika81v.cloudfront.net/uploads/sites/210/Profile-Icon.png"
           alt="User's image"
         />
         <h1 className={styles["top-page__header__title"]}>Moje dane</h1>
