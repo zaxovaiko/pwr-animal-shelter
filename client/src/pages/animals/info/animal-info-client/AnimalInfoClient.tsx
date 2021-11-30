@@ -9,6 +9,7 @@ import { useHistory } from "react-router-dom";
 import { useAlert } from "react-alert";
 import { useContext } from "react";
 import { AuthContext } from "../../../../contexts/AuthContext";
+import ErrorPage from "../../../errors/ErrorPage";
 
 export default function AnimalInfoClient() {
   const history = useHistory();
@@ -32,7 +33,7 @@ export default function AnimalInfoClient() {
   }
 
   if (isError) {
-    return <>Error</>;
+    return <ErrorPage />;
   }
 
   if (!data) {
@@ -83,11 +84,11 @@ export default function AnimalInfoClient() {
             </p>
             <p>
               <b>Wzrost: </b>
-              {data.height} cm
+              {data.height ? data.height + " cm" : "Brak danych"}
             </p>
             <p>
-              <b>Masa: </b>
-              {data.weight} kg
+              <b>Waga: </b>
+              {data.weight ? data.weight + " kg" : "Brak danych"}
             </p>
           </Container>
         </Container>

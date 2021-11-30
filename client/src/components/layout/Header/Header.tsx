@@ -1,7 +1,14 @@
 import { useContext, useState } from "react";
 import { useAlert } from "react-alert";
 import { Container, Nav, Navbar } from "react-bootstrap";
-import { MdAccountCircle, MdLiveHelp, MdLogin, MdLogout } from "react-icons/md";
+import {
+  MdAccountCircle,
+  MdApps,
+  MdClear,
+  MdLiveHelp,
+  MdLogin,
+  MdLogout,
+} from "react-icons/md";
 import { useHistory } from "react-router";
 import { AuthContext } from "../../../contexts/AuthContext";
 import Menu from "../Menu/Menu";
@@ -30,7 +37,7 @@ export default function Header() {
               href="#"
               onClick={() => setIsOpened((p) => !p)}
             >
-              Menu
+              {!isOpened ? <MdApps /> : <MdClear />}
             </Nav.Link>
             <Nav.Link href="/" className="text-white fs-5">
               Główna strona

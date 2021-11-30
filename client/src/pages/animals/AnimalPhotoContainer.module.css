@@ -1,6 +1,4 @@
 .photo-container {
-  margin-top: 40px;
-  margin-left: 70px;
   width: fit-content;
   -webkit-flex-wrap: wrap;
   flex-wrap: wrap;

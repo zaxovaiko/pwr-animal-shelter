@@ -2,6 +2,7 @@ from django.contrib.auth.hashers import make_password
 from django.contrib.auth.base_user import BaseUserManager
 from django.db import models
 from uuid import uuid4
+from rest_framework.validators import ValidationError
 from django.contrib.auth.models import AbstractUser
 from rest_framework.exceptions import ValidationError
 
@@ -61,6 +62,7 @@ class User(AbstractUser):
 
     def save(self, *args, **kwargs):
         try:
-            return super(AbstractUser, self).save(*args, **kwargs)
+            return super(User, self).save(*args, **kwargs)
         except BaseException as e:
             raise ValidationError({ 'error': str(e).split('\n')[0] })
+

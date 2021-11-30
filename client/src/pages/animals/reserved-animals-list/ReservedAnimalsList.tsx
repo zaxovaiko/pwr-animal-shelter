@@ -6,6 +6,7 @@ import HeaderTitle from "../../../components/header-title/HeaderTitle";
 import { AuthContext } from "../../../contexts/AuthContext";
 import styles from "./ReservedAnimalsList.module.css";
 import { fetchReservations } from "../../../api/reservations";
+import ErrorPage from "../../errors/ErrorPage";
 
 export default function ReservedAnimalsList() {
   const { auth } = useContext(AuthContext);
@@ -14,7 +15,7 @@ export default function ReservedAnimalsList() {
     () => fetchReservations(auth.token)
   );
   if (isError) {
-    return <>Error</>;
+    return <ErrorPage />;
   }
 
   if (isLoading) {

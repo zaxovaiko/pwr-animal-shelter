@@ -40,7 +40,7 @@ export default function AnimalIssues() {
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
-      title: data == undefined ? "" : data.chip_code,
+      title: !data ? "" : data.chip_code,
       contents: "",
     },
     validate,
@@ -53,14 +53,11 @@ export default function AnimalIssues() {
       })
         .then((response) => {
           alert.success("Twoja wiadomość została wysłana!");
-          if (response.status == 200) {
+          if (response.status === 200) {
             history.push("/");
           }
-          console.log("SUCCESS!", response.status, response.text);
         })
-        .catch((err) => {
-          console.log("FAILED...", err);
-        });
+        .catch(console.log);
     },
   });
 

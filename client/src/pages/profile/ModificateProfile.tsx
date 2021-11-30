@@ -9,11 +9,9 @@ import { useAlert } from "react-alert";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/material.css";
 
-
 let refTofirst_name: React.RefObject<any> = React.createRef();
 let refTolast_name: React.RefObject<any> = React.createRef();
 let refToPesel: React.RefObject<any> = React.createRef();
-let refTophone: React.RefObject<any> = React.createRef();
 let refToEmail: React.RefObject<any> = React.createRef();
 let refToStreet: React.RefObject<any> = React.createRef();
 let refToBuilding: React.RefObject<any> = React.createRef();
@@ -116,7 +114,9 @@ export default function ModificateProfile() {
     () => fetchProfileData(id),
     { retry: false }
   );
-  const [phoneNumber, setPhone] = useState(data == undefined ? "" : data.phone);
+  const [phoneNumber, setPhone] = useState(
+    data === undefined ? "" : data.phone
+  );
   function handleOnChangePhone(value: any) {
     setPhone(value);
     formik.values.phone = value;
@@ -127,16 +127,16 @@ export default function ModificateProfile() {
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
-      first_name: data == undefined ? "" : data.first_name,
-      last_name: data == undefined ? "" : data.last_name,
-      street: data == undefined ? "" : streetAndBuilding[0],
-      buildingNumber: data == undefined ? "" : streetAndBuilding[1],
-      apartmentNumber: data == undefined ? "" : addressInfo[1],
-      city: data == undefined ? "" : addressInfo[2],
-      zip: data == undefined ? "" : addressInfo[3],
-      pesel: data == undefined ? "" : data.pesel,
+      first_name: data === undefined ? "" : data.first_name,
+      last_name: data === undefined ? "" : data.last_name,
+      street: data === undefined ? "" : streetAndBuilding[0],
+      buildingNumber: data === undefined ? "" : streetAndBuilding[1],
+      apartmentNumber: data === undefined ? "" : addressInfo[1],
+      city: data === undefined ? "" : addressInfo[2],
+      zip: data === undefined ? "" : addressInfo[3],
+      pesel: data === undefined ? "" : data.pesel,
       phone: phoneNumber,
-      email: data == undefined ? "" : data.email,
+      email: data === undefined ? "" : data.email,
     },
     validate,
     onSubmit: (values) => {
@@ -179,7 +179,7 @@ export default function ModificateProfile() {
         .catch(console.error);
     },
   });
-  console.log(phoneNumber)
+
   useEffect(() => {
     if (formik.touched.first_name && formik.errors.first_name) {
       refTofirst_name.current.style.borderColor = "red";

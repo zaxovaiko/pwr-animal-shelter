@@ -1,19 +1,16 @@
-import React, { useEffect, useContext } from "react";
-import { Link, useHistory } from "react-router-dom";
-import styles from "./Login.module.css";
 import { useFormik } from "formik";
-import { AuthContext } from "../../../contexts/AuthContext";
-import { fetchLoginData } from "../../../api/auth";
+import { useEffect, createRef } from "react";
 import { useAlert } from "react-alert";
+import { Link, useHistory } from "react-router-dom";
+import { fetchPasswordResetToken } from "../../../api/auth";
+import styles from "../Login/Login.module.css";
 
-let refToEmail: React.RefObject<any> = React.createRef();
-let refToPassword: React.RefObject<any> = React.createRef();
-let refToErrorUser: React.RefObject<any> = React.createRef();
+let refToEmail: React.RefObject<any> = createRef();
+let refToErrorUser: React.RefObject<any> = createRef();
 
 const validate = (values: any) => {
   const errors: {
     email?: String;
-    password?: String;
   } = {};
 
   if (!values.email) {
@@ -22,40 +19,31 @@ const validate = (values: any) => {
     errors.email = "*Niepoprawne dane";
   }
 
-  if (!values.password) {
-    errors.password = "Podaj hasło";
-  }
-
   return errors;
 };
 
-export default function Login() {
+export default function PasswordReset() {
   const alert = useAlert();
   const history = useHistory();
-  const { setAuth } = useContext(AuthContext);
   let check = false;
 
   const formik = useFormik({
     initialValues: {
       email: "",
-      password: "",
     },
     validate,
     onSubmit: (values) => {
-      fetchLoginData({
-        email: values.email,
-        password: values.password,
-      })
+      fetchPasswordResetToken(values.email as any)
         .then((res) => {
-          if (res.access) {
-            setAuth(res.access);
-            alert.success("Zostałeś zalogowany do swojego konta.");
-            return history.push("/");
+          console.log(res);
+          if (res.status === "OK") {
+            alert.success("Sprawdź swojego maila, który podałeś wcześniej.");
+            return history.push("/login");
           }
           alert.error("Coś poszło nie tak. Spróbuj ponownie.");
           refToErrorUser.current.style.visibility = "visible";
         })
-        .catch(console.error);
+        .catch(() => alert.error("Coś poszło nie tak. Spróbuj ponownie."));
     },
   });
 
@@ -66,21 +54,16 @@ export default function Login() {
       refToEmail.current.style.borderColor = "#DADADA";
     }
 
-    if (formik.touched.password && formik.errors.password) {
-      refToPassword.current.style.borderColor = "red";
-    } else {
-      refToPassword.current.style.borderColor = "#DADADA";
-    }
-
     if (check) {
       refToErrorUser.current.style.visibility = "visible";
     }
   });
+
   return (
     <div className={styles.login}>
       <div className={styles["login__container"]}>
         <h1 className={styles["login__label-h1"]}>
-          <strong>Zaloguj się</strong>
+          <strong>Resetowanie hasła</strong>
         </h1>
         <form className={styles["login__form"]} onSubmit={formik.handleSubmit}>
           <input
@@ -98,28 +81,8 @@ export default function Login() {
               {formik.errors.email}
             </div>
           ) : null}
-          <input
-            name="password"
-            type="password"
-            ref={refToPassword}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.password}
-            className={styles["login__form-input-password"]}
-            placeholder="Hasło"
-          />
-          {formik.touched.password && formik.errors.password ? (
-            <div style={{ color: "red", width: "80%" }}>
-              {formik.errors.password}
-            </div>
-          ) : null}
-          <div className={styles["login__text-pass"]}>
-            <Link className={styles["login__a-text-pass"]} to="/password-reset">
-              Nie pamiętam hasła
-            </Link>
-          </div>
           <button type="submit" className={styles["login__form-submit-button"]}>
-            Zaloguj
+            Wyślij link
           </button>
           <div
             ref={refToErrorUser}

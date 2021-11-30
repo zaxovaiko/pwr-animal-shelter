@@ -39,17 +39,18 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',
     'django_extensions',
     'django_filters',
-    'corsheaders',
     'rest_framework',
     'rest_framework_simplejwt',
+    'django_rest_passwordreset',
     'users',
     'animals',
     'locations',
     'adoptions',
     'arrivals',
-    'reservations'
+    'reservations',
 ]
 
 MIDDLEWARE = [
@@ -68,7 +69,7 @@ ROOT_URLCONF = 'server.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -175,3 +176,9 @@ CORS_ALLOW_ALL_ORIGINS = True
 
 MEDIA_URL = '/images/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'images')
+
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_HOST_USER = ''
+# EMAIL_HOST_PASSWORD =''
+EMAIL_PORT = 587
+# EMAIL_USE_TLS = True

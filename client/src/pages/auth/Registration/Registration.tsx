@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useFormik } from "formik";
 import styles from "./Registration.module.css";
 import { fetchRegisterData } from "../../../api/auth";
@@ -164,16 +164,7 @@ export default function Registration() {
         first_name: values.firstName,
         last_name: values.lastName,
         phone: values.phoneNumber,
-        address:
-          values.street +
-          " " +
-          values.buildingNumber +
-          "," +
-          values.apartmentNumber +
-          ", " +
-          values.city +
-          ", " +
-          values.zip,
+        address: `${values.street} ${values.buildingNumber}, ${values.apartmentNumber}, ${values.city}, ${values.zip}`,
       })
         .then((res) => {
           if (res.id) {
@@ -622,9 +613,9 @@ export default function Registration() {
         </form>
         <div className={styles["registration__text-reg"]}>
           Masz konto?&nbsp;Wróć na stronę&nbsp;
-          <a href="/login" className={styles["registration__a-text-reg"]}>
+          <Link to="/login" className={styles["registration__a-text-reg"]}>
             <strong>logowania się</strong>
-          </a>
+          </Link>
         </div>
       </div>
     </div>

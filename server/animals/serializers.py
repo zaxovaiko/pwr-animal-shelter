@@ -71,7 +71,7 @@ class AnimalSerializer(ModelSerializer):
     weight = IntegerField(min_value=0, required=True)
     description = CharField(max_length=1000, required=True)
     vaccinations = CharField(max_length=1000, required=True)
-    image = ImageField(max_length=1000, required=True, allow_empty_file=False)
+    image = ImageField(max_length=1000, required=False, allow_empty_file=False)
     images = AnimalImageSerializer(many=True, read_only=True)
     animal_status = AnimalStatusSerializer(read_only=True)
     animal_status_id = PrimaryKeyRelatedField(

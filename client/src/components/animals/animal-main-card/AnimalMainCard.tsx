@@ -12,8 +12,6 @@ export default function MainAnimalCard({
   description,
   image,
 }: Animal) {
-  console.log(image);
-
     const { auth } = useContext(AuthContext);
 
     function permissionCheck(id: string) {
@@ -24,7 +22,7 @@ export default function MainAnimalCard({
                 return "/animals/" + id
             }
         } else {
-            return "/login"
+            return "/animals/" + id
         }
     }
 

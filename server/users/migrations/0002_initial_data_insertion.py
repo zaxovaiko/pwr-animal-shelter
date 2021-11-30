@@ -16,18 +16,17 @@ fake.add_provider(internet)
 def insert_users(apps, schema_editor):
     User = apps.get_model('users', 'User')
 
-    for _ in range(60):
-        email = fake.email()
-        first_name = fake.first_name()
-        last_name = fake.last_name()
-        address = fake.address()
-        pesel = fake.msisdn()[:-2]
-        phone = '+48' + fake.msisdn()
-        password = 'password'
-        is_staff = choices([True, False], weights=[0.25, 0.75])[0]
+    User.objects.create(email='user@gmail.com', first_name='Katrin', last_name='Millon', pesel='87060671897',
+                        is_staff=False, phone='+48506940392', address='Wrocław, Grunwaldzka 1-14',
+                        password=make_password('password'))
 
-        User.objects.create(email=email, first_name=first_name, last_name=last_name, pesel=pesel,
-                            is_staff=is_staff, phone=phone, address=address, password=make_password(password))
+    User.objects.create(email='marina.k@gmail.com', first_name='Marina', last_name='Kowal', pesel='98100671887',
+                        is_staff=False, phone='+48506780392', address='Wrocław, Grunwaldzka 18-1',
+                        password=make_password('password'))
+
+    User.objects.create(email='admin@gmail.com', first_name='Edward', last_name='Kalen', pesel='86050671890',
+                        is_staff=True, phone='+48545940392', address='Wrocław, Traugutta 10-15',
+                        password=make_password('password'))
 
 
 class Migration(migrations.Migration):

@@ -12,7 +12,7 @@ fake.add_provider(python)
 
 
 def insert_genders(apps, schema_editor):
-    genders = ['Samiec', 'Samica', 'Brak']
+    genders = ['Samiec', 'Samica', 'Nie wiadomo']
     AnimalGender = apps.get_model('animals', 'AnimalGender')
     for gender in genders:
         AnimalGender.objects.create(value=gender)
@@ -33,7 +33,7 @@ def insert_types(apps, schema_editor):
 
 
 def insert_breeds(apps, schema_editor):
-    breeds = ['Chihuahua', 'Niemiecki owczarek', 'Buldog']
+    breeds = ['Chihuahua', 'Niemiecki owczarek', 'Buldog', 'Mieszaniec']
     AnimalBreed = apps.get_model('animals', 'AnimalBreed')
     for breed in breeds:
         AnimalBreed.objects.create(value=breed)
@@ -50,7 +50,7 @@ def insert_animals(apps, schema_editor):
     AnimalType = apps.get_model('animals', 'AnimalType')
     AnimalGender = apps.get_model('animals', 'AnimalGender')
 
-    for _ in range(150):
+    for _ in range(7):
         breed = get_random(AnimalBreed)
         status = get_random(AnimalStatus)
         type_ = get_random(AnimalType)

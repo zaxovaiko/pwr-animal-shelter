@@ -98,7 +98,7 @@ export default function Reservation() {
           </p>
           <p>
             <span className={styles["bolder"]}>Masa:</span>{" "}
-            {animalQuery.data.weight} gr
+            {animalQuery.data.weight} kg
           </p>
         </Container>
 
