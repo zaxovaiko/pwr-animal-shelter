@@ -22,7 +22,7 @@ export default function MainAnimalCard({
                 return "/animals/" + id
             }
         } else {
-            return "/login"
+            return "/animals/" + id
         }
     }
 

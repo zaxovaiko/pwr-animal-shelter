@@ -2,3 +2,22 @@
   margin-top: 110px;
   margin-bottom: 40px;
 }
+
+.sort-area {
+  width: fit-content;
+  margin-top: 50px;
+  margin-bottom: 150px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.sort-area p {
+  margin-right: 50px;
+  color: #686464;
+  font-size: 20px;
+}
+
+.sort-area Button {
+  margin-right: 50px;
+}
