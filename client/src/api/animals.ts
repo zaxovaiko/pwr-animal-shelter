@@ -4,6 +4,24 @@ export function fetchAnimalTypes() {
   );
 }
 
+export function fetchAnimalBreeds() {
+  return fetch(process.env.REACT_APP_SERVER_URI + "/animal-breeds?page=1").then(
+    (res) => res.json()
+  );
+}
+
+export function fetchAnimalStatuses() {
+  return fetch(
+    process.env.REACT_APP_SERVER_URI + "/animal-statuses?page=1"
+  ).then((res) => res.json());
+}
+
+export function fetchAnimalGenders() {
+  return fetch(
+    process.env.REACT_APP_SERVER_URI + "/animal-genders?page=1"
+  ).then((res) => res.json());
+}
+
 export function fetchAnimals(type: number) {
   return fetch(
     process.env.REACT_APP_SERVER_URI +
@@ -44,5 +62,15 @@ export function fetchReservedAnimals(token: string) {
     headers: {
       Authorization: token,
     },
+  }).then((res) => res.json());
+}
+
+export function fetchUpdateAnimaleData(body: any, id: string, token: any) {
+  return fetch(process.env.REACT_APP_SERVER_URI + "/animals/" + id, {
+    headers: {
+      Authorization: token,
+    },
+    body: body,
+    method: "PATCH",
   }).then((res) => res.json());
 }
