@@ -22,6 +22,7 @@ import AnimalInfoWorker from "./pages/animals/info/animal-info-worker/AnimalInfo
 import AboutUs from "./pages/about-us/AboutUs";
 import PasswordReset from "./pages/auth/password-reset/PasswordReset";
 import PasswordResetConfirm from "./pages/auth/password-reset/PasswordResetConfirm";
+import ModificateAnimal from "./pages/animals/animals-edit/ModificateAnimal";
 
 function App() {
   return (
@@ -44,6 +45,7 @@ function App() {
         <Route exact path="/adopted-animals" component={AdoptedAnimalsList} />
         <Route exact path="/animals/:id" component={AnimalInfoClient} />
         <Route exact path="/animal/:id" component={AnimalInfoWorker} />
+        <Route exact path="/animal/edit/:id" component={ModificateAnimal} />
         <Route exact path="/reserved-animals" component={ReservedAnimalsList} />
         <Route exact path="/charity" component={Charity} />
         <Route exact path="/forms" component={FormList} />
