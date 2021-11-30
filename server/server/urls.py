@@ -39,6 +39,7 @@ urlpatterns = [
     path('api/password_reset', include('django_rest_passwordreset.urls', namespace='password_reset')),
     path('api/register', UserViewSet.as_view({'post': 'create'})),
     path('api/animals-reservations/users', AnimalReservationsViewSet.as_view({'get': 'get_users'})),
+    path('api/animals-reservations/generate_document', AnimalReservationsViewSet.as_view({'post': 'generate_doc'})),
     path('api/adopted', AnimalAdoptionViewSet.as_view({'get': 'adopted'})),
     path('api/', include(router.urls))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
