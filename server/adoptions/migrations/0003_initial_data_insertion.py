@@ -8,7 +8,7 @@ def insert_adoptions(apps, schema_editor):
     User = apps.get_model('users', 'User')
     Animal = apps.get_model('animals', 'Animal')
 
-    for _ in range(35):
+    for _ in range(3):
         user = User.objects.order_by('?').first()
         animal = Animal.objects.order_by('?').first()
         AnimalAdoption.objects.create(user=user, animal=animal)

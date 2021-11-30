@@ -14,7 +14,7 @@ def insert_arrivals(apps, schema_editor):
     User = apps.get_model('users', 'User')
     Animal = apps.get_model('animals', 'Animal')
 
-    for _ in range(25):
+    for _ in range(1):
         user = User.objects.filter(is_staff=True).order_by('?').first()
         animal = Animal.objects.order_by('?').first()
         first_name_of_surrender = fake.first_name()
@@ -22,7 +22,8 @@ def insert_arrivals(apps, schema_editor):
         address_of_surrender = fake.address()
 
         AnimalArrival.objects.create(user=user, animal=animal, last_name_of_surrender=last_name_of_surrender,
-                                     first_name_of_surrender=first_name_of_surrender, address_of_surrender=address_of_surrender)
+                                     first_name_of_surrender=first_name_of_surrender,
+                                     address_of_surrender='Wrocław, Małowiejska 4')
 
 
 class Migration(migrations.Migration):
