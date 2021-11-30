@@ -11,9 +11,11 @@ import { fetchAnimal } from "../../../../api/animals";
 import { fetchLocation } from "../../../../api/location";
 import { AuthContext } from "../../../../contexts/AuthContext";
 import ErrorPage from "../../../errors/ErrorPage";
+import { Link } from "react-router-dom";
 
 export default function AnimalInfoWorker() {
   const { id } = useParams<{ id: string }>();
+  const infoToEdit: string = "/animal/edit/" + id;
   const { auth } = useContext(AuthContext);
 
   const animalQuery = useQuery<Animal>(["fetchAnimal", id], () =>
@@ -65,7 +67,9 @@ export default function AnimalInfoWorker() {
           </p>
           <p>
             <b>Wiek: </b>
-            {animalQuery.data?.age ? animalQuery.data?.age + " lat" : "Brak danych"}
+            {animalQuery.data?.age
+              ? animalQuery.data?.age + " lat"
+              : "Brak danych"}
           </p>
           <p>
             <b>Wzrost: </b>
@@ -151,7 +155,9 @@ export default function AnimalInfoWorker() {
       </Container>
 
       <Container className={styles_main["nav-area"]}>
-        <Button className={styles_button["button-green"]}>Modyfikuj</Button>
+        <Link to={infoToEdit} className="text-decoration-none">
+          <Button className={styles_button["button-green"]}>Modyfikuj</Button>
+        </Link>
       </Container>
     </>
   );
