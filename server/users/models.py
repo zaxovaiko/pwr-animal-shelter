@@ -57,7 +57,7 @@ class User(AbstractUser):
     REQUIRED_FIELDS = ['first_name', 'last_name', 'pesel', 'password']
 
     def __str__(self):
-        return self.email + ' ' + self.pesel
+        return self.email + ' ' + str(self.pesel)
 
     def save(self, *args, **kwargs):
         try:
