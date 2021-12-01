@@ -3,9 +3,12 @@
     margin-bottom: 100px;
 }
 
+.table-cell-link {
+    margin-left: 15px;
+}
+
 .table-header {
-    background-color: rgba(14, 87, 111, 0.25);
     text-align: center;
     color: #686464;
-    font-size: 20px;
+    font-size: 18px;
 }
