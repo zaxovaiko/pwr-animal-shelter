@@ -3,7 +3,7 @@ import { useEffect, createRef } from "react";
 import { useAlert } from "react-alert";
 import { Link, useHistory } from "react-router-dom";
 import { fetchPasswordResetToken } from "../../../api/auth";
-import styles from "../Login/Login.module.css";
+import styles from "../login/Login.module.css";
 
 let refToEmail: React.RefObject<any> = createRef();
 let refToErrorUser: React.RefObject<any> = createRef();

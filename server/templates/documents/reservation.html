@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Umowa o rezerwacji zwierzęcia</title>
+  </head>
+  <body>
+    <h3 style="text-align: center">Umowa</h3>
+    <p>
+      Ja, {{ user.last_name }} {{ user.first_name }}, z nr. peselu {{ user.pesel
+      }} zobowiązuję się zarezerwować wizytę do schroniska do odebrania zwierza:
+      Dane zwierzęta:
+    </p>
+    <ul>
+      <li>Wiek: {{ animal.age }} lat</li>
+      <li>Kolor: {{ animal.color }}</li>
+      <li>Imię: {{ animal.name }}</li>
+      <li>Szczepienia: {{ animal.vaccinations }}</li>
+    </ul>
+  </body>
+</html>
