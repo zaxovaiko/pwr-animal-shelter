@@ -29,7 +29,8 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('reservations', '0002_animalreservation_user'),
-        ('users', '0002_initial_data_insertion')
+        ('users', '0002_initial_data_insertion'),
+        ('animals', '0002_initial_data_insertion')
     ]
 
     operations = [

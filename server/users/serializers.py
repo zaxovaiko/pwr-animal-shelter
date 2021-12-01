@@ -49,24 +49,3 @@ class UserSerializer(serializers.ModelSerializer):
             instance.set_password(validated_data['password'])
         instance.save()
         return instance
-
-    def is_pesel_correct(self, pesel_field):
-        pesel = str(pesel_field)
-        multiples = [1, 3, 7, 9, 1, 3, 7, 9, 1, 3, 0]
-        mult_index = 0
-        check_sum = 0
-        for char in pesel:
-            check_sum += int(char) * multiples[mult_index]
-            mult_index += 1
-
-        lastNumber = check_sum % 10
-        controlNumber = 10 - lastNumber
-
-        if controlNumber == int(pesel[10]):
-            return True
-
-        return False
-
-    def validate(self, attrs):
-        if not self.is_pesel_correct(attrs['pesel']):
-            raise ValidationError('Pesel jest niepoprawny')

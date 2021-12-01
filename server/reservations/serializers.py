@@ -1,4 +1,3 @@
-from rest_framework.exceptions import ValidationError
 from rest_framework.relations import PrimaryKeyRelatedField
 from rest_framework.serializers import ModelSerializer, DateTimeField, CharField
 from animals.models import Animal, AnimalStatus
@@ -40,22 +39,3 @@ class AnimalReservationsSerializer(ModelSerializer):
         validated_data['animal'].save()
         animal_reservation = super().create(validated_data)
         return animal_reservation
-
-    def get_age_from_pesel(self, pesel_field):
-        pesel = self.user.pesel
-        year = str(pesel[0:2])
-        month = str(pesel[2:4])
-        day = str(pesel[4:6])
-
-        date_time_str = F'{month}/{day}/{year} 00:00:00'
-        date = datetime.strptime(date_time_str, '%m/%d/%y %H:%M:%S').date()
-
-        date_now = datetime.now().date()
-
-        difference_in_years = relativedelta(date_now, date).years
-
-        return difference_in_years
-
-    def validate(self, attrs):
-        if self.get_age_from_pesel(attrs['user'].pesel) < 18:
-            raise ValidationError('Użytkownik jest niepełnoletni')
