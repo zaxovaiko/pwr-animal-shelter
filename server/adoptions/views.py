@@ -11,11 +11,11 @@ class AnimalAdoptionViewSet(viewsets.ModelViewSet):
     queryset = AnimalAdoption.objects.all()
     model = AnimalAdoption
     filter_backends = [django_filters.rest_framework.DjangoFilterBackend, filters.OrderingFilter]
-    filterset_fields = ['user', 'date']
+    filterset_fields = ['user', 'date', 'animal']
     ordering_fields = ['date']
 
     def get_permissions(self):
-        return [AllowAny()] if self.action == 'adopted' else [IsAdminUser()]
+        return [AllowAny()]
 
     def adopted(self, request, *args, **kwargs):
         user_id = request.user.id
