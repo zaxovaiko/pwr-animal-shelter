@@ -121,10 +121,11 @@ export default function ModificateProfile() {
     setPhone(value);
     formik.values.phone = value;
   }
-  const addressInfo = data.address.split(",");
-  const streetAndBuilding = addressInfo[0].split(" ");
+  const addressInfo = data === undefined ? "" : data.address.split(",");
+  const streetAndBuilding = data === undefined ? "" : addressInfo[0].split(" ");
 
-  const formik = useFormik({
+  const formik = useFormik(
+    {
     enableReinitialize: true,
     initialValues: {
       first_name: data === undefined ? "" : data.first_name,
@@ -181,58 +182,60 @@ export default function ModificateProfile() {
   });
 
   useEffect(() => {
-    if (formik.touched.first_name && formik.errors.first_name) {
-      refTofirst_name.current.style.borderColor = "red";
-    } else {
-      refTofirst_name.current.style.borderColor = "#DADADA";
-    }
+    if (!isLoading && !isError && auth.token) {
+      if (formik.touched.first_name && formik.errors.first_name) {
+        refTofirst_name.current.style.borderColor = "red";
+      } else {
+        refTofirst_name.current.style.borderColor = "#DADADA";
+      }
 
-    if (formik.touched.last_name && formik.errors.last_name) {
-      refTolast_name.current.style.borderColor = "red";
-    } else {
-      refTolast_name.current.style.borderColor = "#DADADA";
-    }
+      if (formik.touched.last_name && formik.errors.last_name) {
+        refTolast_name.current.style.borderColor = "red";
+      } else {
+        refTolast_name.current.style.borderColor = "#DADADA";
+      }
 
-    if (formik.touched.pesel && formik.errors.pesel) {
-      refToPesel.current.style.borderColor = "red";
-    } else {
-      refToPesel.current.style.borderColor = "#DADADA";
-    }
+      if (formik.touched.pesel && formik.errors.pesel) {
+        refToPesel.current.style.borderColor = "red";
+      } else {
+        refToPesel.current.style.borderColor = "#DADADA";
+      }
 
-    if (formik.touched.email && formik.errors.email) {
-      refToEmail.current.style.borderColor = "red";
-    } else {
-      refToEmail.current.style.borderColor = "#DADADA";
-    }
+      if (formik.touched.email && formik.errors.email) {
+        refToEmail.current.style.borderColor = "red";
+      } else {
+        refToEmail.current.style.borderColor = "#DADADA";
+      }
 
-    if (formik.touched.street && formik.errors.street) {
-      refToStreet.current.style.borderColor = "red";
-    } else {
-      refToStreet.current.style.borderColor = "#DADADA";
-    }
+      if (formik.touched.street && formik.errors.street) {
+        refToStreet.current.style.borderColor = "red";
+      } else {
+        refToStreet.current.style.borderColor = "#DADADA";
+      }
 
-    if (formik.touched.buildingNumber && formik.errors.buildingNumber) {
-      refToBuilding.current.style.borderColor = "red";
-    } else {
-      refToBuilding.current.style.borderColor = "#DADADA";
-    }
+      if (formik.touched.buildingNumber && formik.errors.buildingNumber) {
+        refToBuilding.current.style.borderColor = "red";
+      } else {
+        refToBuilding.current.style.borderColor = "#DADADA";
+      }
 
-    if (formik.touched.apartmentNumber && formik.errors.apartmentNumber) {
-      refToApartment.current.style.borderColor = "red";
-    } else {
-      refToApartment.current.style.borderColor = "#DADADA";
-    }
+      if (formik.touched.apartmentNumber && formik.errors.apartmentNumber) {
+        refToApartment.current.style.borderColor = "red";
+      } else {
+        refToApartment.current.style.borderColor = "#DADADA";
+      }
 
-    if (formik.touched.city && formik.errors.city) {
-      refToCity.current.style.borderColor = "red";
-    } else {
-      refToCity.current.style.borderColor = "#DADADA";
-    }
+      if (formik.touched.city && formik.errors.city) {
+        refToCity.current.style.borderColor = "red";
+      } else {
+        refToCity.current.style.borderColor = "#DADADA";
+      }
 
-    if (formik.touched.zip && formik.errors.zip) {
-      refToZip.current.style.borderColor = "red";
-    } else {
-      refToZip.current.style.borderColor = "#DADADA";
+      if (formik.touched.zip && formik.errors.zip) {
+        refToZip.current.style.borderColor = "red";
+      } else {
+        refToZip.current.style.borderColor = "#DADADA";
+      }
     }
   });
 
@@ -242,6 +245,10 @@ export default function ModificateProfile() {
 
   if (isError) {
     return <h1>Error has occured</h1>;
+  }
+
+  if (!auth.token) {
+    return <>Nie masz uprawnień do przeglądu</>;
   }
 
   return (

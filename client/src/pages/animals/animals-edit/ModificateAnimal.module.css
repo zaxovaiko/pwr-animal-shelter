@@ -222,3 +222,28 @@
     border-color: #dadada;
 }
 
+.photo-container {
+  display: flex;
+  justify-content: center;
+  width: fit-content;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+
+.photo {
+  width: 100px;
+  height: 75px;
+  border-radius: 10%;
+  margin: 10px;
+}
+
+.mod-animal__image {
+  display: flex;
+  justify-content: center;
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+
