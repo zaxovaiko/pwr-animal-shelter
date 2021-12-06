@@ -121,8 +121,8 @@ export default function AnimalInfoWorker() {
           </span>
           <span>
             {" "}
-            <b>Lokalizacja: </b>ul. {locationQuery.data?.building.street}, p.{" "}
-            {locationQuery.data?.room.number}
+            <b>Lokalizacja: </b>ul. {locationQuery.data?.building?.street}, p.{" "}
+            {locationQuery.data?.room?.number}
           </span>
           <br />
           <hr />
