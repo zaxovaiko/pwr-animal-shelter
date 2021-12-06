@@ -3,22 +3,19 @@ import { useQuery } from "react-query";
 import { useHistory } from "react-router-dom";
 import { useAlert } from "react-alert";
 import { useContext, useEffect, useState } from "react";
-import styles from "./ModificateAnimal.module.css";
+import styles from "./AddAnimal.module.css";
 import { AuthContext } from "../../../contexts/AuthContext";
 
 import {
-  fetchAnimal,
+  fetchAddAnimalData,
   fetchAnimalBreeds,
   fetchAnimalGenders,
   fetchAnimalStatuses,
   fetchAnimalTypes,
-  fetchUpdateAnimaleData,
 } from "../../../api/animals";
 import { useFormik } from "formik";
 import React from "react";
 import { Container, Image } from "react-bootstrap";
-import ErrorPage from "../../errors/ErrorPage";
-import LoadingPage from "../../errors/LoadingPage";
 
 let refToChipCode: React.RefObject<any> = React.createRef();
 let refToName: React.RefObject<any> = React.createRef();
@@ -105,17 +102,11 @@ const validate = (values: any) => {
   return errors;
 };
 
-export default function ModificateAnimal() {
+export default function AddAnimal() {
   const alert = useAlert();
   const history = useHistory();
-  const { id } = useParams<{ id: string }>();
-  const infoToGoBack: string = "/animal/" + id;
+  const infoToGoBack: string = "/";
   const { auth } = useContext(AuthContext);
-  const { isLoading, isError, data } = useQuery(
-    ["fetchAnimal", id],
-    () => fetchAnimal(id),
-    { retry: false }
-  );
 
   const [selectedFiles, setSelectedFile] = useState([]);
   const [mainAnimalImage, setMainAnimalImage] = useState("");
@@ -135,23 +126,23 @@ export default function ModificateAnimal() {
   const gendersQuery = useQuery("getAnimalGenders", () => fetchAnimalGenders());
 
   const formik = useFormik({
-    enableReinitialize: true,
     initialValues: {
-      chip_code: data == undefined ? "" : data.chip_code,
-      type: data == undefined ? "" : data.animal_type.id,
-      name: data == undefined ? "" : data.name,
-      age: data == undefined ? "" : data.age,
-      height: data == undefined ? "" : data.height,
-      weight: data == undefined ? "" : data.weight,
-      gender: data == undefined ? "" : data.animal_gender.id,
-      breed: data == undefined ? "" : data.animal_breed.id,
-      status: data == undefined ? "" : data.animal_status.id,
-      color: data == undefined ? "" : data.color,
-      description: data == undefined ? "" : data.description,
-      vaccinations: data == undefined ? "" : data.vaccinations,
+      chip_code: "",
+      type: "1",
+      name: "",
+      age: "",
+      height: "",
+      weight: "",
+      gender: "1",
+      breed: "1",
+      status: "1",
+      color: "",
+      description: "",
+      vaccinations: "",
     },
     validate,
     onSubmit: (values) => {
+      console.log(values)
       const formData = new FormData();
       if (selectedFiles != []) {
         for (var x = 0; x < selectedFiles.length; x++) {
@@ -173,13 +164,14 @@ export default function ModificateAnimal() {
       formData.append("color", values.color);
       formData.append("description", values.description);
       formData.append("vaccinations", values.vaccinations);
-      fetchUpdateAnimaleData(formData, data.id, auth.token)
+      fetchAddAnimalData(formData, auth.token)
         .then((res: any) => {
+          console.log(res)
           if (res.id) {
-            alert.success("Dane zwierzęcia zostały zmodyfikowane!");
+            alert.success("Zwierzę zostało dodane!");
             return history.push(infoToGoBack);
-          } else {
-            alert.error("Coś poszło nie tak! Spróbuj ponownie.");
+          } else if(res.chip_code) {
+            alert.error("Podany chip już istnieje!");
           }
         })
         .catch(console.error);
@@ -187,7 +179,7 @@ export default function ModificateAnimal() {
   });
 
   useEffect(() => {
-    if (!isLoading && !isError && auth.token) {
+    if (auth.token) {
       if (formik.touched.chip_code && formik.errors.chip_code) {
         refToChipCode.current.style.borderColor = "red";
       } else {
@@ -238,21 +230,16 @@ export default function ModificateAnimal() {
     }
   });
 
-  if (isError) {
-    return <ErrorPage />;
-  }
-
-  if (isLoading) {
-    return <LoadingPage />;
-  }
-
-  if (!auth.token) {
-    return <>Nie masz uprawnień do przeglądu</>;
-  }
-
   const optionsBreedsExample = [
     {
       label: "Bulldog",
+      value: "1",
+    },
+  ];
+
+  const optionsTypesExample = [
+    {
+      label: "Pies",
       value: "1",
     },
   ];
@@ -279,12 +266,15 @@ export default function ModificateAnimal() {
     },
   ];
 
-  const optionsTypes = typesQuery.data?.results.map(
-    ({ id, value }: { id: string; value: string }) => ({
-      label: value,
-      value: id,
-    })
-  );
+  const optionsTypes =
+  typesQuery.data == undefined
+      ? optionsTypesExample
+      : typesQuery.data?.results.map(
+          ({ id, value }: { id: string; value: string }) => ({
+            label: value,
+            value: id,
+          })
+        );
 
   const optionsBreeds =
     breedsQuery.data == undefined
@@ -310,7 +300,7 @@ export default function ModificateAnimal() {
     <div className={styles.modProfile}>
       <div className={styles["mod-animal-profile__container"]}>
         <h1 className={styles["mod-animal-profile__label-h1"]}>
-          <strong>Modyfikuj dane zwierzęcia</strong>
+          <strong>Dodaj zwierzę</strong>
         </h1>
         <form
           className={styles["mod-animal-profile__form"]}
@@ -319,18 +309,23 @@ export default function ModificateAnimal() {
           <div className={styles["mod-animal-profile_form-input-div-first"]}>
             <div style={{ display: "flex", justifyContent: "center" }}>
               <Image
-                src={data.image}
                 className={styles["mod-animal__image"]}
-                alt="Animal photo"
+                alt="Brak zdjęcia"
               />
             </div>
 
-            <div style={{ marginTop: "10%", display:"flex", alignItems: "center" }}>
+            <div
+              style={{
+                marginTop: "10%",
+                display: "flex",
+                alignItems: "center",
+              }}
+            >
               <label
                 htmlFor={styles["mod-animal-profile__form-input-div-weight"]}
                 style={{ position: "absolute" }}
               >
-                Zmień:
+                Dodaj:
               </label>
               <input
                 name="image"
@@ -603,26 +598,11 @@ export default function ModificateAnimal() {
           </div>
 
           <div className={styles["mod-animal-profile_form-input-div"]}>
-            {data.images.length > 0 && (
-              <>
-                <Container className={styles["photo-container"]}>
-                  {data?.images.map((photo: any, i: any) => (
-                    <Image
-                      key={i}
-                      className={styles["photo"]}
-                      src={photo.image}
-                      alt="animal photo"
-                      onClick={() => window.open(photo.image)}
-                    />
-                  ))}
-                </Container>
-              </>
-            )}
             <label
               htmlFor={styles["mod-animal-profile__form-input-div-weight"]}
               style={{ position: "absolute", width: "5%" }}
             >
-              Dodaj zdjęcie:
+              Dodaj zdjęcia:
             </label>
             <input
               name="images"
@@ -639,7 +619,7 @@ export default function ModificateAnimal() {
             type="submit"
             className={styles["mod-animal-profile__form-submit-button"]}
           >
-            Zmodifikuj
+            Dodaj zwierzę
           </button>
           <p style={{ width: "100vh", textAlign: "center" }}>lub</p>
           <button

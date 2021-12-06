@@ -9,7 +9,7 @@ import ErrorPage from "../../../pages/errors/ErrorPage";
 import {fetchAdoption} from "../../../api/adoption";
 import {AnimalAdoption} from "../../../types/AnimalAdoption";
 
-export default function AdoptedAnimalCard({name, id}: Animal) {
+export default function AdoptedAnimalCard({name, id, image}: Animal) {
 
     const {auth} = useContext(AuthContext);
     const history = useHistory();
@@ -34,7 +34,7 @@ export default function AdoptedAnimalCard({name, id}: Animal) {
             <Image
                 className={styles["adopted-animal-card__img"]}
                 alt="Animal image"
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Cat03.jpg/1200px-Cat03.jpg"
+                src={image}
             />
             <Row>
                 <p className={styles["adopted-animal-card__name"]}>{name}</p>

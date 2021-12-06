@@ -6,8 +6,8 @@ import Contact from "./pages/contact/Contact";
 import Profile from "./pages/profile/Profile";
 import Charity from "./pages/charity/Charity";
 import FormList from "./pages/forms/FormList";
-import Login from "./pages/auth/login/Login";
-import Registration from "./pages/auth/registration/Registration";
+import Login from "./pages/auth/Login/Login";
+import Registration from "./pages/auth/Registration/Registration";
 import AnimalList from "./pages/animals/animals-list/AnimalsList";
 import AnimalIssues from "./pages/animals/animal-issues/AnimalIssues";
 import AnimalInfoClient from "./pages/animals/info/animal-info-client/AnimalInfoClient";
@@ -23,6 +23,7 @@ import AboutUs from "./pages/about-us/AboutUs";
 import PasswordReset from "./pages/auth/password-reset/PasswordReset";
 import PasswordResetConfirm from "./pages/auth/password-reset/PasswordResetConfirm";
 import ModificateAnimal from "./pages/animals/animals-edit/ModificateAnimal";
+import AddAnimal from "./pages/animals/animals-add/AddAnimal";
 
 function App() {
   return (
@@ -46,6 +47,7 @@ function App() {
         <Route exact path="/animals/:id" component={AnimalInfoClient} />
         <Route exact path="/animal/:id" component={AnimalInfoWorker} />
         <Route exact path="/animal/edit/:id" component={ModificateAnimal} />
+        <Route exact path="/animals-add" component={AddAnimal} />
         <Route exact path="/reserved-animals" component={ReservedAnimalsList} />
         <Route exact path="/charity" component={Charity} />
         <Route exact path="/forms" component={FormList} />

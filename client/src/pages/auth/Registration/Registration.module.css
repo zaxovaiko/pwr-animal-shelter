@@ -60,7 +60,7 @@
   height: 100%;
   border-width: 0px 0px 2px;
   border-color: #dadada;
-  padding-left: 7vh;
+  padding-left: 50px;
 }
 
 #registration__form-input-div-surname {
@@ -68,7 +68,7 @@
   height: 100%;
   border-width: 0px 0px 2px;
   border-color: #dadada;
-  padding-left: 12vh;
+  padding-left: 85px;
 }
 
 #registration__form-input-div-pesel {
@@ -76,7 +76,7 @@
   height: 100%;
   border-width: 0px 0px 2px;
   border-color: #dadada;
-  padding-left: 9vh;
+  padding-left: 60px;
 }
 
 #registration__form-input-div-tel {
@@ -93,7 +93,7 @@
   height: 100%;
   border-width: 0px 0px 2px;
   border-color: #dadada;
-  padding-left: 8vh;
+  padding-left: 55px;
 }
 
 #registration__form-input-div-adress-building {
@@ -101,7 +101,7 @@
   height: 100%;
   border-width: 0px 0px 2px;
   border-color: #dadada;
-  padding-left: 19vh;
+  padding-left: 135px;
 }
 
 #registration__form-input-div-adress-apartment {
@@ -109,7 +109,7 @@
   height: 100%;
   border-width: 0px 0px 2px;
   border-color: #dadada;
-  padding-left: 22vh;
+  padding-left: 155px;
 }
 
 #registration__form-input-div-adress-city {
@@ -117,7 +117,7 @@
   height: 100%;
   border-width: 0px 0px 2px;
   border-color: #dadada;
-  padding-left: 10vh;
+  padding-left: 65px;
 }
 
 #registration__form-input-div-adress-zip {
@@ -125,7 +125,7 @@
   height: 100%;
   border-width: 0px 0px 2px;
   border-color: #dadada;
-  padding-left: 6vh;
+  padding-left: 120px;
 }
 
 #registration__form-input-div-password-repeat {
@@ -133,7 +133,7 @@
   height: 100%;
   border-width: 0px 0px 2px;
   border-color: #dadada;
-  padding-left: 17.5vh;
+  padding-left: 120px;
 }
 
 #registration__form-input-div-name:focus,

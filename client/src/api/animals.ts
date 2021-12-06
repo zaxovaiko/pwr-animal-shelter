@@ -74,3 +74,13 @@ export function fetchUpdateAnimaleData(body: any, id: string, token: any) {
     method: "PATCH",
   }).then((res) => res.json());
 }
+
+export function fetchAddAnimalData(body: any, token: any) {
+  return fetch(process.env.REACT_APP_SERVER_URI + "/animals", {
+    headers: {
+      Authorization: token,
+    },
+    body: body,
+    method: "POST",
+  }).then((res) => res.json());
+}

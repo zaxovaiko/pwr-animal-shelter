@@ -26,12 +26,12 @@ export default function ReservationList() {
 
   const columns = [
     {
-      Header: "ID",
+      Header: () => <strong className={styles_main['table-header']}>ID</strong>,
       accessor: "id",
       minWidth: 40
     },
     {
-      Header: "Od",
+      Header: () => <strong className={styles_main['table-header']}>Od</strong>,
       accessor: "date",
       minWidth: 80,
       Cell: (row: { original: { date: any; }; }) => {
@@ -41,7 +41,7 @@ export default function ReservationList() {
       }
     },
     {
-      Header: "Do",
+      Header: () => <strong className={styles_main['table-header']}>Do</strong>,
       accessor: "date",
       minWidth: 50,
       Cell: (row: { original: { date: any; }; }) => {
@@ -53,15 +53,18 @@ export default function ReservationList() {
       }
     },
     {
-      Header: "Zwierzę",
+      Header: () => <strong className={styles_main['table-header']}>Zwierzę</strong>,
+      id: "animal.id",
+      type: "animal.type",
       accessor: "animal.chip_code",
+      Cell: (row: any) => <a>Chip code: <a href={`/animal/${row.original.id}`} className={styles_main["table-cell-link"]}>  {row.value} </a></a>
     },
     {
-      Header: "Osoba",
+      Header: () => <strong className={styles_main['table-header']}>Osoba</strong>,
       accessor: "user.email",
     },
     {
-      Header: "Status",
+      Header: () => <strong className={styles_main['table-header']}>Status</strong>,
       accessor: "reservation_status.value",
     },
   ];
