@@ -179,7 +179,7 @@ export default function ModificateAnimal() {
             alert.success("Dane zwierzęcia zostały zmodyfikowane!");
             return history.push(infoToGoBack);
           } else {
-            alert.error("Coś poszło nie tak. Spróbuj ponownie.");
+            alert.error("Coś poszło nie tak! Spróbuj ponownie.");
           }
         })
         .catch(console.error);
