@@ -23,6 +23,7 @@ import AboutUs from "./pages/about-us/AboutUs";
 import PasswordReset from "./pages/auth/password-reset/PasswordReset";
 import PasswordResetConfirm from "./pages/auth/password-reset/PasswordResetConfirm";
 import ModificateAnimal from "./pages/animals/animals-edit/ModificateAnimal";
+import AddAnimal from "./pages/animals/animals-add/AddAnimal";
 
 function App() {
   return (
@@ -46,6 +47,7 @@ function App() {
         <Route exact path="/animals/:id" component={AnimalInfoClient} />
         <Route exact path="/animal/:id" component={AnimalInfoWorker} />
         <Route exact path="/animal/edit/:id" component={ModificateAnimal} />
+        <Route exact path="/animals-add" component={AddAnimal} />
         <Route exact path="/reserved-animals" component={ReservedAnimalsList} />
         <Route exact path="/charity" component={Charity} />
         <Route exact path="/forms" component={FormList} />
