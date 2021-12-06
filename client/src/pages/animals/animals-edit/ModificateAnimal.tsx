@@ -5,7 +5,7 @@ import { useAlert } from "react-alert";
 import { useContext, useEffect, useState } from "react";
 import styles from "./ModificateAnimal.module.css";
 import { AuthContext } from "../../../contexts/AuthContext";
-import { Animal } from "../../../types/Animal";
+
 import {
   fetchAnimal,
   fetchAnimalBreeds,
@@ -16,6 +16,9 @@ import {
 } from "../../../api/animals";
 import { useFormik } from "formik";
 import React from "react";
+import { Container, Image } from "react-bootstrap";
+import ErrorPage from "../../errors/ErrorPage";
+import LoadingPage from "../../errors/LoadingPage";
 
 let refToChipCode: React.RefObject<any> = React.createRef();
 let refToName: React.RefObject<any> = React.createRef();
@@ -114,10 +117,14 @@ export default function ModificateAnimal() {
     { retry: false }
   );
 
-  const [selectedFile, setSelectedFile] = useState("");
+  const [selectedFiles, setSelectedFile] = useState([]);
+  const [mainAnimalImage, setMainAnimalImage] = useState("");
+
   function fileChangedHandler(event: any) {
-    setSelectedFile(event.target.files[0]);
-    console.log(selectedFile);
+    setSelectedFile(event.target.files);
+  }
+  function mainImageChangedHandler(event: any) {
+    setMainAnimalImage(event.target.files[0]);
   }
 
   const typesQuery = useQuery("getAnimalTypes", () => fetchAnimalTypes());
@@ -146,7 +153,15 @@ export default function ModificateAnimal() {
     validate,
     onSubmit: (values) => {
       const formData = new FormData();
-      formData.append("images", selectedFile);
+      if (selectedFiles != []) {
+        for (var x = 0; x < selectedFiles.length; x++) {
+          formData.append("images", selectedFiles[x]);
+        }
+      }
+      if (mainAnimalImage != "") {
+        formData.append("image", mainAnimalImage);
+      }
+      formData.append("chip_code", values.chip_code);
       formData.append("animal_type_id", values.type);
       formData.append("name", values.name);
       formData.append("age", values.age);
@@ -158,17 +173,13 @@ export default function ModificateAnimal() {
       formData.append("color", values.color);
       formData.append("description", values.description);
       formData.append("vaccinations", values.vaccinations);
-      fetchUpdateAnimaleData(
-        formData,
-        data.id,
-        auth.token
-      )
+      fetchUpdateAnimaleData(formData, data.id, auth.token)
         .then((res: any) => {
           if (res.id) {
             alert.success("Dane zwierzęcia zostały zmodyfikowane!");
             return history.push(infoToGoBack);
           } else {
-            alert.error("Coś poszło nie tak. Spróbuj ponownie.");
+            alert.error("Coś poszło nie tak! Spróbuj ponownie.");
           }
         })
         .catch(console.error);
@@ -176,61 +187,63 @@ export default function ModificateAnimal() {
   });
 
   useEffect(() => {
-    if (formik.touched.chip_code && formik.errors.chip_code) {
-      refToChipCode.current.style.borderColor = "red";
-    } else {
-      refToChipCode.current.style.borderColor = "#DADADA";
-    }
+    if (!isLoading && !isError && auth.token) {
+      if (formik.touched.chip_code && formik.errors.chip_code) {
+        refToChipCode.current.style.borderColor = "red";
+      } else {
+        refToChipCode.current.style.borderColor = "#DADADA";
+      }
 
-    if (formik.touched.name && formik.errors.name) {
-      refToName.current.style.borderColor = "red";
-    } else {
-      refToName.current.style.borderColor = "#DADADA";
-    }
+      if (formik.touched.name && formik.errors.name) {
+        refToName.current.style.borderColor = "red";
+      } else {
+        refToName.current.style.borderColor = "#DADADA";
+      }
 
-    if (formik.touched.age && formik.errors.age) {
-      refToAge.current.style.borderColor = "red";
-    } else {
-      refToAge.current.style.borderColor = "#DADADA";
-    }
+      if (formik.touched.age && formik.errors.age) {
+        refToAge.current.style.borderColor = "red";
+      } else {
+        refToAge.current.style.borderColor = "#DADADA";
+      }
 
-    if (formik.touched.height && formik.errors.height) {
-      refToHeight.current.style.borderColor = "red";
-    } else {
-      refToHeight.current.style.borderColor = "#DADADA";
-    }
+      if (formik.touched.height && formik.errors.height) {
+        refToHeight.current.style.borderColor = "red";
+      } else {
+        refToHeight.current.style.borderColor = "#DADADA";
+      }
 
-    if (formik.touched.weight && formik.errors.weight) {
-      refToWeight.current.style.borderColor = "red";
-    } else {
-      refToWeight.current.style.borderColor = "#DADADA";
-    }
+      if (formik.touched.weight && formik.errors.weight) {
+        refToWeight.current.style.borderColor = "red";
+      } else {
+        refToWeight.current.style.borderColor = "#DADADA";
+      }
 
-    if (formik.touched.color && formik.errors.color) {
-      refToColor.current.style.borderColor = "red";
-    } else {
-      refToColor.current.style.borderColor = "#DADADA";
-    }
+      if (formik.touched.color && formik.errors.color) {
+        refToColor.current.style.borderColor = "red";
+      } else {
+        refToColor.current.style.borderColor = "#DADADA";
+      }
 
-    if (formik.touched.description && formik.errors.description) {
-      refToDescription.current.style.borderColor = "red";
-    } else {
-      refToDescription.current.style.borderColor = "#DADADA";
-    }
+      if (formik.touched.description && formik.errors.description) {
+        refToDescription.current.style.borderColor = "red";
+      } else {
+        refToDescription.current.style.borderColor = "#DADADA";
+      }
 
-    if (formik.touched.vaccinations && formik.errors.vaccinations) {
-      refToVaccinations.current.style.borderColor = "red";
-    } else {
-      refToVaccinations.current.style.borderColor = "#DADADA";
+      if (formik.touched.vaccinations && formik.errors.vaccinations) {
+        refToVaccinations.current.style.borderColor = "red";
+      } else {
+        refToVaccinations.current.style.borderColor = "#DADADA";
+      }
     }
   });
 
   if (isError) {
-    return <>Error</>;
+    return <ErrorPage />;
   }
 
   if (isLoading) {
-    return <>Loading</>;
+    return <LoadingPage />;
   }
 
   if (!auth.token) {
@@ -304,6 +317,32 @@ export default function ModificateAnimal() {
           onSubmit={formik.handleSubmit}
         >
           <div className={styles["mod-animal-profile_form-input-div-first"]}>
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <Image
+                src={data.image}
+                className={styles["mod-animal__image"]}
+                alt="Animal photo"
+              />
+            </div>
+
+            <div style={{ marginTop: "10%", display:"flex", alignItems: "center" }}>
+              <label
+                htmlFor={styles["mod-animal-profile__form-input-div-weight"]}
+                style={{ position: "absolute" }}
+              >
+                Zmień:
+              </label>
+              <input
+                name="image"
+                type="file"
+                onChange={mainImageChangedHandler}
+                id={styles["mod-animal-profile__form-input-div-weight"]}
+                accept="image/png, image/jpeg"
+              />
+            </div>
+          </div>
+
+          <div className={styles["mod-animal-profile_form-input-div"]}>
             <label
               htmlFor={styles["mod-animal-profile__form-input-div-chip"]}
               style={{ position: "absolute" }}
@@ -564,18 +603,35 @@ export default function ModificateAnimal() {
           </div>
 
           <div className={styles["mod-animal-profile_form-input-div"]}>
+            {data.images.length > 0 && (
+              <>
+                <Container className={styles["photo-container"]}>
+                  {data?.images.map((photo: any, i: any) => (
+                    <Image
+                      key={i}
+                      className={styles["photo"]}
+                      src={photo.image}
+                      alt="animal photo"
+                      onClick={() => window.open(photo.image)}
+                    />
+                  ))}
+                </Container>
+              </>
+            )}
             <label
               htmlFor={styles["mod-animal-profile__form-input-div-weight"]}
-              style={{ position: "absolute" }}
+              style={{ position: "absolute", width: "5%" }}
             >
-              Zdjęcia:
+              Dodaj zdjęcie:
             </label>
             <input
-              name="image"
+              name="images"
               type="file"
               onChange={fileChangedHandler}
               id={styles["mod-animal-profile__form-input-div-weight"]}
               accept="image/png, image/jpeg"
+              style={{ marginTop: "3%" }}
+              multiple
             />
           </div>
 

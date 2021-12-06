@@ -42,8 +42,9 @@ def insert_locations(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('locations', '0002_alter_room_building'),
-        ('users', '0002_initial_data_insertion')
+        ('locations', '0001_initial'),
+        ('users', '0002_initial_data_insertion'),
+        ('animals', '0002_initial_data_insertion')
     ]
 
     operations = [

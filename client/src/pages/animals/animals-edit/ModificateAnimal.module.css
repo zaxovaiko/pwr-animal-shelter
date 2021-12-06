@@ -54,7 +54,7 @@
   height: 100%;
   border-width: 0px 0px 2px;
   border-color: #dadada;
-  padding-left: 7vh;
+  padding-left: 45px;
 }
 
 #mod-animal-profile__form-input-div-chip {
@@ -62,7 +62,7 @@
   height: 100%;
   border-width: 0px 0px 2px;
   border-color: #dadada;
-  padding-left: 7vh;
+  padding-left: 45px;
 }
 
 #mod-animal-profile__form-input-div-type {
@@ -70,7 +70,7 @@
   height: 100%;
   border-width: 0px 0px 2px;
   border-color: #dadada;
-  padding-left: 6vh;
+  padding-left: 35px;
 }
 
 #mod-animal-profile__form-input-div-age {
@@ -78,7 +78,7 @@
   height: 100%;
   border-width: 0px 0px 2px;
   border-color: #dadada;
-  padding-left: 7vh;
+  padding-left: 48px;
 }
 
 #mod-animal-profile__form-input-div-height {
@@ -86,7 +86,7 @@
   height: 100%;
   border-width: 0px 0px 2px;
   border-color: #dadada;
-  padding-left: 14vh;
+  padding-left: 103px;
 }
 
 #mod-animal-profile__form-input-div-weight {
@@ -94,7 +94,7 @@
   height: 100%;
   border-width: 0px 0px 2px;
   border-color: #dadada;
-  padding-left: 12vh;
+  padding-left: 90px;
 }
 
 #mod-animal-profile__form-input-div-color {
@@ -102,7 +102,7 @@
   height: 100%;
   border-width: 0px 0px 2px;
   border-color: #dadada;
-  padding-left: 7.5vh;
+  padding-left: 53px;
 }
 
 #mod-animal-profile__form-input-div-gender {
@@ -110,7 +110,7 @@
     height: 100%;
     border-width: 0px 0px 2px;
     border-color: #dadada;
-    padding-left: 6.5vh;
+    padding-left: 40px;
   }
 
 #mod-animal-profile__form-input-div-breed {
@@ -118,7 +118,7 @@
   height: 100%;
   border-width: 0px 0px 2px;
   border-color: #dadada;
-  padding-left: 7vh;
+  padding-left: 48px;
 }
 
 .mod-animal-profile__form-cancel-button {
@@ -142,7 +142,7 @@
   height: 100%;
   border-width: 0px 0px 2px;
   border-color: #dadada;
-  padding-left: 8.5vh;
+  padding-left: 55px;
 }
 
 #mod-animal-profile__form-input-div-name:focus,
@@ -221,4 +221,29 @@
     outline-width: 0;
     border-color: #dadada;
 }
+
+.photo-container {
+  display: flex;
+  justify-content: center;
+  width: fit-content;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+
+.photo {
+  width: 100px;
+  height: 75px;
+  border-radius: 10%;
+  margin: 10px;
+}
+
+.mod-animal__image {
+  display: flex;
+  justify-content: center;
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
 
