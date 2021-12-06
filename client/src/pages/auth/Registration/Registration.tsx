@@ -178,11 +178,10 @@ export default function Registration() {
           } else if (res.email) {
             alert.error("W systemie istnieje już użytkownik z podanym e-mail");
           } else {
-            alert.error("Coś poszło nie tak. Spróbuj ponownie.");
-            console.log(res);
+            alert.error(res.error);
           }
         })
-        .catch(console.error);
+        .catch(() => {});
     },
   });
 

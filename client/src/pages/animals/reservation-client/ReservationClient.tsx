@@ -11,8 +11,10 @@ import styles from "./ReservationClient.module.css";
 import styles_button from "../../../components/shared/Button.module.css";
 import { User } from "../../../types/User";
 import { useContext } from "react";
+import { useAlert } from "react-alert";
 
 export default function Reservation() {
+  const alert = useAlert();
   const { auth } = useContext(AuthContext);
   const history = useHistory();
   const { id } = useParams<{ id: string }>();
@@ -53,6 +55,9 @@ export default function Reservation() {
       .then((res) => res.json())
       .then((res) => {
         if (res) {
+          if (res.error) {
+            return alert.error(res.error);
+          }
           history.push("/animals/" + id);
         }
       });
