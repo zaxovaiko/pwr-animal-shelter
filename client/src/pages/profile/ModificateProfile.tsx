@@ -3,11 +3,14 @@ import React, { useEffect, useContext, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { useFormik } from "formik";
 import { AuthContext } from "../../contexts/AuthContext";
+import { Container, Image } from "react-bootstrap";
 import { useQuery } from "react-query";
 import { fetchProfileData, fetchUpdateProfileData } from "../../api/profile";
 import { useAlert } from "react-alert";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/material.css";
+import ErrorPage from "../errors/ErrorPage";
+import LoadingPage from "../errors/LoadingPage";
 
 let refTofirst_name: React.RefObject<any> = React.createRef();
 let refTolast_name: React.RefObject<any> = React.createRef();
@@ -117,15 +120,19 @@ export default function ModificateProfile() {
   const [phoneNumber, setPhone] = useState(
     data === undefined ? "" : data.phone
   );
+  const [mainUserImage, setMainUserImage] = useState("");
+  function mainImageChangedHandler(event: any) {
+    setMainUserImage(event.target.files[0]);
+  }
   function handleOnChangePhone(value: any) {
     setPhone(value);
     formik.values.phone = value;
   }
+
   const addressInfo = data === undefined ? "" : data.address.split(",");
   const streetAndBuilding = data === undefined ? "" : addressInfo[0].split(" ");
 
-  const formik = useFormik(
-    {
+  const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
       first_name: data === undefined ? "" : data.first_name,
@@ -141,27 +148,28 @@ export default function ModificateProfile() {
     },
     validate,
     onSubmit: (values) => {
-      fetchUpdateProfileData(
-        {
-          first_name: values.first_name,
-          last_name: values.last_name,
-          address:
-            values.street +
-            " " +
-            values.buildingNumber +
-            "," +
-            values.apartmentNumber +
-            "," +
-            values.city +
-            "," +
-            values.zip,
-          pesel: values.pesel,
-          phone: values.phone,
-          email: values.email,
-        },
-        data.id,
-        auth.token
-      )
+      const formData = new FormData();
+      if (mainUserImage != "") {
+        formData.append("image", mainUserImage);
+      }
+      formData.append("first_name", values.first_name);
+      formData.append("last_name", values.last_name);
+      formData.append(
+        "address",
+        values.street +
+          " " +
+          values.buildingNumber +
+          "," +
+          values.apartmentNumber +
+          "," +
+          values.city +
+          "," +
+          values.zip
+      );
+      formData.append("pesel", values.pesel);
+      formData.append("phone", values.phone);
+      formData.append("email", values.email);
+      fetchUpdateProfileData(formData, data.id, auth.token)
         .then((res: any) => {
           if (res.id) {
             alert.success("Twoje dane zostały zmodyfikowane!");
@@ -240,11 +248,11 @@ export default function ModificateProfile() {
   });
 
   if (isLoading) {
-    return <>Loading</>;
+    return <LoadingPage />;
   }
 
   if (isError) {
-    return <h1>Error has occured</h1>;
+    return <ErrorPage />;
   }
 
   if (!auth.token) {
@@ -262,6 +270,38 @@ export default function ModificateProfile() {
           onSubmit={formik.handleSubmit}
         >
           <div className={styles["mod-profile_form-input-div-first"]}>
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <Image
+                src={data.image}
+                className={styles["mod-profile__image"]}
+                alt="Brak zdjęcia"
+              />
+            </div>
+
+            <div
+              style={{
+                marginTop: "10%",
+                display: "flex",
+                alignItems: "center",
+              }}
+            >
+              <label
+                htmlFor={styles["mod-profile__form-input-div-surname"]}
+                style={{ position: "absolute" }}
+              >
+                Zmień:
+              </label>
+              <input
+                name="image"
+                type="file"
+                onChange={mainImageChangedHandler}
+                id={styles["mod-profile__form-input-div-surname"]}
+                accept="image/png, image/jpeg"
+              />
+            </div>
+          </div>
+
+          <div className={styles["mod-profile_form-input-div"]}>
             <label
               htmlFor={styles["mod-profile__form-input-div-name"]}
               style={{ position: "absolute" }}
@@ -453,7 +493,7 @@ export default function ModificateProfile() {
               htmlFor={styles["mod-profile__form-input-div-adress-zip"]}
               style={{ position: "absolute" }}
             >
-              *ZIP:
+              *Kod pocztowy:
             </label>
             <input
               name="zip"

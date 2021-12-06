@@ -164,7 +164,7 @@ export default function Registration() {
         first_name: values.firstName,
         last_name: values.lastName,
         phone: values.phoneNumber,
-        address: `${values.street} ${values.buildingNumber}, ${values.apartmentNumber}, ${values.city}, ${values.zip}`,
+        address: `${values.street} ${values.buildingNumber},${values.apartmentNumber},${values.city},${values.zip}`,
       })
         .then((res) => {
           if (res.id) {
@@ -456,7 +456,7 @@ export default function Registration() {
               htmlFor={styles["registration__form-input-div-adress-zip"]}
               style={{ position: "absolute" }}
             >
-              *ZIP:
+              *Kod pocztowy:
             </label>
             <input
               name="zip"

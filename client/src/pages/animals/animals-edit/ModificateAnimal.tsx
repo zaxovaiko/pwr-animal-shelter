@@ -5,7 +5,7 @@ import { useAlert } from "react-alert";
 import { useContext, useEffect, useState } from "react";
 import styles from "./ModificateAnimal.module.css";
 import { AuthContext } from "../../../contexts/AuthContext";
-import { Animal } from "../../../types/Animal";
+
 import {
   fetchAnimal,
   fetchAnimalBreeds,
@@ -17,6 +17,8 @@ import {
 import { useFormik } from "formik";
 import React from "react";
 import { Container, Image } from "react-bootstrap";
+import ErrorPage from "../../errors/ErrorPage";
+import LoadingPage from "../../errors/LoadingPage";
 
 let refToChipCode: React.RefObject<any> = React.createRef();
 let refToName: React.RefObject<any> = React.createRef();
@@ -151,7 +153,6 @@ export default function ModificateAnimal() {
     validate,
     onSubmit: (values) => {
       const formData = new FormData();
-      console.log(selectedFiles);
       if (selectedFiles != []) {
         for (var x = 0; x < selectedFiles.length; x++) {
           formData.append("images", selectedFiles[x]);
@@ -160,6 +161,7 @@ export default function ModificateAnimal() {
       if (mainAnimalImage != "") {
         formData.append("image", mainAnimalImage);
       }
+      formData.append("chip_code", values.chip_code);
       formData.append("animal_type_id", values.type);
       formData.append("name", values.name);
       formData.append("age", values.age);
@@ -237,11 +239,11 @@ export default function ModificateAnimal() {
   });
 
   if (isError) {
-    return <>Error</>;
+    return <ErrorPage />;
   }
 
   if (isLoading) {
-    return <>Loading</>;
+    return <LoadingPage />;
   }
 
   if (!auth.token) {
