@@ -12,6 +12,7 @@ import { fetchLocation } from "../../../../api/location";
 import { AuthContext } from "../../../../contexts/AuthContext";
 import ErrorPage from "../../../errors/ErrorPage";
 import { Link } from "react-router-dom";
+import LoadingPage from "../../../errors/LoadingPage";
 
 export default function AnimalInfoWorker() {
   const { id } = useParams<{ id: string }>();
@@ -31,7 +32,7 @@ export default function AnimalInfoWorker() {
   }
 
   if (animalQuery.isLoading || locationQuery.isLoading || !animalQuery.data) {
-    return <>Loading</>;
+    return <LoadingPage />;
   }
 
   if (!auth.token) {
@@ -43,9 +44,9 @@ export default function AnimalInfoWorker() {
       <Container fluid className={styles_main["top-header"]} />
       <Container fluid className={styles_main["header-animal-info"]}>
         <Image
-          src="https://image.flaticon.com/icons/png/512/64/64431.png"
+          src={animalQuery.data.image}
           className={styles_main["animal-photo"]}
-          alt={"animal paw"}
+          alt={"Brak zdjęcia"}
         />
       </Container>
 

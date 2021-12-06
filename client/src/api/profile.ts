@@ -7,10 +7,9 @@ export function fetchProfileData(id: string) {
 export function fetchUpdateProfileData(body: any, id: string, token: any) {
   return fetch(process.env.REACT_APP_SERVER_URI + "/users/" + id, {
     headers: {
-      "Content-Type": "application/json",
       Authorization: token,
     },
-    body: JSON.stringify(body),
+    body: body,
     method: "PATCH",
   }).then((res) => res.json());
 }

@@ -4,6 +4,8 @@ import { useQuery } from "react-query";
 import { Link, useParams } from "react-router-dom";
 import { fetchProfileData } from "../../api/profile";
 import { AuthContext } from "../../contexts/AuthContext";
+import ErrorPage from "../errors/ErrorPage";
+import LoadingPage from "../errors/LoadingPage";
 import styles from "./Profile.module.css";
 
 const FIELDS_TO_SHOW = [
@@ -26,11 +28,11 @@ export default function Profile() {
   );
 
   if (isLoading) {
-    return <>Loading</>;
+    return <LoadingPage />;
   }
 
   if (isError) {
-    return <h1>Error has occured</h1>;
+    return <ErrorPage />;
   }
 
   return (
@@ -40,8 +42,8 @@ export default function Profile() {
         <Image
           roundedCircle
           className={styles["top-page__header__user-img"]}
-          src="https://d2v9ipibika81v.cloudfront.net/uploads/sites/210/Profile-Icon.png"
-          alt="User's image"
+          src={data.image}
+          alt="Brak zdjęcia"
         />
         <h1 className={styles["top-page__header__title"]}>Moje dane</h1>
       </div>
