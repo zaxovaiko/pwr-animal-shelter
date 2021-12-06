@@ -19,7 +19,7 @@ def insert_reservations(apps, schema_editor):
 
     for _ in range(1):
         user = User.objects.order_by('?').first()
-        animal = Animal.objects.filter(animal_status=3).order_by('?').first()
+        animal = Animal.objects.filter(animal_status=0).order_by('?').first()
         reservation_status = ReservationStatus.objects.order_by('?').first()
         AnimalReservation.objects.create(
             user=user, animal=animal, reservation_status=reservation_status)
@@ -30,11 +30,11 @@ class Migration(migrations.Migration):
     dependencies = [
         ('reservations', '0002_animalreservation_user'),
         ('users', '0002_initial_data_insertion'),
-        ('animals', '0002_initial_data_insertion')
+        ('animals', '0002_initial_data_insertion'),
     ]
 
     operations = [
         migrations.RunPython(insert_reservation_statuses,
                              migrations.RunPython.noop),
-        migrations.RunPython(insert_reservations, migrations.RunPython.noop)
+        #migrations.RunPython(insert_reservations, migrations.RunPython.noop)
     ]

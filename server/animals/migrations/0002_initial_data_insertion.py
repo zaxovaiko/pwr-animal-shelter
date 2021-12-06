@@ -52,7 +52,7 @@ def insert_animals(apps, schema_editor):
 
     for _ in range(7):
         breed = get_random(AnimalBreed)
-        status = get_random(AnimalStatus)
+        status = AnimalStatus.objects.order_by("?").filter(value = 'Gotowe do adopcji').first()
         type_ = get_random(AnimalType)
         gender = get_random(AnimalGender)
 

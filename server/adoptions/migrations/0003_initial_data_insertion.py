@@ -24,5 +24,5 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RunPython(insert_adoptions, migrations.RunPython.noop)
+        #migrations.RunPython(insert_adoptions, migrations.RunPython.noop)
     ]
