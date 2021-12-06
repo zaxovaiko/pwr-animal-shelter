@@ -39,6 +39,7 @@ export default function Menu({ isOpened }: { isOpened: boolean }) {
           { path: "/contact", text: "Kontakt" },
           { path: "/reservations", text: "Rezerwacje" },
           { path: "/forms", text: "Formularzy" },
+          { path: "/animals-add", text: "Dodać zwierzę" },
         ];
       } else {
         links = [
