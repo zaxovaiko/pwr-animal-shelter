@@ -19,3 +19,18 @@ export function fetchDeleteReservation(token: any, id: any) {
     }
   );
 }
+
+export function setReservationStatus(token: string, id: any, status: string) {
+    const formData = new FormData();
+    formData.append("reservation_status_id", status);
+    return fetch(
+        process.env.REACT_APP_SERVER_URI + "/animals-reservations/" + id,
+        {
+            headers: {
+                Authorization: token,
+            },
+            body: formData,
+            method: "PATCH",
+        }
+    );
+}
