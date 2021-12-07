@@ -33,7 +33,7 @@ export default function AdoptedAnimalCard({name, id, image}: Animal) {
         <Card className={styles["adopted-animal-card"]}>
             <Image
                 className={styles["adopted-animal-card__img"]}
-                alt="Animal image"
+                alt="Brak zdjęcia"
                 src={image}
             />
             <Row>
@@ -42,7 +42,7 @@ export default function AdoptedAnimalCard({name, id, image}: Animal) {
             </Row>
 
             <button
-                onClick={() => history.push("/animal-issues")}
+                onClick={() => history.push("/animal-issue/" + id)}
                 className={styles["adopted-animal-card__btn"] + " c-btn"}
             >
                 Zgłoś problem

@@ -71,6 +71,7 @@
   border-width: 0px 0px 2px;
   border-color: #dadada;
   padding-left: 35px;
+  background-color: white;
 }
 
 #mod-animal-profile__form-input-div-age {
@@ -111,6 +112,7 @@
     border-width: 0px 0px 2px;
     border-color: #dadada;
     padding-left: 40px;
+    background-color: white;
   }
 
 #mod-animal-profile__form-input-div-breed {
@@ -119,6 +121,7 @@
   border-width: 0px 0px 2px;
   border-color: #dadada;
   padding-left: 48px;
+  background-color: white;
 }
 
 .mod-animal-profile__form-cancel-button {
@@ -143,6 +146,7 @@
   border-width: 0px 0px 2px;
   border-color: #dadada;
   padding-left: 55px;
+  background-color: white;
 }
 
 #mod-animal-profile__form-input-div-name:focus,
