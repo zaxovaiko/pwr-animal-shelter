@@ -7,7 +7,7 @@ from users.models import User, image_path
 class UserTestCase(APITestCase):
     user_data = {
         "email": "testuser@gmail.com",
-        "pesel": 11122233344,
+        "pesel": 56020498194,
         "first_name": "User_first",
         "last_name": "User_last",
         "address": "ul. Wróblewskiego 2, 65, Wrocław",
@@ -22,7 +22,7 @@ class UserTestCase(APITestCase):
     def test_create_user(self):
         user_data_copy = {**self.user_data}
         user_data_copy['email'] = 'anothertestuser@gmail.com'
-        user_data_copy['pesel'] = 11122244433
+        user_data_copy['pesel'] = 80052155415
         response = self.client_class().post(
             '/api/register', user_data_copy, format='json')
         self.assertEqual(response.status_code, HTTP_201_CREATED)
@@ -40,7 +40,7 @@ class UserTestCase(APITestCase):
     def test_create_bad_name_user(self):
         user_data_copy = {**self.user_data}
         user_data_copy['email'] = 'unique@gmail.com'
-        user_data_copy['pesel'] = 11144455533
+        user_data_copy['pesel'] = 90031375116
         user_data_copy['first_name'] = ''
         response = self.client_class().post(
             '/api/register', user_data_copy, format='json')

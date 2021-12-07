@@ -25,7 +25,7 @@ class AnimalsTests(APITestCase):
         self.user_data = {
             "email": "pracownik@gmail.com",
             "is_staff": True,
-            "pesel": 11122233344,
+            "pesel": 63012252593,
             "first_name": "First_name",
             "last_name": "Last_name",
             "password": "password"

@@ -16,15 +16,15 @@ fake.add_provider(internet)
 def insert_users(apps, schema_editor):
     User = apps.get_model('users', 'User')
 
-    User.objects.create(email='user@gmail.com', first_name='Katrin', last_name='Millon', pesel='87060671897',
+    User.objects.create(email='user@gmail.com', first_name='Katrin', last_name='Millon', pesel='96032673123',
                         is_staff=False, phone='+48506940392', address='Wrocław, Grunwaldzka 1-14',
                         password=make_password('password'))
 
-    User.objects.create(email='marina.k@gmail.com', first_name='Marina', last_name='Kowal', pesel='98100671887',
+    User.objects.create(email='marina.k@gmail.com', first_name='Marina', last_name='Kowal', pesel='56070649496',
                         is_staff=False, phone='+48506780392', address='Wrocław, Grunwaldzka 18-1',
                         password=make_password('password'))
 
-    User.objects.create(email='admin@gmail.com', first_name='Edward', last_name='Kalen', pesel='86050671890',
+    User.objects.create(email='admin@gmail.com', first_name='Edward', last_name='Kalen', pesel='76050178891',
                         is_staff=True, phone='+48545940392', address='Wrocław, Traugutta 10-15',
                         password=make_password('password'))
 

@@ -63,3 +63,36 @@
 .bold {
   font-weight: bold;
 }
+
+.mod-animal-profile__form-submit-button {
+  background-color: #adcf62;
+  text-align: center;
+  border: none;
+  color: white;
+  font-size: 2.8vh;
+  border-radius: 25px;
+  text-decoration: none;
+  width: 120px;
+  height: 40px;
+  font-weight: bold;
+}
+
+.mod-animal-profile__form-submit-button:hover {
+  background-color: #d2d980;
+}
+
+.mod-animal-profile__form-cancel-button {
+  background-color: #0e576f;
+  border: none;
+  color: white;
+  font-size: 20px;
+  border-radius: 25px;
+  text-decoration: none;
+  width: 120px;
+  height: 40px;
+  font-weight: bold;
+}
+
+.mod-animal-profile__form-cancel-button:hover {
+  background-color: #75c3c8;
+}
