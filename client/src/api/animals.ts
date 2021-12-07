@@ -22,12 +22,13 @@ export function fetchAnimalGenders() {
   ).then((res) => res.json());
 }
 
-export function fetchAnimals(type: number) {
+export function fetchAnimals(type: number, field = "", order = "asc") {
   return fetch(
-    process.env.REACT_APP_SERVER_URI +
-      "/animals?page=1&animal_type=" +
-      type +
-      "&animal_status=1"
+    `${
+      process.env.REACT_APP_SERVER_URI
+    }/animals?animal_type=${type}&animal_status=1${field ? "&ordering=" : ""}${
+      order === "asc" ? "" : "-"
+    }${field}`
   ).then((res) => res.json());
 }
 

@@ -8,7 +8,6 @@ import { useHistory } from "react-router-dom";
 import { useAlert } from "react-alert";
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
-import { fetchUpdateAnimaleData } from "../../../api/animals";
 
 export default function ReservedAnimalCard({
   id,

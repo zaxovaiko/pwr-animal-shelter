@@ -10,6 +10,7 @@ import {
   MdLogout,
 } from "react-icons/md";
 import { useHistory } from "react-router";
+import { Link } from "react-router-dom";
 import { AuthContext } from "../../../contexts/AuthContext";
 import Menu from "../Menu/Menu";
 import styles from "./Header.module.css";
@@ -39,22 +40,24 @@ export default function Header() {
             >
               {!isOpened ? <MdApps /> : <MdClear />}
             </Nav.Link>
-            <Nav.Link href="/" className="text-white fs-5">
+            <Nav.Link as={Link} to="/" className="text-white fs-5">
               Główna strona
             </Nav.Link>
           </Nav>
           <Nav className={styles["c-header__icon-links"]}>
             <Nav.Link
+              as={Link}
               className={styles["c-header__icon-links__link"]}
-              href="/contact"
+              to="/contact"
             >
               <MdLiveHelp />
             </Nav.Link>
             {auth.user && (
               <>
                 <Nav.Link
+                  as={Link}
                   className={styles["c-header__icon-links__link"]}
-                  href={"/profile/" + auth.user.id}
+                  to={"/profile/" + auth.user.id}
                 >
                   <MdAccountCircle />
                 </Nav.Link>
@@ -69,8 +72,9 @@ export default function Header() {
             )}
             {!auth.user && (
               <Nav.Link
+                as={Link}
                 className={styles["c-header__icon-links__link"]}
-                href="/login"
+                to="/login"
               >
                 <MdLogin />
               </Nav.Link>

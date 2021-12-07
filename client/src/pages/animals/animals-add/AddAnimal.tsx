@@ -1,21 +1,18 @@
-import { useParams } from "react-router-dom";
 import { useQuery } from "react-query";
 import { useHistory } from "react-router-dom";
 import { useAlert } from "react-alert";
 import { useContext, useEffect, useState } from "react";
 import styles from "./AddAnimal.module.css";
 import { AuthContext } from "../../../contexts/AuthContext";
-
 import {
   fetchAddAnimalData,
   fetchAnimalBreeds,
-  fetchAnimalGenders,
   fetchAnimalStatuses,
   fetchAnimalTypes,
 } from "../../../api/animals";
 import { useFormik } from "formik";
 import React from "react";
-import { Container, Image } from "react-bootstrap";
+import { Image } from "react-bootstrap";
 
 let refToChipCode: React.RefObject<any> = React.createRef();
 let refToName: React.RefObject<any> = React.createRef();
@@ -123,7 +120,6 @@ export default function AddAnimal() {
   const statusesQuery = useQuery("getAnimalStatuses", () =>
     fetchAnimalStatuses()
   );
-  const gendersQuery = useQuery("getAnimalGenders", () => fetchAnimalGenders());
 
   const formik = useFormik({
     initialValues: {
@@ -142,14 +138,14 @@ export default function AddAnimal() {
     },
     validate,
     onSubmit: (values) => {
-      console.log(values)
+      console.log(values);
       const formData = new FormData();
-      if (selectedFiles != []) {
+      if (selectedFiles.length > 0) {
         for (var x = 0; x < selectedFiles.length; x++) {
           formData.append("images", selectedFiles[x]);
         }
       }
-      if (mainAnimalImage != "") {
+      if (mainAnimalImage !== "") {
         formData.append("image", mainAnimalImage);
       }
       formData.append("chip_code", values.chip_code);
@@ -166,11 +162,11 @@ export default function AddAnimal() {
       formData.append("vaccinations", values.vaccinations);
       fetchAddAnimalData(formData, auth.token)
         .then((res: any) => {
-          console.log(res)
+          console.log(res);
           if (res.id) {
             alert.success("Zwierzę zostało dodane!");
             return history.push(infoToGoBack);
-          } else if(res.chip_code) {
+          } else if (res.chip_code) {
             alert.error("Podany chip już istnieje!");
           }
         })
@@ -266,35 +262,32 @@ export default function AddAnimal() {
     },
   ];
 
-  const optionsTypes =
-  typesQuery.data == undefined
-      ? optionsTypesExample
-      : typesQuery.data?.results.map(
-          ({ id, value }: { id: string; value: string }) => ({
-            label: value,
-            value: id,
-          })
-        );
+  const optionsTypes = !typesQuery.data
+    ? optionsTypesExample
+    : typesQuery.data?.results.map(
+        ({ id, value }: { id: string; value: string }) => ({
+          label: value,
+          value: id,
+        })
+      );
 
-  const optionsBreeds =
-    breedsQuery.data == undefined
-      ? optionsBreedsExample
-      : breedsQuery.data?.results.map(
-          ({ id, value }: { id: string; value: string }) => ({
-            label: value,
-            value: id,
-          })
-        );
+  const optionsBreeds = !breedsQuery.data
+    ? optionsBreedsExample
+    : breedsQuery.data?.results.map(
+        ({ id, value }: { id: string; value: string }) => ({
+          label: value,
+          value: id,
+        })
+      );
 
-  const optionsStatuses =
-    statusesQuery.data == undefined
-      ? optionsStatusesExample
-      : statusesQuery.data?.results.map(
-          ({ id, value }: { id: string; value: string }) => ({
-            label: value,
-            value: id,
-          })
-        );
+  const optionsStatuses = !statusesQuery.data
+    ? optionsStatusesExample
+    : statusesQuery.data?.results.map(
+        ({ id, value }: { id: string; value: string }) => ({
+          label: value,
+          value: id,
+        })
+      );
 
   return (
     <div className={styles.modProfile}>

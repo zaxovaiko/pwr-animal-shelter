@@ -1,12 +1,12 @@
-import { Container } from "react-bootstrap";
+import {Container} from "react-bootstrap";
 import styles_main from "./ReservationList.module.css";
 import HeaderTitle from "../../../components/header-title/HeaderTitle";
-import { useContext } from "react";
+import {useContext} from "react";
 import ReactTable from "react-table-6";
 import "react-table-6/react-table.css";
-import { useQuery } from "react-query";
-import { fetchReservedAnimals } from "../../../api/animals";
-import { AuthContext } from "../../../contexts/AuthContext";
+import {useQuery} from "react-query";
+import {fetchReservedAnimals, fetchUpdateAnimaleData} from "../../../api/animals";
+import {AuthContext} from "../../../contexts/AuthContext";
 import ErrorPage from "../../errors/ErrorPage";
 import { useAlert } from "react-alert";
 import { useHistory } from "react-router";
@@ -34,9 +34,10 @@ export default function ReservationList() {
     return <></>;
   }
 
-  if (isError) {
-    return <ErrorPage />;
-  }
+    if (isError) {
+        return <ErrorPage/>;
+    }
+
 
   const columns = [
     {
