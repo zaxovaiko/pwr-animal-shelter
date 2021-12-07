@@ -38,6 +38,7 @@ export default function Menu({ isOpened }: { isOpened: boolean }) {
           { path: "/adoption", text: "Adopcja", submenu },
           { path: "/contact", text: "Kontakt" },
           { path: "/reservations", text: "Rezerwacje" },
+          { path: "/forms", text: "Formularzy" },
           { path: "/animals-add", text: "Dodać zwierzę" },
         ];
       } else {

@@ -40,6 +40,7 @@
 }
 
 .anIssues__form-input-contents {
+    margin-top: 8vh;
     border-color: #dadada;
 }
 
@@ -86,15 +87,4 @@
 .anIssues__form-input-contents:focus {
     outline-width: 0;
     border-color: #dadada;
-}
-
-.anIssues__form-input-div-contents {
-  margin-top: 8vh;
-  width: 80%;
-  height: 20%;
-}
-
-.anIssues__form-input-div-contents-first {
-  width: 80%;
-  height: 20%;
 }
