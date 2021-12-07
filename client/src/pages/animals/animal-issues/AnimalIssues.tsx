@@ -1,5 +1,5 @@
 import styles from "./AnimalIssues.module.css";
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { send } from "emailjs-com";
 import { useFormik } from "formik";
@@ -8,8 +8,6 @@ import { useQuery } from "react-query";
 import { fetchAnimal } from "../../../api/animals";
 import { AuthContext } from "../../../contexts/AuthContext";
 import { useAlert } from "react-alert";
-import LoadingPage from "../../errors/LoadingPage";
-import ErrorPage from "../../errors/ErrorPage";
 
 init("user_jcVmieJrNckPINNxKG4Dj");
 
@@ -63,22 +61,12 @@ export default function AnimalIssues() {
     },
   });
 
-  useEffect(() => {
-    if (!isLoading && !isError && auth.token) {
-      if (formik.touched.contents && formik.errors.contents) {
-        refToContents.current.style.borderColor = "red";
-      } else {
-        refToContents.current.style.borderColor = "#DADADA";
-      }
-    }
-  });
-
   if (isLoading) {
-    return <LoadingPage />;
+    return <>Loading</>;
   }
 
   if (isError) {
-    return <ErrorPage />;
+    return <h1>Error has occured</h1>;
   }
 
   return (
@@ -91,43 +79,38 @@ export default function AnimalIssues() {
           className={styles["anIssues__form"]}
           onSubmit={formik.handleSubmit}
         >
-          <div className={styles["anIssues__form-input-div-contents-first"]}>
-            <input
-              type="text"
-              name="title"
-              ref={refToTitle}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.title}
-              className={styles["anIssues__form-input-title"]}
-              placeholder="Tytuł"
-              disabled={true}
-              style={{ width: "100%" }}
-            />
-            {formik.touched.title && formik.errors.title ? (
-              <div style={{ color: "red", width: "100%" }}>
-                {formik.errors.title}
-              </div>
-            ) : null}
-          </div>
+          <input
+            type="text"
+            name="title"
+            ref={refToTitle}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.title}
+            className={styles["anIssues__form-input-title"]}
+            placeholder="Tytuł"
+            disabled={true}
+            style={{ width: "100%" }}
+          />
+          {formik.touched.title && formik.errors.title ? (
+            <div style={{ color: "red", width: "100%" }}>
+              {formik.errors.title}
+            </div>
+          ) : null}
+          <textarea
+            name="contents"
+            style={{ width: "100%", height: "30vh" }}
+            ref={refToContents}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.contents}
+            className={styles["anIssues__form-input-contents"]}
+          />
+          {formik.touched.contents && formik.errors.contents ? (
+            <div style={{ color: "red", width: "100%" }}>
+              {formik.errors.contents}
+            </div>
+          ) : null}
 
-          <div className={styles["anIssues__form-input-div-contents"]}>
-            <label style={{}}>Treść:</label>
-            <textarea
-              name="contents"
-              style={{ width: "100%", height: "30vh" }}
-              ref={refToContents}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.contents}
-              className={styles["anIssues__form-input-contents"]}
-            />
-            {formik.touched.contents && formik.errors.contents ? (
-              <div style={{ color: "red", width: "100%" }}>
-                {formik.errors.contents}
-              </div>
-            ) : null}
-          </div>
           <button
             type="submit"
             className={styles["anIssues__form-submit-button"]}
