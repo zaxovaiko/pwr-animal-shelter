@@ -9,7 +9,6 @@ import { AuthContext } from "../../../contexts/AuthContext";
 import {
   fetchAnimal,
   fetchAnimalBreeds,
-  fetchAnimalGenders,
   fetchAnimalStatuses,
   fetchAnimalTypes,
   fetchUpdateAnimaleData,
@@ -132,33 +131,32 @@ export default function ModificateAnimal() {
   const statusesQuery = useQuery("getAnimalStatuses", () =>
     fetchAnimalStatuses()
   );
-  const gendersQuery = useQuery("getAnimalGenders", () => fetchAnimalGenders());
 
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
-      chip_code: data == undefined ? "" : data.chip_code,
-      type: data == undefined ? "" : data.animal_type.id,
-      name: data == undefined ? "" : data.name,
-      age: data == undefined ? "" : data.age,
-      height: data == undefined ? "" : data.height,
-      weight: data == undefined ? "" : data.weight,
-      gender: data == undefined ? "" : data.animal_gender.id,
-      breed: data == undefined ? "" : data.animal_breed.id,
-      status: data == undefined ? "" : data.animal_status.id,
-      color: data == undefined ? "" : data.color,
-      description: data == undefined ? "" : data.description,
-      vaccinations: data == undefined ? "" : data.vaccinations,
+      chip_code: !data ? "" : data.chip_code,
+      type: !data ? "" : data.animal_type.id,
+      name: !data ? "" : data.name,
+      age: !data ? "" : data.age,
+      height: !data ? "" : data.height,
+      weight: !data ? "" : data.weight,
+      gender: !data ? "" : data.animal_gender.id,
+      breed: !data ? "" : data.animal_breed.id,
+      status: !data ? "" : data.animal_status.id,
+      color: !data ? "" : data.color,
+      description: !data ? "" : data.description,
+      vaccinations: !data ? "" : data.vaccinations,
     },
     validate,
     onSubmit: (values) => {
       const formData = new FormData();
-      if (selectedFiles != []) {
-        for (var x = 0; x < selectedFiles.length; x++) {
+      if (selectedFiles.length > 0) {
+        for (let x = 0; x < selectedFiles.length; x++) {
           formData.append("images", selectedFiles[x]);
         }
       }
-      if (mainAnimalImage != "") {
+      if (mainAnimalImage !== "") {
         formData.append("image", mainAnimalImage);
       }
       formData.append("chip_code", values.chip_code);
@@ -286,25 +284,23 @@ export default function ModificateAnimal() {
     })
   );
 
-  const optionsBreeds =
-    breedsQuery.data == undefined
-      ? optionsBreedsExample
-      : breedsQuery.data?.results.map(
-          ({ id, value }: { id: string; value: string }) => ({
-            label: value,
-            value: id,
-          })
-        );
+  const optionsBreeds = !breedsQuery.data
+    ? optionsBreedsExample
+    : breedsQuery.data?.results.map(
+        ({ id, value }: { id: string; value: string }) => ({
+          label: value,
+          value: id,
+        })
+      );
 
-  const optionsStatuses =
-    statusesQuery.data == undefined
-      ? optionsStatusesExample
-      : statusesQuery.data?.results.map(
-          ({ id, value }: { id: string; value: string }) => ({
-            label: value,
-            value: id,
-          })
-        );
+  const optionsStatuses = !statusesQuery.data
+    ? optionsStatusesExample
+    : statusesQuery.data?.results.map(
+        ({ id, value }: { id: string; value: string }) => ({
+          label: value,
+          value: id,
+        })
+      );
 
   return (
     <div className={styles.modProfile}>
@@ -325,7 +321,13 @@ export default function ModificateAnimal() {
               />
             </div>
 
-            <div style={{ marginTop: "10%", display:"flex", alignItems: "center" }}>
+            <div
+              style={{
+                marginTop: "10%",
+                display: "flex",
+                alignItems: "center",
+              }}
+            >
               <label
                 htmlFor={styles["mod-animal-profile__form-input-div-weight"]}
                 style={{ position: "absolute" }}

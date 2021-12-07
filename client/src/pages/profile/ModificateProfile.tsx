@@ -3,7 +3,7 @@ import React, { useEffect, useContext, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { useFormik } from "formik";
 import { AuthContext } from "../../contexts/AuthContext";
-import { Container, Image } from "react-bootstrap";
+import { Image } from "react-bootstrap";
 import { useQuery } from "react-query";
 import { fetchProfileData, fetchUpdateProfileData } from "../../api/profile";
 import { useAlert } from "react-alert";
@@ -118,7 +118,7 @@ export default function ModificateProfile() {
     { retry: false }
   );
   const [phoneNumber, setPhone] = useState(
-    data === undefined ? "" : data.phone
+    !data ? "" : data.phone
   );
   const [mainUserImage, setMainUserImage] = useState("");
   function mainImageChangedHandler(event: any) {
@@ -129,27 +129,27 @@ export default function ModificateProfile() {
     formik.values.phone = value;
   }
 
-  const addressInfo = data === undefined ? "" : data.address.split(",");
-  const streetAndBuilding = data === undefined ? "" : addressInfo[0].split(" ");
+  const addressInfo = !data ? "" : data.address.split(",");
+  const streetAndBuilding = !data ? "" : addressInfo[0].split(" ");
 
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
-      first_name: data === undefined ? "" : data.first_name,
-      last_name: data === undefined ? "" : data.last_name,
-      street: data === undefined ? "" : streetAndBuilding[0],
-      buildingNumber: data === undefined ? "" : streetAndBuilding[1],
-      apartmentNumber: data === undefined ? "" : addressInfo[1],
-      city: data === undefined ? "" : addressInfo[2],
-      zip: data === undefined ? "" : addressInfo[3],
-      pesel: data === undefined ? "" : data.pesel,
+      first_name: !data ? "" : data.first_name,
+      last_name: !data ? "" : data.last_name,
+      street: !data ? "" : streetAndBuilding[0],
+      buildingNumber: !data ? "" : streetAndBuilding[1],
+      apartmentNumber: !data ? "" : addressInfo[1],
+      city: !data ? "" : addressInfo[2],
+      zip: !data ? "" : addressInfo[3],
+      pesel: !data ? "" : data.pesel,
       phone: phoneNumber,
-      email: data === undefined ? "" : data.email,
+      email: !data ? "" : data.email,
     },
     validate,
     onSubmit: (values) => {
       const formData = new FormData();
-      if (mainUserImage != "") {
+      if (mainUserImage !== "") {
         formData.append("image", mainUserImage);
       }
       formData.append("first_name", values.first_name);
