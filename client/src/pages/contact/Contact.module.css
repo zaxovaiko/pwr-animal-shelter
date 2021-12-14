@@ -1,28 +1,27 @@
 .main-container {
-    font-family: Quicksand, serif;
-    font-size: 1.3em;
-    color: #686464;
+  font-family: Quicksand, serif;
+  font-size: 1.3em;
+  color: #686464;
 }
 
 .image-icon {
-    height: 200px;
-    width: 220px;
-    margin-right: 9em;
-    float: left;
-    padding: 1em;
+  height: 200px;
+  width: 220px;
+  margin-right: 9em;
+  float: left;
+  padding: 1em;
 }
 
 .info-row {
-    margin-left: 4em;
-    margin-top: 7em;
-    margin-bottom: 5em;
-    align-items:center;
+  margin-left: 4em;
+  margin-top: 7em;
+  margin-bottom: 5em;
+  align-items: center;
 }
 
 @media (max-width: 1000px) {
-    .main-container {
-        margin-left: -50px;
-        width: 500px;
-    }
+  .main-container {
+    margin-left: -50px;
+    width: 500px;
+  }
 }
-

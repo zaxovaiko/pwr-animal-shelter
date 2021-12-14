@@ -40,8 +40,8 @@
 }
 
 .anIssues__form-input-contents {
-    margin-top: 8vh;
-    border-color: #dadada;
+  margin-top: 8vh;
+  border-color: #dadada;
 }
 
 .anIssues__form-submit-button {
@@ -59,19 +59,19 @@
 }
 
 .anIssues__form-cancel-button {
-    background-color: #0e576f;;
-    border: none;
-    color: white;
-    font-size: 20px;
-    border-radius: 25px;
-    text-decoration: none;
-    width: 80%;
-    height: 8vh;
-    font-weight: bold;
+  background-color: #0e576f;
+  border: none;
+  color: white;
+  font-size: 20px;
+  border-radius: 25px;
+  text-decoration: none;
+  width: 80%;
+  height: 8vh;
+  font-weight: bold;
 }
 
 .anIssues__form-cancel-button:hover {
-    background-color: #75C3C8
+  background-color: #75c3c8;
 }
 
 .anIssues__form-submit-button:hover {
@@ -85,6 +85,6 @@
 }
 
 .anIssues__form-input-contents:focus {
-    outline-width: 0;
-    border-color: #dadada;
+  outline-width: 0;
+  border-color: #dadada;
 }

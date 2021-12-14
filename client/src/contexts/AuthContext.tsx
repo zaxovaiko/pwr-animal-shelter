@@ -23,7 +23,6 @@ const AuthProvider: FC = ({ children }) => {
     if (token) {
       setTokenAndParseUser(token.replace("Bearer ", ""));
     }
-    console.log(token);
   }, []);
 
   function setTokenAndParseUser(token: string | null) {

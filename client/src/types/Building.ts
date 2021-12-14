@@ -1,5 +1,5 @@
 export type Building = {
-    id: string;
-    street: string;
-    number: string;
-}
+  id: string;
+  street: string;
+  number: string;
+};

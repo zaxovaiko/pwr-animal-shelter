@@ -76,12 +76,14 @@ export default function ReservedAnimalCard({
               marginBottom: "6vh",
             }}
           >
-            <strong style={{marginBottom: "14vh"}}>Czy napewno chcesz anulować rezerwację?</strong>
+            <strong style={{ marginBottom: "14vh" }}>
+              Czy napewno chcesz anulować rezerwację?
+            </strong>
             <div
               style={{
                 display: "flex",
                 justifyContent: "space-around",
-                paddingTop: "50px"
+                paddingTop: "50px",
               }}
             >
               <button
@@ -93,7 +95,7 @@ export default function ReservedAnimalCard({
               <button
                 className={styles["mod-animal-profile__form-cancel-button"]}
                 onClick={() => {
-                  history.go(0)
+                  history.go(0);
                 }}
               >
                 Nie

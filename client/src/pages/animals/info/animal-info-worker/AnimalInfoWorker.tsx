@@ -116,12 +116,10 @@ export default function AnimalInfoWorker() {
 
         <Row className={styles_main["animal-description"]}>
           <span>
-            {" "}
             <b> Data od: </b>
             {locationQuery.data?.date_from?.split("T")[0]}{" "}
           </span>
           <span>
-            {" "}
             <b>Lokalizacja: </b>ul. {locationQuery.data?.building?.street}, p.{" "}
             {locationQuery.data?.room?.number}
           </span>

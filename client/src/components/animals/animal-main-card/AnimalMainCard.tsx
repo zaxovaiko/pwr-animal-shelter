@@ -2,8 +2,8 @@ import { Image, Nav, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import styles from "./AnimalMainCard.module.css";
 import { Animal } from "../../../types/Animal";
-import {useContext} from "react";
-import {AuthContext} from "../../../contexts/AuthContext";
+import { useContext } from "react";
+import { AuthContext } from "../../../contexts/AuthContext";
 
 export default function MainAnimalCard({
   id,
@@ -12,20 +12,19 @@ export default function MainAnimalCard({
   description,
   image,
 }: Animal) {
-    const { auth } = useContext(AuthContext);
+  const { auth } = useContext(AuthContext);
 
-    function permissionCheck(id: string) {
-        if (auth.user) {
-            if (auth.user.is_staff) {
-                return "/animal/" + id
-            }else {
-                return "/animals/" + id
-            }
-        } else {
-            return "/animals/" + id
-        }
+  function permissionCheck(id: string) {
+    if (auth.user) {
+      if (auth.user.is_staff) {
+        return "/animal/" + id;
+      } else {
+        return "/animals/" + id;
+      }
+    } else {
+      return "/animals/" + id;
     }
-
+  }
 
   return (
     <Card className={styles["animal-card"]} body>

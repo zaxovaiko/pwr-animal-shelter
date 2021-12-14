@@ -7,6 +7,7 @@ import { AuthContext } from "../../../contexts/AuthContext";
 import styles from "./ReservedAnimalsList.module.css";
 import { fetchReservations } from "../../../api/reservations";
 import ErrorPage from "../../errors/ErrorPage";
+import LoadingPage from "../../errors/LoadingPage";
 
 export default function ReservedAnimalsList() {
   const { auth } = useContext(AuthContext);
@@ -19,7 +20,7 @@ export default function ReservedAnimalsList() {
   }
 
   if (isLoading) {
-    return <>Loading</>;
+    return <LoadingPage />;
   }
   return (
     <>

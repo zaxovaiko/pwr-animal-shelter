@@ -11,14 +11,9 @@ export default function Menu({ isOpened }: { isOpened: boolean }) {
   const { isError, isLoading, data } = useQuery("getAnimalTypes", () =>
     fetchAnimalTypes()
   );
-
   const { auth } = useContext(AuthContext);
 
-  if (isError) {
-    return <></>;
-  }
-
-  if (isLoading) {
+  if (isError || isLoading) {
     return <></>;
   }
 

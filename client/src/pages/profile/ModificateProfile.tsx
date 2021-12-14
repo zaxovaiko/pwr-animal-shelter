@@ -117,9 +117,7 @@ export default function ModificateProfile() {
     () => fetchProfileData(id),
     { retry: false }
   );
-  const [phoneNumber, setPhone] = useState(
-    !data ? "" : data.phone
-  );
+  const [phoneNumber, setPhone] = useState(!data ? "" : data.phone);
   const [mainUserImage, setMainUserImage] = useState("");
   function mainImageChangedHandler(event: any) {
     setMainUserImage(event.target.files[0]);

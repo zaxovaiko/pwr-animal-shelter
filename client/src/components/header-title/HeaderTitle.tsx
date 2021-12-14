@@ -15,7 +15,11 @@ export default function HeaderTitle({
       <Container
         fluid
         className={styles["header__image"]}
-        style={color ? { backgroundColor: color } : { backgroundImage: `url(${image})` }}
+        style={
+          color
+            ? { backgroundColor: color }
+            : { backgroundImage: `url(${image})` }
+        }
       />
       <Container fluid>
         <Row>

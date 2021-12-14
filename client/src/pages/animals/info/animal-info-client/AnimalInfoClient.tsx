@@ -10,6 +10,7 @@ import { useAlert } from "react-alert";
 import { useContext } from "react";
 import { AuthContext } from "../../../../contexts/AuthContext";
 import ErrorPage from "../../../errors/ErrorPage";
+import LoadingPage from "../../../errors/LoadingPage";
 
 export default function AnimalInfoClient() {
   const history = useHistory();
@@ -22,22 +23,17 @@ export default function AnimalInfoClient() {
       alert.error("Musisz być zalogowany!");
     }
   };
-
   const { id } = useParams<{ id: string }>();
   const { isLoading, isError, data } = useQuery<Animal>("fetchAnimal", () =>
     fetchAnimal(id)
   );
 
   if (isLoading) {
-    return <>Loading</>;
+    return <LoadingPage />;
   }
 
-  if (isError) {
+  if (isError || !data) {
     return <ErrorPage />;
-  }
-
-  if (!data) {
-    return <>Something went wrong</>;
   }
 
   return (

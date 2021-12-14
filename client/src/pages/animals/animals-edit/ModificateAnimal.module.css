@@ -106,12 +106,12 @@
 }
 
 #mod-animal-profile__form-input-div-gender {
-    width: 100%;
-    height: 100%;
-    border-width: 0px 0px 2px;
-    border-color: #dadada;
-    padding-left: 40px;
-  }
+  width: 100%;
+  height: 100%;
+  border-width: 0px 0px 2px;
+  border-color: #dadada;
+  padding-left: 40px;
+}
 
 #mod-animal-profile__form-input-div-breed {
   width: 100%;
@@ -218,8 +218,8 @@
 }
 
 #mod-animal__form-input-info:focus {
-    outline-width: 0;
-    border-color: #dadada;
+  outline-width: 0;
+  border-color: #dadada;
 }
 
 .photo-container {
@@ -245,5 +245,3 @@
   height: 120px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
-
-

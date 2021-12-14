@@ -22,5 +22,5 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RunPython(load_data_from_sql),
+        migrations.RunPython(load_data_from_sql, migrations.RunPython.noop),
     ]

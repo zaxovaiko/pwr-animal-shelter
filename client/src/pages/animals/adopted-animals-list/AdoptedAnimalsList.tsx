@@ -6,6 +6,7 @@ import AdoptedAnimalCard from "../../../components/animals/adopted-animal-card/A
 import HeaderTitle from "../../../components/header-title/HeaderTitle";
 import { AuthContext } from "../../../contexts/AuthContext";
 import ErrorPage from "../../errors/ErrorPage";
+import LoadingPage from "../../errors/LoadingPage";
 
 export default function AdoptedAnimalsList() {
   const { auth } = useContext(AuthContext);
@@ -15,7 +16,7 @@ export default function AdoptedAnimalsList() {
   );
 
   if (isLoading) {
-    return <>Loading</>;
+    return <LoadingPage />;
   }
 
   if (isError) {
