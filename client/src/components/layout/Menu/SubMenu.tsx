@@ -18,7 +18,9 @@ export default function SubMenu({
 }) {
   return (
     <ul
-      className={styles["c-header__menu__submenu"] + (!isOpened ? " d-none" : " d-block")}
+      className={
+        styles["c-header__menu__submenu"] + (!isOpened ? " d-none" : " d-block")
+      }
     >
       {links &&
         links.map(({ path, text }, i) => (

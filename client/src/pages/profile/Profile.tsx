@@ -4,6 +4,8 @@ import { useQuery } from "react-query";
 import { Link, useParams } from "react-router-dom";
 import { fetchProfileData } from "../../api/profile";
 import { AuthContext } from "../../contexts/AuthContext";
+import ErrorPage from "../errors/ErrorPage";
+import LoadingPage from "../errors/LoadingPage";
 import styles from "./Profile.module.css";
 
 const FIELDS_TO_SHOW = [
@@ -18,6 +20,7 @@ const FIELDS_TO_SHOW = [
 export default function Profile() {
   const { id } = useParams<{ id: string }>();
   const { auth } = useContext(AuthContext);
+  const infoToEdit: string = "/profile/edit/" + id;
   const { isLoading, isError, data } = useQuery(
     ["getProfileData", id],
     () => fetchProfileData(id),
@@ -25,14 +28,13 @@ export default function Profile() {
   );
 
   if (isLoading) {
-    return <>Loading</>;
+    return <LoadingPage />;
   }
 
   if (isError) {
-    return <h1>Error has occured</h1>;
+    return <ErrorPage />;
   }
 
-  console.log(data)
   return (
     <>
       <Container fluid className={styles["top-page"]} />
@@ -41,7 +43,7 @@ export default function Profile() {
           roundedCircle
           className={styles["top-page__header__user-img"]}
           src={data.image}
-          alt="User's image"
+          alt="Brak zdjęcia"
         />
         <h1 className={styles["top-page__header__title"]}>Moje dane</h1>
       </div>
@@ -56,7 +58,7 @@ export default function Profile() {
         )}
       </Container>
       {auth.user && (
-        <Link to="/profile/2" className="text-decoration-none">
+        <Link to={infoToEdit} className="text-decoration-none">
           <Button className={styles["btn-modify"]}>Modyfikuj</Button>
         </Link>
       )}

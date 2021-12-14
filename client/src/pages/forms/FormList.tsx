@@ -1,5 +1,5 @@
 import { Container } from "react-bootstrap";
-import HeaderTitle from "../../components/HeaderTitle/HeaderTitle";
+import HeaderTitle from "../../components/header-title/HeaderTitle";
 import styles from "./FormList.module.css";
 
 export default function FormList() {

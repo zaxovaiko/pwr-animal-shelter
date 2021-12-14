@@ -60,7 +60,7 @@
   height: 100%;
   border-width: 0px 0px 2px;
   border-color: #dadada;
-  padding-left: 7vh;
+  padding-left: 50px;
 }
 
 #registration__form-input-div-surname {
@@ -68,7 +68,7 @@
   height: 100%;
   border-width: 0px 0px 2px;
   border-color: #dadada;
-  padding-left: 12vh;
+  padding-left: 85px;
 }
 
 #registration__form-input-div-pesel {
@@ -76,15 +76,14 @@
   height: 100%;
   border-width: 0px 0px 2px;
   border-color: #dadada;
-  padding-left: 9vh;
+  padding-left: 60px;
 }
 
 #registration__form-input-div-tel {
   width: 100%;
   height: 100%;
-  border-width: 0px 0px 2px;
+  border-width: 2px;
   border-color: #dadada;
-  padding-left: 5vh;
 }
 
 #registration__form-input-div-adress,
@@ -94,7 +93,39 @@
   height: 100%;
   border-width: 0px 0px 2px;
   border-color: #dadada;
-  padding-left: 8vh;
+  padding-left: 55px;
+}
+
+#registration__form-input-div-adress-building {
+  width: 100%;
+  height: 100%;
+  border-width: 0px 0px 2px;
+  border-color: #dadada;
+  padding-left: 135px;
+}
+
+#registration__form-input-div-adress-apartment {
+  width: 100%;
+  height: 100%;
+  border-width: 0px 0px 2px;
+  border-color: #dadada;
+  padding-left: 155px;
+}
+
+#registration__form-input-div-adress-city {
+  width: 100%;
+  height: 100%;
+  border-width: 0px 0px 2px;
+  border-color: #dadada;
+  padding-left: 65px;
+}
+
+#registration__form-input-div-adress-zip {
+  width: 100%;
+  height: 100%;
+  border-width: 0px 0px 2px;
+  border-color: #dadada;
+  padding-left: 120px;
 }
 
 #registration__form-input-div-password-repeat {
@@ -102,7 +133,7 @@
   height: 100%;
   border-width: 0px 0px 2px;
   border-color: #dadada;
-  padding-left: 17.5vh;
+  padding-left: 120px;
 }
 
 #registration__form-input-div-name:focus,
@@ -112,7 +143,11 @@
 #registration__form-input-div-adress:focus,
 #registration__form-input-div-email:focus,
 #registration__form-input-div-password:focus,
-#registration__form-input-div-password-repeat:focus {
+#registration__form-input-div-password-repeat:focus,
+#registration__form-input-div-adress-building:focus,
+#registration__form-input-div-adress-apartment:focus,
+#registration__form-input-div-adress-city:focus,
+#registration__form-input-div-adress-zip:focus {
   outline-width: 0;
   border-width: 0px 0px 2px;
 }

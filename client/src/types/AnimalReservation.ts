@@ -10,8 +10,8 @@ export type ReservationStatus = Entity;
 
 export type AnimalReservation = {
   id: string;
-  date: string;
+  user: User;
   animal: Animal;
   reservation_status: ReservationStatus;
-  user: User;
+  date: string;
 };

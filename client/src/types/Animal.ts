@@ -7,6 +7,11 @@ export type AnimalBreed = Entity;
 export type AnimalStatus = Entity;
 export type AnimalType = Entity;
 export type AnimalGender = Entity;
+export type AnimalImage = {
+  id: string;
+  image: string;
+  animal?: Animal;
+};
 
 export type Animal = {
   id: string;
@@ -18,7 +23,9 @@ export type Animal = {
   animal_breed: AnimalGender;
   color: string;
   image: string;
+  images: [AnimalImage];
   height: number;
+  weight: number;
   description: string;
   vaccinations: string;
   animal_status: AnimalStatus;

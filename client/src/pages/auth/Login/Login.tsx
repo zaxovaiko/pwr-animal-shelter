@@ -1,9 +1,10 @@
 import React, { useEffect, useContext } from "react";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import styles from "./Login.module.css";
 import { useFormik } from "formik";
 import { AuthContext } from "../../../contexts/AuthContext";
 import { fetchLoginData } from "../../../api/auth";
+import { useAlert } from "react-alert";
 
 let refToEmail: React.RefObject<any> = React.createRef();
 let refToPassword: React.RefObject<any> = React.createRef();
@@ -29,8 +30,9 @@ const validate = (values: any) => {
 };
 
 export default function Login() {
+  const alert = useAlert();
   const history = useHistory();
-  const { auth, setAuth } = useContext(AuthContext);
+  const { setAuth } = useContext(AuthContext);
   let check = false;
 
   const formik = useFormik({
@@ -47,10 +49,11 @@ export default function Login() {
         .then((res) => {
           if (res.access) {
             setAuth(res.access);
-            history.push("/");
-          } else {
-            refToErrorUser.current.style.visibility = "visible";
+            alert.success("Zostałeś zalogowany do swojego konta.");
+            return history.push("/");
           }
+          alert.error("Coś poszło nie tak. Spróbuj ponownie.");
+          refToErrorUser.current.style.visibility = "visible";
         })
         .catch(console.error);
     },
@@ -70,7 +73,6 @@ export default function Login() {
     }
 
     if (check) {
-      alert(check);
       refToErrorUser.current.style.visibility = "visible";
     }
   });
@@ -112,9 +114,9 @@ export default function Login() {
             </div>
           ) : null}
           <div className={styles["login__text-pass"]}>
-            <a href="/" className={styles["login__a-text-pass"]}>
+            <Link className={styles["login__a-text-pass"]} to="/password-reset">
               Nie pamiętam hasła
-            </a>
+            </Link>
           </div>
           <button type="submit" className={styles["login__form-submit-button"]}>
             Zaloguj
@@ -134,9 +136,9 @@ export default function Login() {
         </form>
         <div className={styles["login__text-reg"]}>
           Nie masz konta?&nbsp;
-          <a href="/registration" className={styles["login__a-text-reg"]}>
+          <Link to="/registration" className={styles["login__a-text-reg"]}>
             <strong>Zarejestruj się</strong>
-          </a>
+          </Link>
         </div>
       </div>
     </div>

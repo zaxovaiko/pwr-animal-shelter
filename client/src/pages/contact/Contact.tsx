@@ -1,5 +1,5 @@
 import { Container, Image, Row } from "react-bootstrap";
-import HeaderTitle from "../../components/HeaderTitle/HeaderTitle";
+import HeaderTitle from "../../components/header-title/HeaderTitle";
 import styles_main from "./Contact.module.css";
 
 export default function Contact() {

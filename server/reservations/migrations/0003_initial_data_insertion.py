@@ -4,8 +4,7 @@ from django.db import migrations
 
 
 def insert_reservation_statuses(apps, schema_editor):
-    statuses = ['Oczekuje potwierdzenia', 'Potwierdzono',
-                'Brak informacji', 'Do rozpatrzenia']
+    statuses = ['Aktywna', 'Anulowana']
     ReservationStatus = apps.get_model('reservations', 'ReservationStatus')
 
     for status in statuses:
@@ -18,9 +17,9 @@ def insert_reservations(apps, schema_editor):
     User = apps.get_model('users', 'User')
     Animal = apps.get_model('animals', 'Animal')
 
-    for _ in range(35):
+    for _ in range(1):
         user = User.objects.order_by('?').first()
-        animal = Animal.objects.filter(animal_status=3).order_by('?').first()
+        animal = Animal.objects.filter(animal_status=0).order_by('?').first()
         reservation_status = ReservationStatus.objects.order_by('?').first()
         AnimalReservation.objects.create(
             user=user, animal=animal, reservation_status=reservation_status)
@@ -30,11 +29,12 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('reservations', '0002_animalreservation_user'),
-        ('users', '0002_initial_data_insertion')
+        ('users', '0002_initial_data_insertion'),
+        ('animals', '0002_initial_data_insertion'),
     ]
 
     operations = [
         migrations.RunPython(insert_reservation_statuses,
                              migrations.RunPython.noop),
-        migrations.RunPython(insert_reservations, migrations.RunPython.noop)
+        #migrations.RunPython(insert_reservations, migrations.RunPython.noop)
     ]

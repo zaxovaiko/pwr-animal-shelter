@@ -1,54 +1,54 @@
 .main-container {
-    font-family: Quicksand, serif;
-    font-size: 1.3em;
-    color: #686464;
+  font-family: Quicksand, serif;
+  font-size: 1.3em;
+  color: #686464;
 }
 
 .main-content {
-    margin-top: 5em;
-    margin-bottom: 10em;
+  margin-top: 5em;
+  margin-bottom: 10em;
 }
 
 .details-row {
-    margin-top: 4em;
-    margin-left: 2em;
-    margin-right: 2em;
+  margin-top: 4em;
+  margin-left: 2em;
+  margin-right: 2em;
 }
 
 .details-summary {
-    padding-top: 1.3em;
-    background: rgba(133, 175, 91, 0.47);
-    height: 150px;
-    list-style: none
+  padding-top: 1.3em;
+  background: rgba(133, 175, 91, 0.47);
+  height: 150px;
+  list-style: none;
 }
 
 .details-summary-title {
-    text-align: center;
-    margin-top: 0.2em;
-    margin-left: 1.5em;
-    padding: 0.5em 2em;
-    height: 2.5em;
-    width: 14em;
-    background-color: rgba(104, 100, 100, 0.6);
-    color: white;
-    font-size: 1.5em;
-    font-weight: bolder;
-    border-radius: 10px;
+  text-align: center;
+  margin-top: 0.2em;
+  margin-left: 1.5em;
+  padding: 0.5em 2em;
+  height: 2.5em;
+  width: 14em;
+  background-color: rgba(104, 100, 100, 0.6);
+  color: white;
+  font-size: 1.5em;
+  font-weight: bolder;
+  border-radius: 10px;
 }
 
 .details-main-text {
-    margin-top: 2em;
-    margin-left: 3em;
-    margin-bottom: 2em;
+  margin-top: 2em;
+  margin-left: 3em;
+  margin-bottom: 2em;
 }
 
 .details-headers {
-    margin-bottom: 1em;
-    font-weight: bold;
+  margin-bottom: 1em;
+  font-weight: bold;
 }
 
 .details-important {
-    margin-top: 1em;
-    color: #0E576F;
-    font-weight: bold;
+  margin-top: 1em;
+  color: #0e576f;
+  font-weight: bold;
 }

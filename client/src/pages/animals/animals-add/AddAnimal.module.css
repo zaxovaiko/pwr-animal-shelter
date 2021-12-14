@@ -1,0 +1,247 @@
+.modProfile {
+  background-image: url("../../../assets/auth/Sign_in_back-bicubic.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  font-family: "Quicksand", sans-serif;
+  padding-bottom: 30vh;
+}
+
+.mod-animal-profile__label-h1 {
+  color: #686464;
+  width: 100vh;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+.mod-animal-profile__container {
+  padding-top: 15vh;
+  padding-left: 15vh;
+  display: flex;
+  flex-wrap: wrap;
+  width: 50%;
+  justify-content: center;
+}
+
+.mod-animal-profile__form {
+  width: 55vh;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.mod-animal-profile_form-input-div-first {
+  margin-top: 8vh;
+  width: 80%;
+  height: 20%;
+}
+
+.mod-animal-profile_form-input-div {
+  margin-top: 6vh;
+  width: 80%;
+  height: 20%;
+}
+
+.mod-animal-profile_form-input-div-pass {
+  margin-top: 12vh;
+  width: 80%;
+  height: 20%;
+}
+
+#mod-animal-profile__form-input-div-name {
+  width: 100%;
+  height: 100%;
+  border-width: 0px 0px 2px;
+  border-color: #dadada;
+  padding-left: 45px;
+}
+
+#mod-animal-profile__form-input-div-chip {
+  width: 100%;
+  height: 100%;
+  border-width: 0px 0px 2px;
+  border-color: #dadada;
+  padding-left: 45px;
+}
+
+#mod-animal-profile__form-input-div-type {
+  width: 100%;
+  height: 100%;
+  border-width: 0px 0px 2px;
+  border-color: #dadada;
+  padding-left: 35px;
+}
+
+#mod-animal-profile__form-input-div-age {
+  width: 100%;
+  height: 100%;
+  border-width: 0px 0px 2px;
+  border-color: #dadada;
+  padding-left: 48px;
+}
+
+#mod-animal-profile__form-input-div-height {
+  width: 100%;
+  height: 100%;
+  border-width: 0px 0px 2px;
+  border-color: #dadada;
+  padding-left: 103px;
+}
+
+#mod-animal-profile__form-input-div-weight {
+  width: 100%;
+  height: 100%;
+  border-width: 0px 0px 2px;
+  border-color: #dadada;
+  padding-left: 90px;
+}
+
+#mod-animal-profile__form-input-div-color {
+  width: 100%;
+  height: 100%;
+  border-width: 0px 0px 2px;
+  border-color: #dadada;
+  padding-left: 53px;
+}
+
+#mod-animal-profile__form-input-div-gender {
+  width: 100%;
+  height: 100%;
+  border-width: 0px 0px 2px;
+  border-color: #dadada;
+  padding-left: 40px;
+}
+
+#mod-animal-profile__form-input-div-breed {
+  width: 100%;
+  height: 100%;
+  border-width: 0px 0px 2px;
+  border-color: #dadada;
+  padding-left: 48px;
+}
+
+.mod-animal-profile__form-cancel-button {
+  background-color: #0e576f;
+  border: none;
+  color: white;
+  font-size: 20px;
+  border-radius: 25px;
+  text-decoration: none;
+  width: 80%;
+  height: 8vh;
+  font-weight: bold;
+}
+
+.mod-animal-profile__form-cancel-button:hover {
+  background-color: #75c3c8;
+}
+
+#mod-animal-profile__form-input-div-status {
+  width: 100%;
+  height: 100%;
+  border-width: 0px 0px 2px;
+  border-color: #dadada;
+  padding-left: 55px;
+}
+
+#mod-animal-profile__form-input-div-name:focus,
+#mod-animal-profile__form-input-div-chip:focus,
+#mod-animal-profile__form-input-div-type:focus,
+#mod-animal-profile__form-input-div-age:focus,
+#mod-animal-profile__form-input-div-status:focus,
+#mod-animal-profile__form-input-div-height:focus,
+#mod-animal-profile__form-input-div-weight:focus,
+#mod-animal-profile__form-input-div-color:focus,
+#mod-animal-profile__form-input-div-breed:focus,
+#mod-animal-profile__form-input-div-gender:focus {
+  outline-width: 0;
+  border-width: 0px 0px 2px;
+}
+
+.mod-animal-profile__text-pass {
+  width: 80%;
+  padding-top: 1%;
+  display: flex;
+}
+
+.mod-animal-profile__a-text-pass:hover,
+.mod-animal-profile__a-text-reg:hover {
+  color: #a2e3e9;
+}
+
+.mod-animal-profile__a-text-pass {
+  margin-left: auto;
+}
+
+.mod-animal-profile__form-submit-button {
+  background-color: #adcf62;
+  text-align: center;
+  border: none;
+  color: white;
+  margin-top: 20%;
+  margin-bottom: 5%;
+  font-size: 2.8vh;
+  border-radius: 25px;
+  text-decoration: none;
+  width: 80%;
+  height: 8vh;
+  font-weight: bold;
+}
+
+.mod-animal-profile__form-submit-button:hover {
+  background-color: #d2d980;
+}
+
+.mod-animal-profile__text-reg {
+  display: flex;
+  justify-content: center;
+  font-size: 2.2vh;
+}
+
+.mod-animal-profile__a-text-reg {
+  color: #0e576f;
+  margin-right: auto;
+}
+
+.mod-animal-profile__form-input-div-checkbox {
+  -ms-transform: scale(2); /* IE */
+  -moz-transform: scale(2); /* FF */
+  -webkit-transform: scale(2); /* Safari and Chrome */
+  -o-transform: scale(2); /* Opera */
+  transform: scale(2);
+}
+
+#mod-animal__form-input-info {
+  margin-top: 5vh;
+  border-color: #dadada;
+}
+
+#mod-animal__form-input-info:focus {
+  outline-width: 0;
+  border-color: #dadada;
+}
+
+.photo-container {
+  display: flex;
+  justify-content: center;
+  width: fit-content;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+
+.photo {
+  width: 100px;
+  height: 75px;
+  border-radius: 10%;
+  margin: 10px;
+}
+
+.mod-animal__image {
+  display: flex;
+  justify-content: center;
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}

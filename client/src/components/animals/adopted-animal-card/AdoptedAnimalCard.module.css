@@ -1,0 +1,37 @@
+.adopted-animal-card {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  padding: 20px;
+  margin-bottom: 45px;
+  background: rgba(133, 175, 91, 0.23);
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.08);
+  border-radius: 10px;
+}
+
+.adopted-animal-card__img {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  margin-right: 15px;
+  margin-left: -60px;
+  margin-top: -70px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.adopted-animal-card__name {
+  margin: 0;
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: #686464;
+}
+
+.adopted-animal-card__date {
+  margin-top: 10px;
+  font-weight: normal;
+}
+
+.adopted-animal-card__btn {
+  margin-left: auto;
+  padding: 10px 45px;
+}

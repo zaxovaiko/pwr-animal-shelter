@@ -1,20 +1,35 @@
-import React, { useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useHistory } from "react-router-dom";
 import { useFormik } from "formik";
 import styles from "./Registration.module.css";
 import { fetchRegisterData } from "../../../api/auth";
+import { useAlert } from "react-alert";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/material.css";
 
 let refToFirstName: React.RefObject<any> = React.createRef();
 let refToLastName: React.RefObject<any> = React.createRef();
 let refToPesel: React.RefObject<any> = React.createRef();
-let refToPhoneNumber: React.RefObject<any> = React.createRef();
 let refToEmail: React.RefObject<any> = React.createRef();
 let refToPassword: React.RefObject<any> = React.createRef();
 let refToRepeatPassword: React.RefObject<any> = React.createRef();
+let refToStreet: React.RefObject<any> = React.createRef();
+let refToBuilding: React.RefObject<any> = React.createRef();
+let refToApartment: React.RefObject<any> = React.createRef();
+let refToCity: React.RefObject<any> = React.createRef();
+let refToZip: React.RefObject<any> = React.createRef();
 
 const validate = (values: any) => {
   function isNumeric(value: string) {
     return /^-?\d+$/.test(value);
+  }
+
+  function validateZip(zipCode: string) {
+    var zip = require("zippo");
+    return zip.validate(zipCode);
+  }
+  function isInDesiredForm(number: string) {
+    return /^\+?(0|[1-9]\d*)$/.test(number);
   }
 
   const errors: {
@@ -22,7 +37,11 @@ const validate = (values: any) => {
     lastName?: String;
     pesel?: String;
     phoneNumber?: String;
-    address?: String;
+    street?: String;
+    buildingNumber?: String;
+    apartmentNumber?: String;
+    city?: String;
+    zip?: String;
     email?: String;
     password?: String;
     repeatPassword?: String;
@@ -32,14 +51,14 @@ const validate = (values: any) => {
 
   if (!values.firstName) {
     errors.firstName = "*Pole jest obowiązkowe";
-  } else if (values.firstName.length > 15) {
-    errors.firstName = "*Pole musi mieć nie więcej niż 15 znaków";
+  } else if (values.firstName.length > 50) {
+    errors.firstName = "*Pole musi mieć nie więcej niż 50 znaków";
   }
 
   if (!values.lastName) {
     errors.lastName = "*Pole jest obowiązkowe";
-  } else if (values.lastName.length > 20) {
-    errors.lastName = "*Pole musi mieć nie więcej niż 20 znaków";
+  } else if (values.lastName.length > 50) {
+    errors.lastName = "*Pole musi mieć nie więcej niż 50 znaków";
   }
 
   if (!values.pesel) {
@@ -52,10 +71,34 @@ const validate = (values: any) => {
 
   if (!values.phoneNumber) {
     errors.phoneNumber = "*Pole jest obowiązkowe";
-  } else if (values.phoneNumber.length !== 9) {
-    errors.phoneNumber = "*Pole musi mieć 9 znaków";
-  } else if (!isNumeric(values.phoneNumber)) {
-    errors.phoneNumber = "*Pole musi zawierać wyłącznie cyfry";
+  } else if (values.phoneNumber.length < 11) {
+    errors.phoneNumber = "*Niepoprawne dane";
+  }
+
+  if (!values.street) {
+    errors.street = "*Pole jest obowiązkowe";
+  }
+
+  if (!values.buildingNumber) {
+    errors.buildingNumber = "*Pole jest obowiązkowe";
+  }
+
+  if (!values.apartmentNumber) {
+    errors.apartmentNumber = "*Pole jest obowiązkowe";
+  } else if (!isNumeric(values.apartmentNumber)) {
+    errors.apartmentNumber = "*Pole musi zawierać wyłącznie cyfry";
+  } else if (!isInDesiredForm(values.apartmentNumber)) {
+    errors.apartmentNumber = "*Niepoprawne dane";
+  }
+
+  if (!values.city) {
+    errors.city = "*Pole jest obowiązkowe";
+  }
+
+  if (!values.zip) {
+    errors.zip = "*Pole jest obowiązkowe";
+  } else if (!validateZip(values.zip)) {
+    errors.zip = "*Niepoprawny kod pocztowy";
   }
 
   if (!values.email) {
@@ -66,8 +109,8 @@ const validate = (values: any) => {
 
   if (!values.password) {
     errors.password = "*Pole jest obowiązkowe";
-  } else if (values.password.length > 11) {
-    errors.password = "*Pole musi mieć więcej niż 11 znaków";
+  } else if (values.password.length < 6) {
+    errors.password = "*Pole musi mieć więcej niż 5 znaków";
   }
 
   if (!values.repeatPassword) {
@@ -89,14 +132,25 @@ const validate = (values: any) => {
 };
 
 export default function Registration() {
+  const alert = useAlert();
   const history = useHistory();
+  const [phone, setPhone] = useState("");
+  function handleOnChangePhone(value: any) {
+    setPhone(value);
+    formik.values.phoneNumber = value;
+  }
+
   const formik = useFormik({
     initialValues: {
       firstName: "",
       lastName: "",
       pesel: "",
       phoneNumber: "",
-      address: "",
+      apartmentNumber: "",
+      buildingNumber: "",
+      city: "",
+      street: "",
+      zip: "",
       email: "",
       password: "",
       repeatPassword: "",
@@ -110,14 +164,24 @@ export default function Registration() {
         first_name: values.firstName,
         last_name: values.lastName,
         phone: values.phoneNumber,
+        address: `${values.street} ${values.buildingNumber},${values.apartmentNumber},${values.city},${values.zip}`,
       })
         .then((res) => {
           if (res.id) {
-            history.push("/login");
+            alert.success("Teraz juz możesz zalogować się.");
+            return history.push("/login");
           }
-          console.log(res);
+          if (res.pesel) {
+            alert.error(
+              "W systemie istnieje już użytkownik z podanym numerem PESEL"
+            );
+          } else if (res.email) {
+            alert.error("W systemie istnieje już użytkownik z podanym e-mail");
+          } else {
+            alert.error(res.error);
+          }
         })
-        .catch(console.error);
+        .catch(() => {});
     },
   });
 
@@ -140,12 +204,6 @@ export default function Registration() {
       refToPesel.current.style.borderColor = "#DADADA";
     }
 
-    if (formik.touched.phoneNumber && formik.errors.phoneNumber) {
-      refToPhoneNumber.current.style.borderColor = "red";
-    } else {
-      refToPhoneNumber.current.style.borderColor = "#DADADA";
-    }
-
     if (formik.touched.email && formik.errors.email) {
       refToEmail.current.style.borderColor = "red";
     } else {
@@ -162,6 +220,36 @@ export default function Registration() {
       refToRepeatPassword.current.style.borderColor = "red";
     } else {
       refToRepeatPassword.current.style.borderColor = "#DADADA";
+    }
+
+    if (formik.touched.street && formik.errors.street) {
+      refToStreet.current.style.borderColor = "red";
+    } else {
+      refToStreet.current.style.borderColor = "#DADADA";
+    }
+
+    if (formik.touched.buildingNumber && formik.errors.buildingNumber) {
+      refToBuilding.current.style.borderColor = "red";
+    } else {
+      refToBuilding.current.style.borderColor = "#DADADA";
+    }
+
+    if (formik.touched.apartmentNumber && formik.errors.apartmentNumber) {
+      refToApartment.current.style.borderColor = "red";
+    } else {
+      refToApartment.current.style.borderColor = "#DADADA";
+    }
+
+    if (formik.touched.city && formik.errors.city) {
+      refToCity.current.style.borderColor = "red";
+    } else {
+      refToCity.current.style.borderColor = "#DADADA";
+    }
+
+    if (formik.touched.zip && formik.errors.zip) {
+      refToZip.current.style.borderColor = "red";
+    } else {
+      refToZip.current.style.borderColor = "#DADADA";
     }
   });
 
@@ -251,13 +339,17 @@ export default function Registration() {
             >
               *Tel:
             </label>
-            <input
-              name="phoneNumber"
-              id={styles["registration__form-input-div-tel"]}
-              value={formik.values.phoneNumber}
-              onBlur={formik.handleBlur}
-              onChange={formik.handleChange}
-              ref={refToPhoneNumber}
+            <PhoneInput
+              country={"pl"}
+              placeholder={""}
+              specialLabel="*Numer telefonu"
+              value={phone}
+              onChange={handleOnChangePhone}
+              inputProps={{
+                name: "phoneNumber",
+                id: styles["registration__form-input-div-tel"],
+                onBlur: formik.handleBlur,
+              }}
             />
             {formik.touched.phoneNumber && formik.errors.phoneNumber ? (
               <div style={{ color: "red", position: "absolute" }}>
@@ -271,15 +363,114 @@ export default function Registration() {
               htmlFor={styles["registration__form-input-div-adress"]}
               style={{ position: "absolute" }}
             >
-              Adres:
+              *Ulica:
             </label>
             <input
-              name="address"
+              name="street"
               type="text"
+              ref={refToStreet}
               id={styles["registration__form-input-div-adress"]}
               onChange={formik.handleChange}
-              value={formik.values.address}
+              onBlur={formik.handleBlur}
+              value={formik.values.street}
             />
+            {formik.touched.street && formik.errors.street ? (
+              <div style={{ color: "red", position: "absolute" }}>
+                {formik.errors.street}
+              </div>
+            ) : null}
+          </div>
+
+          <div className={styles["registration_form-input-div"]}>
+            <label
+              htmlFor={styles["registration__form-input-div-adress-building"]}
+              style={{ position: "absolute" }}
+            >
+              *Numer budynku:
+            </label>
+            <input
+              name="buildingNumber"
+              type="text"
+              ref={refToBuilding}
+              id={styles["registration__form-input-div-adress-building"]}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.buildingNumber}
+            />
+            {formik.touched.buildingNumber && formik.errors.buildingNumber ? (
+              <div style={{ color: "red", position: "absolute" }}>
+                {formik.errors.buildingNumber}
+              </div>
+            ) : null}
+          </div>
+
+          <div className={styles["registration_form-input-div"]}>
+            <label
+              htmlFor={styles["registration__form-input-div-adress-apartment"]}
+              style={{ position: "absolute" }}
+            >
+              *Numer mieszkania:
+            </label>
+            <input
+              name="apartmentNumber"
+              type="text"
+              ref={refToApartment}
+              id={styles["registration__form-input-div-adress-apartment"]}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.apartmentNumber}
+            />
+            {formik.touched.apartmentNumber && formik.errors.apartmentNumber ? (
+              <div style={{ color: "red", position: "absolute" }}>
+                {formik.errors.apartmentNumber}
+              </div>
+            ) : null}
+          </div>
+
+          <div className={styles["registration_form-input-div"]}>
+            <label
+              htmlFor={styles["registration__form-input-div-adress-city"]}
+              style={{ position: "absolute" }}
+            >
+              *Miasto:
+            </label>
+            <input
+              name="city"
+              type="text"
+              ref={refToCity}
+              id={styles["registration__form-input-div-adress-city"]}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.city}
+            />
+            {formik.touched.city && formik.errors.city ? (
+              <div style={{ color: "red", position: "absolute" }}>
+                {formik.errors.city}
+              </div>
+            ) : null}
+          </div>
+
+          <div className={styles["registration_form-input-div"]}>
+            <label
+              htmlFor={styles["registration__form-input-div-adress-zip"]}
+              style={{ position: "absolute" }}
+            >
+              *Kod pocztowy:
+            </label>
+            <input
+              name="zip"
+              type="text"
+              ref={refToZip}
+              id={styles["registration__form-input-div-adress-zip"]}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.zip}
+            />
+            {formik.touched.zip && formik.errors.zip ? (
+              <div style={{ color: "red", position: "absolute" }}>
+                {formik.errors.zip}
+              </div>
+            ) : null}
           </div>
 
           <div className={styles["registration_form-input-div"]}>
@@ -421,9 +612,9 @@ export default function Registration() {
         </form>
         <div className={styles["registration__text-reg"]}>
           Masz konto?&nbsp;Wróć na stronę&nbsp;
-          <a href="/login" className={styles["registration__a-text-reg"]}>
+          <Link to="/login" className={styles["registration__a-text-reg"]}>
             <strong>logowania się</strong>
-          </a>
+          </Link>
         </div>
       </div>
     </div>

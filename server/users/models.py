@@ -3,12 +3,13 @@ from django.contrib.auth.base_user import BaseUserManager
 from django.db import models
 from uuid import uuid4
 from django.contrib.auth.models import AbstractUser
+from rest_framework.exceptions import ValidationError
 
 
 def image_path(instance, filename):
     ext = filename.split('.')[-1]
     new_filename = "user_%s.%s" % (uuid4().hex, ext)
-    return 'images/users/' + new_filename
+    return 'users/' + new_filename
 
 
 class UserManager(BaseUserManager):
@@ -43,17 +44,28 @@ class UserManager(BaseUserManager):
 class User(AbstractUser):
     username = None
     email = models.EmailField(unique=True)
-    first_name = models.CharField("Imię", max_length=100)
-    last_name = models.CharField("Nazwisko", max_length=100)
+    first_name = models.CharField("Imię", max_length=50)
+    last_name = models.CharField("Nazwisko", max_length=50)
     address = models.CharField("Adres", max_length=200)
     pesel = models.CharField("PESEL", max_length=11, unique=True)
     phone = models.CharField("Telefon", max_length=20)
-    image = models.ImageField(upload_to=image_path, default='users/default.jpeg')
+    image = models.ImageField(upload_to=image_path, default='users/default.jpg', verbose_name="Zdjęcie")
 
     objects = UserManager()
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['first_name', 'last_name', 'pesel', 'password']
 
+    class Meta:
+        verbose_name = 'Użytkownik'
+        verbose_name_plural = 'Użytkownicy'
+
     def __str__(self):
-        return self.email + ' ' + self.pesel
+        return f'{self.email} {self.pesel}'
+
+    def save(self, *args, **kwargs):
+        try:
+            return super(User, self).save(*args, **kwargs)
+        except BaseException as e:
+            raise ValidationError({ 'error': str(e).split('\n')[0] })
+

@@ -6,16 +6,26 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import AuthProvider from "./contexts/AuthContext";
+import { positions, transitions, Provider as AlertProvider } from "react-alert";
+import Alert from "./components/layout/Alert";
 
 const queryClient = new QueryClient();
+const options = {
+  position: positions.TOP_RIGHT,
+  timeout: 5000,
+  offset: "15px",
+  transition: transitions.SCALE,
+};
 
 ReactDOM.render(
   <React.StrictMode>
     <Router>
       <QueryClientProvider client={queryClient}>
-        <AuthProvider>
-          <App />
-        </AuthProvider>
+        <AlertProvider template={Alert} {...options}>
+          <AuthProvider>
+            <App />
+          </AuthProvider>
+        </AlertProvider>
       </QueryClientProvider>
     </Router>
   </React.StrictMode>,

@@ -8,7 +8,7 @@ def insert_adoptions(apps, schema_editor):
     User = apps.get_model('users', 'User')
     Animal = apps.get_model('animals', 'Animal')
 
-    for _ in range(35):
+    for _ in range(3):
         user = User.objects.order_by('?').first()
         animal = Animal.objects.order_by('?').first()
         AnimalAdoption.objects.create(user=user, animal=animal)
@@ -19,9 +19,10 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('adoptions', '0002_animaladoption_user'),
-        ('users', '0002_initial_data_insertion')
+        ('users', '0002_initial_data_insertion'),
+        ('animals', '0002_initial_data_insertion')
     ]
 
     operations = [
-        migrations.RunPython(insert_adoptions, migrations.RunPython.noop)
+        #migrations.RunPython(insert_adoptions, migrations.RunPython.noop)
     ]

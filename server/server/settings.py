@@ -15,6 +15,8 @@ import os
 from datetime import timedelta
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+import psycopg2.extensions
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -39,17 +41,18 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',
     'django_extensions',
     'django_filters',
-    'corsheaders',
     'rest_framework',
     'rest_framework_simplejwt',
+    'django_rest_passwordreset',
     'users',
     'animals',
     'locations',
     'adoptions',
     'arrivals',
-    'reservations'
+    'reservations',
 ]
 
 MIDDLEWARE = [
@@ -68,7 +71,7 @@ ROOT_URLCONF = 'server.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -107,6 +110,10 @@ DATABASES = {
         'HOST': '127.0.0.1',
 
         'PORT': '5432',
+
+        'OPTIONS': {
+            'isolation_level': psycopg2.extensions.ISOLATION_LEVEL_SERIALIZABLE,
+        },
     }
 }
 
@@ -133,7 +140,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'pl-PL'
 
 TIME_ZONE = 'UTC'
 
@@ -175,3 +182,9 @@ CORS_ALLOW_ALL_ORIGINS = True
 
 MEDIA_URL = '/images/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'images')
+
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_HOST_USER = ''
+# EMAIL_HOST_PASSWORD =''
+EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
