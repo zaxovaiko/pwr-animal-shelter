@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import styles from "./Login.module.css";
 import { useFormik } from "formik";
@@ -30,15 +30,16 @@ const validate = (values: any) => {
 };
 
 export default function Login() {
-  const alert = useAlert();
+  //const alert = useAlert();
   const history = useHistory();
+  const [loginError, setLoginError] = useState(false);
   const { setAuth } = useContext(AuthContext);
-  let check = false;
 
   const formik = useFormik({
     initialValues: {
       email: "",
       password: "",
+      errorVal: false,
     },
     validate,
     onSubmit: (values) => {
@@ -49,10 +50,11 @@ export default function Login() {
         .then((res) => {
           if (res.access) {
             setAuth(res.access);
-            alert.success("Zostałeś zalogowany do swojego konta.");
+            //alert.success("Zostałeś zalogowany do swojego konta.");
             return history.push("/");
           }
-          alert.error("Coś poszło nie tak. Spróbuj ponownie.");
+          //alert.error("Coś poszło nie tak. Spróbuj ponownie.");
+          setLoginError(true);
           refToErrorUser.current.style.visibility = "visible";
         })
         .catch(console.error);
@@ -71,9 +73,8 @@ export default function Login() {
     } else {
       refToPassword.current.style.borderColor = "#DADADA";
     }
-
-    if (check) {
-      refToErrorUser.current.style.visibility = "visible";
+    if (formik.errors.errorVal) {
+      formik.values.errorVal = true
     }
   });
   return (
@@ -82,10 +83,11 @@ export default function Login() {
         <h1 className={styles["login__label-h1"]}>
           <strong>Zaloguj się</strong>
         </h1>
-        <form className={styles["login__form"]} onSubmit={formik.handleSubmit}>
+        <form className={styles["login__form"]} onSubmit={formik.handleSubmit} data-testid="form">
           <input
             type="email"
             name="email"
+            data-testid="email"
             ref={refToEmail}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
@@ -101,6 +103,7 @@ export default function Login() {
           <input
             name="password"
             type="password"
+            data-testid="password"
             ref={refToPassword}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
@@ -118,21 +121,14 @@ export default function Login() {
               Nie pamiętam hasła
             </Link>
           </div>
-          <button type="submit" className={styles["login__form-submit-button"]}>
+          <button data-testid="button" type="submit" className={styles["login__form-submit-button"]}>
             Zaloguj
           </button>
-          <div
-            ref={refToErrorUser}
-            style={{
-              color: "red",
-              width: "80%",
-              textAlign: "center",
-              visibility: "hidden",
-              marginTop: "0.5vh",
-            }}
-          >
-            E-mail lub hasło są nieprawidłowe
-          </div>
+          {loginError ? (
+            <div style={{ color: "red", width: "80%", textAlign: "center" }}>
+              E-mail lub hasło są nieprawidłowe
+            </div>
+          ) : null}
         </form>
         <div className={styles["login__text-reg"]}>
           Nie masz konta?&nbsp;

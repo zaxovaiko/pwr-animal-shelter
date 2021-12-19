@@ -20,7 +20,7 @@ export type Animal = {
   age: number;
   animal_type: AnimalType;
   animal_gender: AnimalGender;
-  animal_breed: AnimalGender;
+  animal_breed: AnimalBreed;
   color: string;
   image: string;
   images: [AnimalImage];

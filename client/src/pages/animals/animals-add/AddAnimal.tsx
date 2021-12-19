@@ -549,7 +549,7 @@ export default function AddAnimal() {
               htmlFor={styles["mod-animal-profile__form-input-div-email"]}
               style={{ position: "absolute" }}
             >
-              *Harakterystyka:
+              *Charakterystyka:
             </label>
             <textarea
               name="description"

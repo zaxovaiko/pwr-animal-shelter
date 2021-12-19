@@ -3,7 +3,7 @@ import { useEffect, createRef } from "react";
 import { useAlert } from "react-alert";
 import { Link, useHistory, useLocation } from "react-router-dom";
 import { fetchPasswordResetConfirmation } from "../../../api/auth";
-import styles from "../login/Login.module.css";
+import styles from "../Login/Login.module.css";
 
 let refToPassword: React.RefObject<any> = createRef();
 let refToPasswordConfirmation: React.RefObject<any> = createRef();

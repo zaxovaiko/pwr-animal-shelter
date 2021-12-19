@@ -54,7 +54,7 @@ export function fetchAnimalType(id: number) {
 
 export function fetchNewAnimals() {
   return fetch(
-    process.env.REACT_APP_SERVER_URI + "/animals-arrivals?ordering=-date"
+    process.env.REACT_APP_SERVER_URI + "/animals-arrivals"
   ).then((res) => res.json());
 }
 

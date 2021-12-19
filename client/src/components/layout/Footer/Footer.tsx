@@ -14,10 +14,11 @@ export default function Footer() {
                 <Link className={styles["link"]} to="/contact">KONTAKT</Link>
                 <Link className={styles["link"]} to="/charity">JAK POMÓC?</Link>
                 <Link className={styles["link"]} to="/">ADOPCJA</Link>
+                <Link className={styles["link"]} to="/about-us">O NAS</Link>
             </Container>
             <Image className={styles["image"]} src="https://www.schroniskowroclaw.pl/images/logo-footer.png" />
             <Image className={styles["image"]} src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0jHL_iZit9md7y_hCNIh7DCUbFSXFH6r2a4Z2xqFsz6Va1HdqM9ZeLlbArlpArWazb_s&usqp=CAU" />
-            <Row className={styles["text"]}>Schronisko dla bezdomnych zwierąt we Wrocławiu</Row>
+            <Row className={styles["text"]}>Schronisko dla bezdomnych zwierząt we Wrocławiu</Row>
         </Container>
     </div>
   );
